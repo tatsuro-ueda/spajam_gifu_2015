@@ -28,7 +28,7 @@ namespace SpajamMadobenWebAPI.Controllers
                     var products = await response.Content.ReadAsAsync<List<Service>>();
                     return string.Empty;
                 }
-                else 
+                else
                 {
                     return null;
                 }
@@ -60,18 +60,18 @@ namespace SpajamMadobenWebAPI.Controllers
         // GET: api/GoogleSpeechTexts/flacName
         public string GetGoogleSpeechText(String flacName)
         {
-            var key = "AIzaSyAvRLVu5aNZ1bf5R3x9pIMYLX-PTWOuXiY";
+            var key = "AIzaSyBlwhF2pGCf472kxOMCGk1-4ODWtInjjGk";
             var url = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
             var postUrl = url + key;
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(postUrl);
-            
+
             request.Method = "POST";
             var filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + flacName + ".flac");
             byte[] byteArray = File.ReadAllBytes(filePath);
-            var sampleRate = 44100;
+            var sampleRate = 16000;
             request.ContentType = "audio/x-flac; rate=" + sampleRate.ToString();
             request.ContentLength = byteArray.Length;
-            
+
             Stream sendStream = request.GetRequestStream();
             sendStream.Write(byteArray, 0, byteArray.Length);
             sendStream.Close();
