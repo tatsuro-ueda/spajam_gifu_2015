@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpajamMadobenWebAPI", "SpajamMadobenWebAPI\SpajamMadobenWebAPI.csproj", "{2630500C-3975-491E-8B18-C3DCD89975FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A1B5DE88-80B9-4CCF-BD3C-4C40EF9D09E7}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2630500C-3975-491E-8B18-C3DCD89975FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2630500C-3975-491E-8B18-C3DCD89975FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2630500C-3975-491E-8B18-C3DCD89975FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2630500C-3975-491E-8B18-C3DCD89975FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
