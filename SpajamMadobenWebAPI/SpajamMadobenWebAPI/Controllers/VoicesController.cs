@@ -6,58 +6,59 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using SpajamMadobenWebAPI.Models;
 
 namespace SpajamMadobenWebAPI.Controllers
 {
-    public class CardInfoesController : ApiController
+    public class VoicesController : ApiController
     {
-        private SpajamMadobenDBEntities db = new SpajamMadobenDBEntities();
+        private SpajamMadobenDBEntities2 db = new SpajamMadobenDBEntities2();
 
-        // GET: api/CardInfoes
-        public IQueryable<CardInfo> GetCardInfo()
+        // GET: api/Voices
+        public IQueryable<Voice> GetVoice()
         {
-            return db.CardInfo;
+            return db.Voice;
         }
 
-        // GET: api/CardInfoes/5
-        [ResponseType(typeof(CardInfo))]
-        public IHttpActionResult GetCardInfo(string id)
+        // GET: api/Voices/5
+        [ResponseType(typeof(Voice))]
+        public async Task<IHttpActionResult> GetVoice(string id)
         {
-            CardInfo cardInfo = db.CardInfo.Find(id);
-            if (cardInfo == null)
+            Voice voice = await db.Voice.FindAsync(id);
+            if (voice == null)
             {
                 return NotFound();
             }
 
-            return Ok(cardInfo);
+            return Ok(voice);
         }
 
-        // PUT: api/CardInfoes/5
+        // PUT: api/Voices/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCardInfo(string id, CardInfo cardInfo)
+        public async Task<IHttpActionResult> PutVoice(string id, Voice voice)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != cardInfo.CardID)
+            if (id != voice.TalkID)
             {
                 return BadRequest();
             }
 
-            db.Entry(cardInfo).State = EntityState.Modified;
+            db.Entry(voice).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CardInfoExists(id))
+                if (!VoiceExists(id))
                 {
                     return NotFound();
                 }
@@ -70,24 +71,24 @@ namespace SpajamMadobenWebAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/CardInfoes
-        [ResponseType(typeof(CardInfo))]
-        public IHttpActionResult PostCardInfo(CardInfo cardInfo)
+        // POST: api/Voices
+        [ResponseType(typeof(Voice))]
+        public async Task<IHttpActionResult> PostVoice(Voice voice)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.CardInfo.Add(cardInfo);
+            db.Voice.Add(voice);
 
             try
             {
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (CardInfoExists(cardInfo.CardID))
+                if (VoiceExists(voice.TalkID))
                 {
                     return Conflict();
                 }
@@ -97,23 +98,23 @@ namespace SpajamMadobenWebAPI.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = cardInfo.CardID }, cardInfo);
+            return CreatedAtRoute("DefaultApi", new { id = voice.TalkID }, voice);
         }
 
-        // DELETE: api/CardInfoes/5
-        [ResponseType(typeof(CardInfo))]
-        public IHttpActionResult DeleteCardInfo(string id)
+        // DELETE: api/Voices/5
+        [ResponseType(typeof(Voice))]
+        public async Task<IHttpActionResult> DeleteVoice(string id)
         {
-            CardInfo cardInfo = db.CardInfo.Find(id);
-            if (cardInfo == null)
+            Voice voice = await db.Voice.FindAsync(id);
+            if (voice == null)
             {
                 return NotFound();
             }
 
-            db.CardInfo.Remove(cardInfo);
-            db.SaveChanges();
+            db.Voice.Remove(voice);
+            await db.SaveChangesAsync();
 
-            return Ok(cardInfo);
+            return Ok(voice);
         }
 
         protected override void Dispose(bool disposing)
@@ -125,9 +126,9 @@ namespace SpajamMadobenWebAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CardInfoExists(string id)
+        private bool VoiceExists(string id)
         {
-            return db.CardInfo.Count(e => e.CardID == id) > 0;
+            return db.Voice.Count(e => e.TalkID == id) > 0;
         }
     }
 }

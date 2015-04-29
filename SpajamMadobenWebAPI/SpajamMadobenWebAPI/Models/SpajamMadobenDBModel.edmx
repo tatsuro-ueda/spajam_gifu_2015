@@ -5,51 +5,91 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="SpajamMadobenDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="CardInfo">
+        <EntityType Name="Talk">
           <Key>
-            <PropertyRef Name="CardID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="TalkID" />
           </Key>
-          <Property Name="CardID" Type="nchar" MaxLength="6" Nullable="false" />
-          <Property Name="CustomerID" Type="nchar" MaxLength="5" />
-          <Property Name="IssueDate" Type="datetime" />
-          <Property Name="ExpireDate" Type="datetime" />
-          <Property Name="EmployeeID" Type="int" />
+          <Property Name="UserID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="TalkID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="TalkName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="SortID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Voice">
+          <Key>
+            <PropertyRef Name="TalkID" />
+            <PropertyRef Name="IndexID" />
+          </Key>
+          <Property Name="TalkID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="IndexID" Type="bigint" Nullable="false" />
+          <Property Name="VoiceID" Type="varchar" MaxLength="36" />
+          <Property Name="FileID" Type="varchar" MaxLength="36" />
+          <Property Name="VoiceAnalysisResult" Type="varchar(max)" />
+          <Property Name="TextMiningResult" Type="varchar(max)" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityContainer Name="SpajamMadobenDBModelStoreContainer">
-          <EntitySet Name="CardInfo" EntityType="Self.CardInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Talk" EntityType="Self.Talk" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Voice" EntityType="Self.Voice" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SpajamMadobenDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="CardInfo">
+        <EntityType Name="Talk">
           <Key>
-            <PropertyRef Name="CardID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="TalkID" />
           </Key>
-          <Property Name="CardID" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="CustomerID" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="IssueDate" Type="DateTime" Precision="3" />
-          <Property Name="ExpireDate" Type="DateTime" Precision="3" />
-          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="UserID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TalkID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TalkName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SortID" Type="Int64" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="SpajamMadobenDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CardInfo" EntityType="Self.CardInfo" />
+        <EntityType Name="Voice">
+          <Key>
+            <PropertyRef Name="TalkID" />
+            <PropertyRef Name="IndexID" />
+          </Key>
+          <Property Name="TalkID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IndexID" Type="Int64" Nullable="false" />
+          <Property Name="VoiceID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="FileID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="VoiceAnalysisResult" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TextMiningResult" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="SpajamMadobenDBEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Talk" EntityType="Self.Talk" />
+          <EntitySet Name="Voice" EntityType="Self.Voice" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SpajamMadobenDBModelStoreContainer" CdmEntityContainer="SpajamMadobenDBEntities">
-          <EntitySetMapping Name="CardInfo">
-            <EntityTypeMapping TypeName="SpajamMadobenDBModel.CardInfo">
-              <MappingFragment StoreEntitySet="CardInfo">
-                <ScalarProperty Name="CardID" ColumnName="CardID" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
-                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+        <EntityContainerMapping StorageEntityContainer="SpajamMadobenDBModelStoreContainer" CdmEntityContainer="SpajamMadobenDBEntities2">
+          <EntitySetMapping Name="Talk">
+            <EntityTypeMapping TypeName="SpajamMadobenDBModel.Talk">
+              <MappingFragment StoreEntitySet="Talk">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TalkID" ColumnName="TalkID" />
+                <ScalarProperty Name="TalkName" ColumnName="TalkName" />
+                <ScalarProperty Name="SortID" ColumnName="SortID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Voice">
+            <EntityTypeMapping TypeName="SpajamMadobenDBModel.Voice">
+              <MappingFragment StoreEntitySet="Voice">
+                <ScalarProperty Name="TalkID" ColumnName="TalkID" />
+                <ScalarProperty Name="IndexID" ColumnName="IndexID" />
+                <ScalarProperty Name="VoiceID" ColumnName="VoiceID" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="VoiceAnalysisResult" ColumnName="VoiceAnalysisResult" />
+                <ScalarProperty Name="TextMiningResult" ColumnName="TextMiningResult" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

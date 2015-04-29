@@ -12,12 +12,11 @@ namespace SpajamMadobenWebAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CardInfo
+    public partial class Talk
     {
-        public string CardID { get; set; }
-        public string CustomerID { get; set; }
-        public Nullable<System.DateTime> IssueDate { get; set; }
-        public Nullable<System.DateTime> ExpireDate { get; set; }
-        public Nullable<int> EmployeeID { get; set; }
+        public string UserID { get; set; }
+        public string TalkID { get; set; }
+        public string TalkName { get; set; }
+        public long SortID { get; set; }
     }
 }

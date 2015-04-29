@@ -4,8 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="de23810a607c4fa6a870102417fd5ad4" Name="Diagram1">
-        <EntityTypeShape EntityType="SpajamMadobenDBModel.CardInfo" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="0865caff6b2145b786f40493f43f9d08" Name="Diagram1">
+        <EntityTypeShape EntityType="SpajamMadobenDBModel.Talk" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpajamMadobenDBModel.Voice" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

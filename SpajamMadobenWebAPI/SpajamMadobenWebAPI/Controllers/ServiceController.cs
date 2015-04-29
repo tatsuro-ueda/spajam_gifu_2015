@@ -19,47 +19,6 @@ namespace SpajamMadobenWebAPI.Controllers
 {
     public class ServiceController : ApiController
     {
-        // GET: api/Services
-        public async Task<string> GetServiceAsync()
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://spajammadobenwebapi.azurewebsites.net/");
-                HttpResponseMessage response = await client.GetAsync("api/CardInfoes");
-                if (response.IsSuccessStatusCode)
-                {
-                    var products = await response.Content.ReadAsAsync<List<Service>>();
-                    return string.Empty;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
-
-        // GET: api/Services/5
-        [ResponseType(typeof(CardInfo))]
-        public async Task<string> GetServiceAsync(string id)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://spajammadobenwebapi.azurewebsites.net/");
-                HttpResponseMessage response = await client.GetAsync("api/CardInfoes");
-
-                if (response.IsSuccessStatusCode)
-                {
-                    String text = await response.Content.ReadAsStringAsync();
-                    return text;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-
-        }
-
         public HttpResponseMessage GetAudio(String fileName) 
         {
             // アカウントを取得

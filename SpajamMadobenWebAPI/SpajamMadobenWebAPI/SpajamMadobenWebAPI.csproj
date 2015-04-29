@@ -223,17 +223,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\CardInfoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\TalksController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VoicesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CardInfo.cs">
-      <DependentUpon>SpajamMadobenDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Service.cs" />
     <Compile Include="Models\SpajamMadobenDBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -248,6 +245,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SpajamMadobenDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Talk.cs">
+      <DependentUpon>SpajamMadobenDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Voice.cs">
+      <DependentUpon>SpajamMadobenDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -280,6 +283,9 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="ApplicationInsights.config" />
+    <Content Include="App_Data\1.flac" />
+    <Content Include="App_Data\2.flac" />
+    <Content Include="App_Data\3.flac" />
     <EntityDeploy Include="Models\SpajamMadobenDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SpajamMadobenDBModel.Designer.cs</LastGenOutput>
@@ -297,9 +303,6 @@
       <DependentUpon>SpajamMadobenDBModel.edmx</DependentUpon>
       <LastGenOutput>SpajamMadobenDBModel.cs</LastGenOutput>
     </Content>
-    <Content Include="App_Data\1.flac" />
-    <Content Include="App_Data\2.flac" />
-    <Content Include="App_Data\3.flac" />
     <None Include="Properties\PublishProfiles\SpajamMadobenWebAPI.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

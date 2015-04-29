@@ -13,10 +13,10 @@ namespace SpajamMadobenWebAPI.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SpajamMadobenDBEntities : DbContext
+    public partial class SpajamMadobenDBEntities2 : DbContext
     {
-        public SpajamMadobenDBEntities()
-            : base("name=SpajamMadobenDBEntities")
+        public SpajamMadobenDBEntities2()
+            : base("name=SpajamMadobenDBEntities2")
         {
         }
     
@@ -25,6 +25,7 @@ namespace SpajamMadobenWebAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CardInfo> CardInfo { get; set; }
+        public virtual DbSet<Talk> Talk { get; set; }
+        public virtual DbSet<Voice> Voice { get; set; }
     }
 }
