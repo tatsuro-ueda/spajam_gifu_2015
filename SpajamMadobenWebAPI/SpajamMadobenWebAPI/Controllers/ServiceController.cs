@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Microsoft.WindowsAzure.Storage;
+using System.Configuration;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace SpajamMadobenWebAPI.Controllers
 {
@@ -56,6 +59,34 @@ namespace SpajamMadobenWebAPI.Controllers
             }
 
         }
+
+        public HttpResponseMessage GetAudio(String fileName) 
+        {
+            // アカウントを取得
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+                @"DefaultEndpointsProtocol=https;AccountName=spajammadobenstrage;AccountKey=007q7do8gs4w3BFp3vWIGLO7XXqJKquhKaqZ9vWuAUZzawL/teMWwyNgCgTLf5X9oGVZVVpu0VXe/WbN19wgvQ==");
+
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            
+            // コンテナを作成
+            CloudBlobContainer container = blobClient.GetContainerReference("audios");
+
+            container.CreateIfNotExists();
+
+            // Blobを作成
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference("test" + fileName + ".flac");
+
+            // Blobにアップロードする
+            var filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + fileName + ".flac");
+
+            using (var fileStream = System.IO.File.OpenRead(filePath))
+            {
+                blockBlob.UploadFromStream(fileStream);
+            } 
+
+            return null;
+        }
+
 
         // GET: api/GoogleSpeechTexts/flacName
         public string GetGoogleSpeechText(String flacName)
