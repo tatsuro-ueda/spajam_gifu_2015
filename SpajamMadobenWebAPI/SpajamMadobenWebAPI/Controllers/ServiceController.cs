@@ -47,7 +47,7 @@ namespace SpajamMadobenWebAPI.Controllers
         }
 
         // GET: api/GoogleSpeechTexts/base64
-        public string GetFlacSpeechText(String base64)
+        public string PostFlacSpeechText(String base64)
         {
             var key = "AIzaSyBlwhF2pGCf472kxOMCGk1-4ODWtInjjGk";
             var url = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
