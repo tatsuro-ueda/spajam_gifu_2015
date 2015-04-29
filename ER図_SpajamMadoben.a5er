@@ -1,0 +1,97 @@
+﻿# A5:ER FORMAT:10
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright (C)2007 m.matsubara
+# A5:SQL Mk-2 Copyright (C)1997 m.matsubara
+#  http://www.wind.sannet.ne.jp/m_matsu/developer/a5m2/
+
+[Manager]
+ProjectName=SpajamMadoben
+Author=平内　孝尚
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=Main
+PageInfo="Main",2,"A3Landscape",$FFFFFF
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=2
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Tahoma
+FontSize=6
+PaperSize=A4Landscape
+HeaderLeft=
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSType=4
+RDBMSTypeName=Microsoft SQL Server 2008
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+ShowTag=1
+ShowCommonAttributes=0
+
+[Relation]
+Entity1=Talk
+Entity2=Voice
+RelationType1=1
+RelationType2=3
+Fields1=VoiceID
+Fields2=VoiceID
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,585,9415,705,R,R
+Dependence=0
+Caption=
+PName=
+ModifiedDateTime=20150429202043
+LineMode=0
+Bar1=58
+Bar2=942
+Bar3=70
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=Voice
+LName=音声テーブル
+Comment=音声ファイルを保存するテーブル
+TableOption=
+Page=Main
+Left=400
+Top=100
+Field="音声ID","VoiceID","@VARCHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ファイルID","FileID","@VARCHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
+Field="音声解析結果","VoiceAnalysisResult","@VARCHAR(max)",,,"","",$FFFFFFFF,""
+Field="テキストマイニング結果","TextMiningResult","@VARCHAR(max)",,,"","",$FFFFFFFF,""
+Field="作成日時","CreateDateTime","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20150429202100
+Position="Main",400,100
+
+[Entity]
+PName=Talk
+LName=トークテーブル
+Comment=音声ファイルテーブルを1つの会話としてグルーピングするテーブル
+TableOption=
+Page=Main
+Left=100
+Top=100
+Field="ユーザーID","UserID","@VARCHAR(36)","NOT NULL",0,"","",$FFFFFFFF,""
+Field="トークID","TalkID","@VARCHAR(36)","NOT NULL",1,"","",$FFFFFFFF,""
+Field="トーク名","TalkName","@VARCHAR(256)","NOT NULL",,"","",$FFFFFFFF,""
+Field="インデックス","Index","BIGINT","NOT NULL",,"","",$FFFFFFFF,""
+Field="音声ID","VoiceID","@VARCHAR(36)","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20150429201305
+Position="Main",100,100,183,153
