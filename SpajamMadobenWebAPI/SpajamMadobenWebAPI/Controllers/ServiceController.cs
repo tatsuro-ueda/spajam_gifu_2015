@@ -54,11 +54,13 @@ namespace SpajamMadobenWebAPI.Controllers
             
             //バイト型配列に戻す
             byte[] byteArray = System.Convert.FromBase64String(base64);
-            
+
             // AzureBLOBStrageに保存
+            var fileName = Guid.NewGuid().ToString();
+
+            /*
             //ファイルに保存する
             //保存するファイル名
-            var fileName = Guid.NewGuid().ToString();
             string outFileName = @"~/App_Data/" + fileName + ".flac";
 
             //ファイルに書き込む
@@ -66,6 +68,9 @@ namespace SpajamMadobenWebAPI.Controllers
                 System.IO.FileMode.Create, System.IO.FileAccess.Write);
             outFile.Write(byteArray, 0, byteArray.Length);
             outFile.Close();
+            */
+            // byte配列をMemoryStreamに変換
+          
 
             // アカウントを取得
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
@@ -82,12 +87,19 @@ namespace SpajamMadobenWebAPI.Controllers
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName + ".flac");
 
             // Blobにアップロードする
+            /*
             var filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + fileName + ".flac");
 
             using (var fileStream = System.IO.File.OpenRead(filePath))
             {
                 blockBlob.UploadFromStream(fileStream);
-            } 
+            }
+            */
+
+            using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
+            {
+                await blockBlob.UploadFromStreamAsync(ms);
+            }
 
             // GoogleSpeechAPIに送信
             var key = "AIzaSyBlwhF2pGCf472kxOMCGk1-4ODWtInjjGk";
