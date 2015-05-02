@@ -46,36 +46,72 @@ namespace SpajamMadobenWebAPI.Controllers
             return null;
         }
 
-        // GET: api/GoogleSpeechTexts/base64
-        public async Task<string> PostFlacSpeechTextAsync()
+        // POST: api/Service
+        public async Task<string> PostBase64AudioAsync()
         {
-            var key = "AIzaSyBlwhF2pGCf472kxOMCGk1-4ODWtInjjGk";
-            var url = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
-            var postUrl = url + key;
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(postUrl);
+            // リクエスト内容を取得
             var base64 = await Request.Content.ReadAsStringAsync();
+            
+            //バイト型配列に戻す
+            byte[] byteArray = System.Convert.FromBase64String(base64);
+
+            // AzureBLOBStrageに保存
+            var fileName = Guid.NewGuid().ToString();
+
             /*
             //ファイルに保存する
             //保存するファイル名
-            string outFileName = @"C:\test.dat";
+            string outFileName = @"~/App_Data/" + fileName + ".flac";
 
             //ファイルに書き込む
             System.IO.FileStream outFile = new System.IO.FileStream(outFileName,
                 System.IO.FileMode.Create, System.IO.FileAccess.Write);
-            outFile.Write(byteArray, 0, bs.Length);
+            outFile.Write(byteArray, 0, byteArray.Length);
             outFile.Close();
             */
+            // byte配列をMemoryStreamに変換
+          
 
-            // var filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + flacName + ".flac");
-            // byte[] byteArray = File.ReadAllBytes(filePath);
+            // アカウントを取得
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+                @"DefaultEndpointsProtocol=https;AccountName=spajammadobenstrage;AccountKey=007q7do8gs4w3BFp3vWIGLO7XXqJKquhKaqZ9vWuAUZzawL/teMWwyNgCgTLf5X9oGVZVVpu0VXe/WbN19wgvQ==");
 
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+            // コンテナを作成
+            CloudBlobContainer container = blobClient.GetContainerReference("audios");
+
+            container.CreateIfNotExists();
+
+            // Blobを作成
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName + ".flac");
+
+            // Blobにアップロードする
+            /*
+            var filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + fileName + ".flac");
+
+            using (var fileStream = System.IO.File.OpenRead(filePath))
+            {
+                blockBlob.UploadFromStream(fileStream);
+            }
+            */
+
+            using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
+            {
+                await blockBlob.UploadFromStreamAsync(ms);
+            }
+
+            // GoogleSpeechAPIに送信
+            var key = "AIzaSyBlwhF2pGCf472kxOMCGk1-4ODWtInjjGk";
+            var url = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
+            var postUrl = url + key;
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(postUrl);
+            var sampleRate = 16000; 
+            
             request.Method = "POST";
-            //バイト型配列に戻す
-            byte[] byteArray = System.Convert.FromBase64String(base64);
-            var sampleRate = 16000;
             request.ContentType = "audio/x-flac; rate=" + sampleRate.ToString();
             request.ContentLength = byteArray.Length;
-
+            
             Stream sendStream = request.GetRequestStream();
             sendStream.Write(byteArray, 0, byteArray.Length);
             sendStream.Close();
