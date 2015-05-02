@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,7 +29,12 @@ namespace SpajamMadobenTestWebClient
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 送信
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void Button_ClickAsync(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -36,21 +44,39 @@ namespace SpajamMadobenTestWebClient
                 // POST 送信先の Uri
                 var uri = new Uri(this.URL.Text);
 
-                var param = new StringContent(this.Param.Text, System.Text.Encoding.UTF8, "text/plain");
+                HttpContent param = new StringContent(this.Param.Text, System.Text.Encoding.UTF8, "text/plain");
 
                 switch (this.Method.Text)
                 {
                     case "GET":
-                        httpClient.GetAsync(uri);
+                        await httpClient.GetAsync(uri);
                         break;
                     case "POST":
-                        httpClient.PostAsync(uri, param);
+                        if(!string.IsNullOrWhiteSpace(this.File.Text))
+                        {
+                            var filePath = this.File.Text;
+                            
+                            using(var stream = System.IO.File.OpenRead(filePath))
+                            {
+                                var byteArray = new byte[stream.Length];
+
+                                MultipartFormDataContent multiContent = new MultipartFormDataContent();
+                                stream.Read(byteArray, 0, (int)stream.Length);
+                                var fileContent = new ByteArrayContent(byteArray);
+                                fileContent.Headers.ContentType = new MediaTypeHeaderValue("audio/x-flac");
+                                multiContent.Add(fileContent, JsonConvert.SerializeObject("buffer"));
+                                param = multiContent;
+                            }
+                        }
+
+                        await httpClient.PostAsync(uri, param);
+                        
                         break;
                     case "PUT":
-                        httpClient.PutAsync(uri, param);
+                        await httpClient.PutAsync(uri, param);
                         break;
                     case "DELETE":
-                        httpClient.DeleteAsync(uri);
+                        await httpClient.DeleteAsync(uri);
                         break;
                     default:
                         break;
@@ -59,6 +85,22 @@ namespace SpajamMadobenTestWebClient
             catch(Exception ex)
             {
                 //握りつぶす
+            }
+        }
+
+        /// <summary>
+        /// ファイル選択
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.FileName = "";
+            ofd.DefaultExt = "*.*";
+            if (ofd.ShowDialog() == true)
+            {
+                this.File.Text = ofd.FileName;
             }
         }
     }
