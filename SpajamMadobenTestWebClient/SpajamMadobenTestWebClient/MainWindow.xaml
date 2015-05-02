@@ -20,7 +20,14 @@
                 <ComboBoxItem>CONNECT</ComboBoxItem>
             </ComboBox>
         </DockPanel>
-        <Button DockPanel.Dock="Bottom" Content="送信" Margin="5" Click="Button_Click"/>
+        <DockPanel DockPanel.Dock="Top" Margin="5">
+            <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Left" Text="ファイル選択:"/>
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Content="ファイル選択" Click="Button_Click_1" />
+                <TextBox Name="File" IsReadOnly="True" HorizontalAlignment="Stretch" />
+            </DockPanel>
+        </DockPanel>
+        <Button DockPanel.Dock="Bottom" Content="送信" Margin="5" Click="Button_ClickAsync"/>
         <DockPanel>
             <TextBlock DockPanel.Dock="Top" Text="パラメーター:" Margin="5"/>
             <TextBox Margin="5" Name="Param" HorizontalAlignment="Stretch" />

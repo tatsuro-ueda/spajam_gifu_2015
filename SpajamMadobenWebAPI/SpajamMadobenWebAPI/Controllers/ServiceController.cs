@@ -58,20 +58,6 @@ namespace SpajamMadobenWebAPI.Controllers
             // AzureBLOBStrageに保存
             var fileName = Guid.NewGuid().ToString();
 
-            /*
-            //ファイルに保存する
-            //保存するファイル名
-            string outFileName = @"~/App_Data/" + fileName + ".flac";
-
-            //ファイルに書き込む
-            System.IO.FileStream outFile = new System.IO.FileStream(outFileName,
-                System.IO.FileMode.Create, System.IO.FileAccess.Write);
-            outFile.Write(byteArray, 0, byteArray.Length);
-            outFile.Close();
-            */
-            // byte配列をMemoryStreamに変換
-          
-
             // アカウントを取得
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
                 @"DefaultEndpointsProtocol=https;AccountName=spajammadobenstrage;AccountKey=007q7do8gs4w3BFp3vWIGLO7XXqJKquhKaqZ9vWuAUZzawL/teMWwyNgCgTLf5X9oGVZVVpu0VXe/WbN19wgvQ==");
@@ -86,18 +72,10 @@ namespace SpajamMadobenWebAPI.Controllers
             // Blobを作成
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName + ".flac");
 
-            // Blobにアップロードする
-            /*
-            var filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + fileName + ".flac");
-
-            using (var fileStream = System.IO.File.OpenRead(filePath))
-            {
-                blockBlob.UploadFromStream(fileStream);
-            }
-            */
-
+            // byte配列をMemoryStreamに変換
             using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
             {
+                // Blobにアップロードする
                 await blockBlob.UploadFromStreamAsync(ms);
             }
 
