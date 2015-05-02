@@ -47,13 +47,13 @@ namespace SpajamMadobenWebAPI.Controllers
         }
 
         // GET: api/GoogleSpeechTexts/base64
-        public string PostFlacSpeechText(String base64)
+        public async Task<string> PostFlacSpeechTextAsync()
         {
             var key = "AIzaSyBlwhF2pGCf472kxOMCGk1-4ODWtInjjGk";
             var url = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
             var postUrl = url + key;
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(postUrl);
-
+            var base64 = await Request.Content.ReadAsStringAsync();
             /*
             //ファイルに保存する
             //保存するファイル名

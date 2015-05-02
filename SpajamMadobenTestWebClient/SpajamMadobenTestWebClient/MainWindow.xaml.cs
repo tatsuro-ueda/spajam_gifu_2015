@@ -36,7 +36,7 @@ namespace SpajamMadobenTestWebClient
                 // POST 送信先の Uri
                 var uri = new Uri(this.URL.Text);
 
-                var param = new StringContent(this.Param.Text, System.Text.Encoding.UTF8, "application/json");
+                var param = new StringContent(this.Param.Text, System.Text.Encoding.UTF8, "text/plain");
 
                 switch (this.Method.Text)
                 {
