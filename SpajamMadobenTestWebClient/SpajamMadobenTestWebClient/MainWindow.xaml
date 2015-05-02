@@ -4,12 +4,19 @@
         Title="テスト用WebClient" Height="350" Width="525">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top" Margin="5">
-            <TextBlock Width="40" HorizontalAlignment="Left" Text="URL:"/>
-            <TextBox Name="URL" HorizontalAlignment="Stretch" Text="http://spajammadobenwebapi.azurewebsites.net/api/" />
+            <TextBlock Text="接続先:" Width="50" HorizontalAlignment="Left"/>
+            <ComboBox Name="Server" SelectionChanged="Server_SelectionChanged" HorizontalAlignment="Stretch">
+                <ComboBoxItem>テスト</ComboBoxItem>
+                <ComboBoxItem>本番</ComboBoxItem>
+            </ComboBox>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top" Margin="5">
-            <TextBlock Text="メソッド:" Width="40" HorizontalAlignment="Left"/>
-            <ComboBox Name="Method">
+            <TextBlock Width="50" HorizontalAlignment="Left" Text="URL:"/>
+            <TextBox Name="URL" HorizontalAlignment="Stretch"/>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Top" Margin="5">
+            <TextBlock Text="メソッド:" Width="50" HorizontalAlignment="Left"/>
+            <ComboBox Name="Method" SelectedValue="POST">
                 <ComboBoxItem>GET</ComboBoxItem>
                 <ComboBoxItem>POST</ComboBoxItem>
                 <ComboBoxItem>PUT</ComboBoxItem>

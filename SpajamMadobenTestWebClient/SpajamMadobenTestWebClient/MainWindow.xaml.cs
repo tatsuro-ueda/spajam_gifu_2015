@@ -103,5 +103,21 @@ namespace SpajamMadobenTestWebClient
                 this.File.Text = ofd.FileName;
             }
         }
+
+        /// <summary>
+        /// 環境選択
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Server_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.Server.Text == "テスト")
+            {
+                this.URL.Text = "http://spajammadobenwebapi.azurewebsites.net/api/Service";
+                return;
+            }
+
+            this.URL.Text = "http://localhost:24133/api/Service";
+        }
     }
 }
