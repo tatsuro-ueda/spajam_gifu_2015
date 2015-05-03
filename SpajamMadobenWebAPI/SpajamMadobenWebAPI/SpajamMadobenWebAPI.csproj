@@ -226,6 +226,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MultipartFormDataController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\SpajamMadobenController.cs" />
     <Compile Include="Controllers\TalksController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VoicesController.cs" />
@@ -250,6 +251,7 @@
     <Compile Include="Models\Talk.cs">
       <DependentUpon>SpajamMadobenDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TalkModel.cs" />
     <Compile Include="Models\Voice.cs">
       <DependentUpon>SpajamMadobenDBModel.tt</DependentUpon>
     </Compile>

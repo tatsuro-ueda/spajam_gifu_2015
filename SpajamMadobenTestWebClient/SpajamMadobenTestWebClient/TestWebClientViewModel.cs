@@ -338,7 +338,8 @@ namespace SpajamMadobenTestWebClient
                 // POST 送信先の Uri
                 var uri = new Uri(this.URL);
 
-                HttpContent param = new StringContent(this.Parameter, System.Text.Encoding.UTF8, CONTENT_TYPE_TEXT);
+                // HttpContent param = new StringContent(this.Parameter, System.Text.Encoding.UTF8, CONTENT_TYPE_TEXT);
+                HttpContent param = new StringContent(this.Parameter, System.Text.Encoding.UTF8, CONTENT_TYPE_JSON);
 
                 switch (this.Method.ComboBoxItem)
                 {
