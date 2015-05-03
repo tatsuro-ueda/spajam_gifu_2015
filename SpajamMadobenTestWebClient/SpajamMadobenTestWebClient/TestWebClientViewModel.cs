@@ -47,7 +47,7 @@ namespace SpajamMadobenTestWebClient
         /// <summary> 選択中の接続先 </summary>
         ComboBoxModel server_ = new ComboBoxModel();
         /// <summary> URL</summary>
-        string url_;
+        string url_ = string.Empty;
         /// <summary> メソッド一覧 </summary>
         ObservableCollection<ComboBoxModel> methods_ = new ObservableCollection<ComboBoxModel>();
         /// <summary> 選択中のメソッド </summary>
@@ -57,9 +57,9 @@ namespace SpajamMadobenTestWebClient
         /// <summary> 選択中のコンテンツタイプ </summary>
         ComboBoxModel contentType_ = new ComboBoxModel();
         /// <summary> ファイルパス</summary>
-        string filePath_;
+        string filePath_ = string.Empty;
         /// <summary> パラメーター</summary>
-        string parameter_;
+        string parameter_ = string.Empty;
         #endregion Fields
 
         #region Commands
