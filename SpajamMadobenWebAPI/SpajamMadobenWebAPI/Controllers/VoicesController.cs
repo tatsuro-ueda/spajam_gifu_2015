@@ -13,17 +13,29 @@ using SpajamMadobenWebAPI.Models;
 
 namespace SpajamMadobenWebAPI.Controllers
 {
+    /// <summary>
+    /// VoiceテーブルのCRUD処理を行う
+    /// </summary>
     public class VoicesController : ApiController
     {
         private SpajamMadobenDBEntities2 db = new SpajamMadobenDBEntities2();
 
         // GET: api/Voices
+        /// <summary>
+        /// Voiceテーブルのデータ一覧を取得する
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<Voice> GetVoice()
         {
             return db.Voice;
         }
 
         // GET: api/Voices/5
+        /// <summary>
+        /// Voiceテーブルのデータを1件取得する
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Voice))]
         public async Task<IHttpActionResult> GetVoice(string id)
         {
@@ -37,6 +49,12 @@ namespace SpajamMadobenWebAPI.Controllers
         }
 
         // PUT: api/Voices/5
+        /// <summary>
+        /// Voiceテーブルのデータを1件更新する
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="voice"></param>
+        /// <returns></returns>
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutVoice(string id, Voice voice)
         {
@@ -72,6 +90,11 @@ namespace SpajamMadobenWebAPI.Controllers
         }
 
         // POST: api/Voices
+        /// <summary>
+        /// Voiceテーブルのデータを1件追加する
+        /// </summary>
+        /// <param name="voice"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Voice))]
         public async Task<IHttpActionResult> PostVoice(Voice voice)
         {
@@ -102,6 +125,11 @@ namespace SpajamMadobenWebAPI.Controllers
         }
 
         // DELETE: api/Voices/5
+        /// <summary>
+        /// Voiceテーブルのデータを1件削除する
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Voice))]
         public async Task<IHttpActionResult> DeleteVoice(string id)
         {
@@ -117,6 +145,10 @@ namespace SpajamMadobenWebAPI.Controllers
             return Ok(voice);
         }
 
+        /// <summary>
+        /// DBインスタンスの破棄
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -126,6 +158,11 @@ namespace SpajamMadobenWebAPI.Controllers
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// 重複の確認
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool VoiceExists(string id)
         {
             return db.Voice.Count(e => e.TalkID == id) > 0;

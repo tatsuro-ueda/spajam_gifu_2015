@@ -12,9 +12,16 @@ using System.Web.Http;
 
 namespace SpajamMadobenWebAPI.Controllers
 {
+    /// <summary>
+    /// multipart-formでPOSTされた音声ファイルを登録するAPI
+    /// </summary>
     public class MultipartFormDataController : ApiController
     {
         // POST: api/Service
+        /// <summary>
+        /// multipart-formでPOSTされた音声ファイルを登録する
+        /// </summary>
+        /// <returns></returns>
         public async Task<string> PostMultipartAudioAsync()
         {
             // リクエスト内容を取得

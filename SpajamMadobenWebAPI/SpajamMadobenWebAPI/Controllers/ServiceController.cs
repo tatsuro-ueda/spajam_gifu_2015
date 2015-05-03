@@ -17,8 +17,16 @@ using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace SpajamMadobenWebAPI.Controllers
 {
+    /// <summary>
+    /// Azureを利用したWEBAPIのサンプル
+    /// </summary>
     public class ServiceController : ApiController
     {
+        /// <summary>
+        /// サーバー上の音声ファイルをAzureのBLOBストレージにアップロードする
+        /// </summary>
+        /// <param name="fileName">ファイル名</param>
+        /// <returns></returns>
         public HttpResponseMessage GetAudio(String fileName) 
         {
             // アカウントを取得
@@ -47,6 +55,10 @@ namespace SpajamMadobenWebAPI.Controllers
         }
 
         // POST: api/Service
+        /// <summary>
+        /// base64文字列で受け取った音声ファイルをBLOBストレージに保存し、GoogleSpeechAPIで解析する
+        /// </summary>
+        /// <returns></returns>
         public async Task<string> PostBase64AudioAsync()
         {
             // リクエスト内容を取得
@@ -104,6 +116,11 @@ namespace SpajamMadobenWebAPI.Controllers
         }
 
         // GET: api/GoogleSpeechTexts/flacName
+        /// <summary>
+        /// サーバー上の音声ファイルをGoogleSpeechAPIで解析する
+        /// </summary>
+        /// <param name="flacName">ファイル名</param>
+        /// <returns></returns>
         public string GetGoogleSpeechText(String flacName)
         {
             var key = "AIzaSyBlwhF2pGCf472kxOMCGk1-4ODWtInjjGk";

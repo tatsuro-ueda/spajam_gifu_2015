@@ -13,17 +13,29 @@ using SpajamMadobenWebAPI.Models;
 
 namespace SpajamMadobenWebAPI.Controllers
 {
+    /// <summary>
+    /// TalkテーブルのCRUD処理を行う
+    /// </summary>
     public class TalksController : ApiController
     {
         private SpajamMadobenDBEntities2 db = new SpajamMadobenDBEntities2();
 
         // GET: api/Talks
+        /// <summary>
+        /// Talkテーブルのデータ一覧を取得する
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<Talk> GetTalk()
         {
             return db.Talk;
         }
 
         // GET: api/Talks/5
+        /// <summary>
+        /// Talkテーブルのデータを1件取得する
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Talk))]
         public async Task<IHttpActionResult> GetTalk(string id)
         {
@@ -37,6 +49,12 @@ namespace SpajamMadobenWebAPI.Controllers
         }
 
         // PUT: api/Talks/5
+        /// <summary>
+        /// Talkテーブルのデータを1件更新する
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="talk"></param>
+        /// <returns></returns>
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutTalk(string id, Talk talk)
         {
@@ -72,6 +90,11 @@ namespace SpajamMadobenWebAPI.Controllers
         }
 
         // POST: api/Talks
+        /// <summary>
+        /// Talkテーブルのデータを1件追加する
+        /// </summary>
+        /// <param name="talk"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Talk))]
         public async Task<IHttpActionResult> PostTalk(Talk talk)
         {
@@ -102,6 +125,11 @@ namespace SpajamMadobenWebAPI.Controllers
         }
 
         // DELETE: api/Talks/5
+        /// <summary>
+        /// Talkテーブルのデータを1件削除する
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(Talk))]
         public async Task<IHttpActionResult> DeleteTalk(string id)
         {
@@ -117,6 +145,10 @@ namespace SpajamMadobenWebAPI.Controllers
             return Ok(talk);
         }
 
+        /// <summary>
+        /// DBインスタンスの破棄
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -126,6 +158,11 @@ namespace SpajamMadobenWebAPI.Controllers
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// 重複の確認
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool TalkExists(string id)
         {
             return db.Talk.Count(e => e.UserID == id) > 0;

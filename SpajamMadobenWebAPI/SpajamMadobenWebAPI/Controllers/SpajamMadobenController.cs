@@ -14,11 +14,20 @@ using System.Web.Http.Description;
 
 namespace SpajamMadobenWebAPI.Controllers
 {
+    /// <summary>
+    /// Spajamで使用するAPI
+    /// </summary>
     public class SpajamMadobenController : ApiController
     {
         private SpajamMadobenDBEntities2 db = new SpajamMadobenDBEntities2();
 
+
         // POST: api/Talks
+        /// <summary>
+        /// json形式でデータを受け取り、DB登録、BLOBストレージアップロード、GoogleSpeechAPIで音声解析を行う
+        /// </summary>
+        /// <param name="talkModel">Request用jsonモデル</param>
+        /// <returns></returns>
         [ResponseType(typeof(TalkModel))]
         public async Task<string> PostTalk(TalkModel talkModel)
         {
