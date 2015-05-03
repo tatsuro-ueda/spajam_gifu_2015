@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -36,8 +37,6 @@ namespace SpajamMadobenWebAPI.Controllers
             // バイト配列に戻す
             byte[] byteArray = await fileContent.ReadAsByteArrayAsync();
             
-            // var json = await provider.Contents.First(x => x.Headers.ContentDisposition.Name == JsonConvert.SerializeObject("fileName")).ReadAsStringAsync();
-            
             // AzureBLOBStrageに保存
             var fileName = Guid.NewGuid().ToString();
 
@@ -63,6 +62,22 @@ namespace SpajamMadobenWebAPI.Controllers
             }
 
             // GoogleSpeechAPIに送信
+            /*
+            var httpClient = new HttpClient();
+
+            // POST 送信先の Uri
+            var key = "AIzaSyBlwhF2pGCf472kxOMCGk1-4ODWtInjjGk";
+            var urlString = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
+            var uri = new Uri(urlString + key);
+
+            MultipartFormDataContent multiContent = new MultipartFormDataContent();
+            multiContent.Add(fileContent, JsonConvert.SerializeObject("buffer"));
+
+            var result = await httpClient.PostAsync(uri, multiContent);
+
+            return null;
+            */
+
             var key = "AIzaSyBlwhF2pGCf472kxOMCGk1-4ODWtInjjGk";
             var url = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
             var postUrl = url + key;
