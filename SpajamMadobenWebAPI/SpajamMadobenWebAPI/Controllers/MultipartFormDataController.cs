@@ -84,6 +84,7 @@ namespace SpajamMadobenWebAPI.Controllers
             reader.Close();
             response.Close();
             return responseFromServer;
+            // return JsonConvert.DeserializeObject<SpajamMadobenWebAPI.Models.GoogleSpeechAPIResponseModel.Rootobject>(responseFromServer);
         }
 
     }
