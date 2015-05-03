@@ -25,7 +25,22 @@ namespace SpajamMadobenTestWebClient
         {
             Initialize();
         }
-        
+
+        #region Const
+        private const string SERVER_TEST = "テスト";
+        private const string SERVER_HONBAN = "本番";
+
+        private const string METHOD_GET = "GET";
+        private const string METHOD_POST = "POST";
+        private const string METHOD_PUT = "PUT";
+        private const string METHOD_DELETE = "DELETE";
+
+        private const string CONTENT_TYPE_TEXT = "text/plain";
+        private const string CONTENT_TYPE_JSON = "application/json";
+        private const string CONTENT_TYPE_AUDIO = "audio/x-flac";
+        private const string CONTENT_TYPE_OTHER = "application/x-www-form-urlencoded";
+        #endregion Const
+
         #region Fields
         /// <summary> 接続先一覧 </summary>
         ObservableCollection<ComboBoxModel> servers_ = new ObservableCollection<ComboBoxModel>();
@@ -106,7 +121,7 @@ namespace SpajamMadobenTestWebClient
             {
                 server_ = value;
                 this.OnPropertyChagned("Server");
-                if (this.server_.ComboBoxItem == "テスト")
+                if (this.server_.ComboBoxItem == SERVER_TEST)
                 {
                     this.URL = "http://localhost:24133/api/Service";
                     return;
@@ -231,62 +246,68 @@ namespace SpajamMadobenTestWebClient
             this.Servers.Add(
                 new ComboBoxModel()
                 {
-                    ComboBoxItem = "テスト"
+                    ComboBoxItem = SERVER_TEST
                 }
             );
             this.Servers.Add(
                 new ComboBoxModel()
                 {
-                    ComboBoxItem = "本番"
+                    ComboBoxItem = SERVER_HONBAN
                 }
             );
-            this.Server = Servers.Where(server => server.ComboBoxItem == "テスト").First();
+            this.Server = Servers.Where(server => server.ComboBoxItem == SERVER_TEST).First();
             // メソッド設定
             this.Methods.Add(
                 new ComboBoxModel()
                 {
-                    ComboBoxItem = "GET"
+                    ComboBoxItem = METHOD_GET
                 }
             );
             this.Methods.Add(
                 new ComboBoxModel()
                 {
-                    ComboBoxItem = "POST"
+                    ComboBoxItem = METHOD_POST
                 }
             );
             this.Methods.Add(
                 new ComboBoxModel()
                 {
-                    ComboBoxItem = "PUT"
+                    ComboBoxItem = METHOD_PUT
                 }
             );
             this.Methods.Add(
                 new ComboBoxModel()
                 {
-                    ComboBoxItem = "DELETE"
+                    ComboBoxItem = METHOD_DELETE
                 }
             );
-            this.Method = Methods.Where(method => method.ComboBoxItem == "POST").First();
+            this.Method = Methods.Where(method => method.ComboBoxItem == METHOD_POST).First();
             // コンテンツタイプ設定
             this.ContentTypes.Add(
                 new ComboBoxModel()
                 {
-                    ComboBoxItem = "text/plain"
+                    ComboBoxItem = CONTENT_TYPE_TEXT
                 }
             );
             this.ContentTypes.Add(
                 new ComboBoxModel()
                 {
-                    ComboBoxItem = "application/json"
+                    ComboBoxItem = CONTENT_TYPE_JSON
                 }
             );
             this.ContentTypes.Add(
                 new ComboBoxModel()
                 {
-                    ComboBoxItem = "application/x-www-form-urlencoded"
+                    ComboBoxItem = CONTENT_TYPE_AUDIO
                 }
             );
-            this.ContentType = ContentTypes.Where(contentType => contentType.ComboBoxItem == "text/plain").First();
+            this.ContentTypes.Add(
+                new ComboBoxModel()
+                {
+                    ComboBoxItem = CONTENT_TYPE_OTHER
+                }
+            );
+            this.ContentType = ContentTypes.Where(contentType => contentType.ComboBoxItem == CONTENT_TYPE_TEXT).First();
 
         }
         
@@ -317,14 +338,14 @@ namespace SpajamMadobenTestWebClient
                 // POST 送信先の Uri
                 var uri = new Uri(this.URL);
 
-                HttpContent param = new StringContent(this.Parameter, System.Text.Encoding.UTF8, "text/plain");
+                HttpContent param = new StringContent(this.Parameter, System.Text.Encoding.UTF8, CONTENT_TYPE_TEXT);
 
                 switch (this.Method.ComboBoxItem)
                 {
-                    case "GET":
+                    case METHOD_GET:
                         await httpClient.GetAsync(uri);
                         break;
-                    case "POST":
+                    case METHOD_POST:
                         if (!string.IsNullOrWhiteSpace(this.FilePath))
                         {
                             var filePath = this.FilePath;
@@ -336,7 +357,7 @@ namespace SpajamMadobenTestWebClient
                                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
                                 stream.Read(byteArray, 0, (int)stream.Length);
                                 var fileContent = new ByteArrayContent(byteArray);
-                                fileContent.Headers.ContentType = new MediaTypeHeaderValue("audio/x-flac");
+                                fileContent.Headers.ContentType = new MediaTypeHeaderValue(CONTENT_TYPE_AUDIO);
                                 multiContent.Add(fileContent, JsonConvert.SerializeObject("buffer"));
                                 param = multiContent;
                             }
@@ -345,10 +366,10 @@ namespace SpajamMadobenTestWebClient
                         await httpClient.PostAsync(uri, param);
 
                         break;
-                    case "PUT":
+                    case METHOD_PUT:
                         await httpClient.PutAsync(uri, param);
                         break;
-                    case "DELETE":
+                    case METHOD_DELETE:
                         await httpClient.DeleteAsync(uri);
                         break;
                     default:
