@@ -30,8 +30,8 @@ namespace SpajamMadobenWebAPI.Controllers
         public HttpResponseMessage GetAudio(String fileName) 
         {
             // アカウントを取得
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                @"DefaultEndpointsProtocol=https;AccountName=spajammadobenstrage;AccountKey=007q7do8gs4w3BFp3vWIGLO7XXqJKquhKaqZ9vWuAUZzawL/teMWwyNgCgTLf5X9oGVZVVpu0VXe/WbN19wgvQ==");
+            var appSettings = ConfigurationManager.AppSettings;
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(appSettings["CloudStorageAccount"]);
 
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
             
@@ -71,8 +71,8 @@ namespace SpajamMadobenWebAPI.Controllers
             var fileName = Guid.NewGuid().ToString();
 
             // アカウントを取得
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                @"DefaultEndpointsProtocol=https;AccountName=spajammadobenstrage;AccountKey=007q7do8gs4w3BFp3vWIGLO7XXqJKquhKaqZ9vWuAUZzawL/teMWwyNgCgTLf5X9oGVZVVpu0VXe/WbN19wgvQ==");
+            var appSettings = ConfigurationManager.AppSettings;
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(appSettings["CloudStorageAccount"]);
 
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
@@ -92,7 +92,7 @@ namespace SpajamMadobenWebAPI.Controllers
             }
 
             // GoogleSpeechAPIに送信
-            var key = "AIzaSyBlwhF2pGCf472kxOMCGk1-4ODWtInjjGk";
+            var key = appSettings["GoogleSpeechAPIKey"];
             var url = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
             var postUrl = url + key;
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(postUrl);
@@ -123,7 +123,8 @@ namespace SpajamMadobenWebAPI.Controllers
         /// <returns></returns>
         public string GetGoogleSpeechText(String flacName)
         {
-            var key = "AIzaSyBlwhF2pGCf472kxOMCGk1-4ODWtInjjGk";
+            var appSettings = ConfigurationManager.AppSettings;
+            var key = appSettings["GoogleSpeechAPIKey"];
             var url = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
             var postUrl = url + key;
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(postUrl);
