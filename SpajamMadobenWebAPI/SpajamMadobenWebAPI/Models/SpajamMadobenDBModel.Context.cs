@@ -17,7 +17,7 @@ namespace SpajamMadobenWebAPI.Models
     public partial class SpajamMadobenDBEntities : DbContext
     {
         public SpajamMadobenDBEntities()
-            : base(ConfigurationManager.AppSettings["ConnectionString"])
+            : base(ConfigurationManager.AppSettings["SpajamMadobenDBConnectionString"])
         {
         }
     

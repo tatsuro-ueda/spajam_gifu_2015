@@ -40,7 +40,7 @@ namespace SpajamMadobenWebAPI.Controllers
                 // return BadRequest(ModelState);
             }
 
-            db.Talk.Add(talkModel.Talk);
+           db.Talk.Add(talkModel.Talk);
 
             try
             {
@@ -53,6 +53,7 @@ namespace SpajamMadobenWebAPI.Controllers
                 var accountKey = appSettings["CloudStorageAccount"];
                 byte[] byteArray = System.Convert.FromBase64String(talkModel.Base64Audio);
                 var fileName = Guid.NewGuid().ToString();
+                //var fileName = appSettings["SpajamMadobenDBConnectionString"];
                 await UploadBlobStrage(accountKey, byteArray, fileName);
 
                 // GoogleSpeechAPIに送信
@@ -61,8 +62,14 @@ namespace SpajamMadobenWebAPI.Controllers
                 var responceArray = responseFromServer.Split('\n');
                 responseString = responceArray[1];
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                /*
+                var appSettings = ConfigurationManager.AppSettings;
+                var accountKey = appSettings["CloudStorageAccount"];
+                byte[] byteArray = System.Convert.FromBase64String("");
+                var task = UploadBlobStrage(accountKey, byteArray,  ex.Message);
+                */
                 // 握りつぶす
             }
 
