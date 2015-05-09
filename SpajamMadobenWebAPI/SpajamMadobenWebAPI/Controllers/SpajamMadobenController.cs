@@ -3,6 +3,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using SpajamMadobenWebAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
@@ -48,32 +49,13 @@ namespace SpajamMadobenWebAPI.Controllers
                 // リクエスト内容を取得
                 var base64 = talkModel.Base64Audio;
 
-                //バイト型配列に戻す
-                byte[] byteArray = System.Convert.FromBase64String(base64);
-
                 // AzureBLOBStrageに保存
-                var fileName = Guid.NewGuid().ToString();
-
-                // アカウントを取得
                 var appSettings = ConfigurationManager.AppSettings;
-                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(appSettings["CloudStorageAccount"]);
-
-                CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-
-                // コンテナを作成
-                CloudBlobContainer container = blobClient.GetContainerReference("audios");
-
-                container.CreateIfNotExists();
-
-                // Blobを作成
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName + ".flac");
-
-                // byte配列をMemoryStreamに変換
-                using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
-                {
-                    // Blobにアップロードする
-                    await blockBlob.UploadFromStreamAsync(ms);
-                }
+                CloudStorageAccount storageAccount = 
+                    CloudStorageAccount.Parse(appSettings["CloudStorageAccount"]);
+                byte[] byteArray = System.Convert.FromBase64String(base64);
+                var fileName = Guid.NewGuid().ToString();
+                await UploadBlobStrage(storageAccount, byteArray, fileName);
 
                 // GoogleSpeechAPIに送信
                 var key = appSettings["GoogleSpeechAPIKey"];
@@ -109,6 +91,34 @@ namespace SpajamMadobenWebAPI.Controllers
             }
 
             return responseFromServer;
+        }
+
+        /// <summary>
+        /// AzureBlobStrageにファイルをアップロードする
+        /// </summary>
+        /// <param name="storageAccount"></param>
+        /// <param name="byteArray"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        private static async Task UploadBlobStrage(CloudStorageAccount storageAccount, byte[] byteArray, string fileName)
+        {
+            
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+            // コンテナを作成
+            CloudBlobContainer container = blobClient.GetContainerReference("audios");
+
+            container.CreateIfNotExists();
+
+            // Blobを作成
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName + ".flac");
+
+            // byte配列をMemoryStreamに変換
+            using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
+            {
+                // Blobにアップロードする
+                await blockBlob.UploadFromStreamAsync(ms);
+            }
         }
 
         private bool TalkExists(string id)
