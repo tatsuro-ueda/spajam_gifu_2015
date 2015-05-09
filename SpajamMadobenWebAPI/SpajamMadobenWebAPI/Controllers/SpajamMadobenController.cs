@@ -46,40 +46,17 @@ namespace SpajamMadobenWebAPI.Controllers
                 // DB登録
                // await db.SaveChangesAsync();
 
-                // リクエスト内容を取得
-                var base64 = talkModel.Base64Audio;
+                var appSettings = ConfigurationManager.AppSettings;
 
                 // AzureBLOBStrageに保存
-                var appSettings = ConfigurationManager.AppSettings;
-                CloudStorageAccount storageAccount = 
-                    CloudStorageAccount.Parse(appSettings["CloudStorageAccount"]);
-                byte[] byteArray = System.Convert.FromBase64String(base64);
+                var accountKey = appSettings["CloudStorageAccount"];
+                byte[] byteArray = System.Convert.FromBase64String(talkModel.Base64Audio);
                 var fileName = Guid.NewGuid().ToString();
-                await UploadBlobStrage(storageAccount, byteArray, fileName);
+                await UploadBlobStrage(accountKey, byteArray, fileName);
 
                 // GoogleSpeechAPIに送信
-                var httpClient = new HttpClient();
-
-                //content-type指定
-                var mediaType = new MediaTypeWithQualityHeaderValue("audio/x-flac");
-                var parameter = new NameValueHeaderValue("rate", "16000");
-                mediaType.Parameters.Add(parameter);
-                // httpClient.DefaultRequestHeaders.Accept.Add(mediaType);
-
-                var key = appSettings["GoogleSpeechAPIKey"];
-                var url = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
-                var uri = new Uri(url + key);
-
-                HttpContent param;
-                using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
-                {
-                    param = new StreamContent(ms);
-                    param.Headers.ContentType = mediaType;
-
-                    var result = await httpClient.PostAsync(uri, param);
-
-                    responseFromServer = await result.Content.ReadAsStringAsync();
-                }
+                var apiKey = appSettings["GoogleSpeechAPIKey"];
+                responseFromServer = await RequestGoogleSpeechAPI(apiKey, byteArray);
             }
             catch (Exception)
             {
@@ -90,15 +67,47 @@ namespace SpajamMadobenWebAPI.Controllers
         }
 
         /// <summary>
+        /// GoogleSpeechAPIにリクエスト送信
+        /// </summary>
+        /// <param name="key">APIキー</param>
+        /// <param name="byteArray">音声ファイルのByte配列</param>
+        /// <returns></returns>
+        private static async Task<string> RequestGoogleSpeechAPI(string key, byte[] byteArray)
+        {
+            var httpClient = new HttpClient();
+
+            //content-type指定
+            var mediaType = new MediaTypeWithQualityHeaderValue("audio/x-flac");
+            var parameter = new NameValueHeaderValue("rate", "16000");
+            mediaType.Parameters.Add(parameter);
+            // httpClient.DefaultRequestHeaders.Accept.Add(mediaType);
+
+            var url = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
+            var uri = new Uri(url + key);
+
+            using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
+            {
+                var param = new StreamContent(ms);
+                param.Headers.ContentType = mediaType;
+
+                var result = await httpClient.PostAsync(uri, param);
+
+                return await result.Content.ReadAsStringAsync(); ;
+            }
+        }
+
+        /// <summary>
         /// AzureBlobStrageにファイルをアップロードする
         /// </summary>
-        /// <param name="storageAccount"></param>
-        /// <param name="byteArray"></param>
-        /// <param name="fileName"></param>
+        /// <param name="accountKey">AzureStorageのアカウントキー</param>
+        /// <param name="byteArray">バイナリデータのbyte配列</param>
+        /// <param name="fileName">ファイル名</param>
         /// <returns></returns>
-        private static async Task UploadBlobStrage(CloudStorageAccount storageAccount, byte[] byteArray, string fileName)
+        private static async Task UploadBlobStrage(string accountKey, byte[] byteArray, string fileName)
         {
-            
+
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(accountKey);
+
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
             // コンテナを作成
@@ -117,6 +126,11 @@ namespace SpajamMadobenWebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Talkテーブルにデータが存在することを確認
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool TalkExists(string id)
         {
             return db.Talk.Count(e => e.UserID == id) > 0;

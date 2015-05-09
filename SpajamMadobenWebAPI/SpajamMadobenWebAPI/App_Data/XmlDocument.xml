@@ -529,13 +529,28 @@
             <param name="talkModel">Request用jsonモデル</param>
             <returns></returns>
         </member>
-        <member name="M:SpajamMadobenWebAPI.Controllers.SpajamMadobenController.UploadBlobStrage(Microsoft.WindowsAzure.Storage.CloudStorageAccount,System.Byte[],System.String)">
+        <member name="M:SpajamMadobenWebAPI.Controllers.SpajamMadobenController.RequestGoogleSpeechAPI(System.String,System.Byte[])">
+            <summary>
+            GoogleSpeechAPIにリクエスト送信
+            </summary>
+            <param name="key">APIキー</param>
+            <param name="byteArray">音声ファイルのByte配列</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpajamMadobenWebAPI.Controllers.SpajamMadobenController.UploadBlobStrage(System.String,System.Byte[],System.String)">
             <summary>
             AzureBlobStrageにファイルをアップロードする
             </summary>
-            <param name="storageAccount"></param>
-            <param name="byteArray"></param>
-            <param name="fileName"></param>
+            <param name="accountKey">AzureStorageのアカウントキー</param>
+            <param name="byteArray">バイナリデータのbyte配列</param>
+            <param name="fileName">ファイル名</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpajamMadobenWebAPI.Controllers.SpajamMadobenController.TalkExists(System.String)">
+            <summary>
+            Talkテーブルにデータが存在することを確認
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:SpajamMadobenWebAPI.Controllers.TalksController">
