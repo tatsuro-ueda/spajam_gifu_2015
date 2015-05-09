@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SpajamMadobenTestWebClient
 {
@@ -364,7 +365,11 @@ namespace SpajamMadobenTestWebClient
                             }
                         }
 
-                        await httpClient.PostAsync(uri, param);
+                        var result = await httpClient.PostAsync(uri, param);
+
+                        var resultString = await result.Content.ReadAsStringAsync();
+
+                        MessageBox.Show(resultString);
 
                         break;
                     case METHOD_PUT:
