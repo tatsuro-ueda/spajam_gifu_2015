@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -21,7 +22,6 @@ namespace SpajamMadobenWebAPI.Controllers
     public class SpajamMadobenController : ApiController
     {
         private SpajamMadobenDBEntities2 db = new SpajamMadobenDBEntities2();
-
 
         // POST: api/Talks
         /// <summary>
@@ -39,12 +39,12 @@ namespace SpajamMadobenWebAPI.Controllers
                 // return BadRequest(ModelState);
             }
 
-            db.Talk.Add(talkModel.Talk);
+            // db.Talk.Add(talkModel.Talk);
 
             try
             {
                 // DB登録
-                await db.SaveChangesAsync();
+               // await db.SaveChangesAsync();
 
                 // リクエスト内容を取得
                 var base64 = talkModel.Base64Audio;
@@ -58,36 +58,32 @@ namespace SpajamMadobenWebAPI.Controllers
                 await UploadBlobStrage(storageAccount, byteArray, fileName);
 
                 // GoogleSpeechAPIに送信
+                var httpClient = new HttpClient();
+
+                //content-type指定
+                var mediaType = new MediaTypeWithQualityHeaderValue("audio/x-flac");
+                var parameter = new NameValueHeaderValue("rate", "16000");
+                mediaType.Parameters.Add(parameter);
+                // httpClient.DefaultRequestHeaders.Accept.Add(mediaType);
+
                 var key = appSettings["GoogleSpeechAPIKey"];
                 var url = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
-                var postUrl = url + key;
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(postUrl);
-                var sampleRate = 16000;
+                var uri = new Uri(url + key);
 
-                request.Method = "POST";
-                request.ContentType = "audio/x-flac; rate=" + sampleRate.ToString();
-                request.ContentLength = byteArray.Length;
+                HttpContent param;
+                using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
+                {
+                    param = new StreamContent(ms);
+                    param.Headers.ContentType = mediaType;
 
-                Stream sendStream = request.GetRequestStream();
-                sendStream.Write(byteArray, 0, byteArray.Length);
-                sendStream.Close();
+                    var result = await httpClient.PostAsync(uri, param);
 
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                var reader = new StreamReader(response.GetResponseStream());
-                responseFromServer = reader.ReadToEnd();
-                reader.Close();
-                response.Close();
+                    responseFromServer = await result.Content.ReadAsStringAsync();
+                }
             }
-            catch (DbUpdateException)
+            catch (Exception)
             {
-                if (TalkExists(talkModel.Talk.UserID))
-                {
-                    // return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                // 握りつぶす
             }
 
             return responseFromServer;
