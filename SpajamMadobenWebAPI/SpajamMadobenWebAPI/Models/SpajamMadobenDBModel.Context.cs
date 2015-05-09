@@ -10,13 +10,14 @@
 namespace SpajamMadobenWebAPI.Models
 {
     using System;
+    using System.Configuration;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
     public partial class SpajamMadobenDBEntities : DbContext
     {
         public SpajamMadobenDBEntities()
-            : base("name=SpajamMadobenDBEntities")
+            : base(ConfigurationManager.AppSettings["ConnectionString"])
         {
         }
     
