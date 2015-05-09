@@ -22,7 +22,7 @@ namespace SpajamMadobenWebAPI.Controllers
     /// </summary>
     public class SpajamMadobenController : ApiController
     {
-        private SpajamMadobenDBEntities2 db = new SpajamMadobenDBEntities2();
+        private SpajamMadobenDBEntities db = new SpajamMadobenDBEntities();
 
         // POST: api/Talks
         /// <summary>
@@ -40,12 +40,12 @@ namespace SpajamMadobenWebAPI.Controllers
                 // return BadRequest(ModelState);
             }
 
-            // db.Talk.Add(talkModel.Talk);
+           db.Talk.Add(talkModel.Talk);
 
             try
             {
                // DB登録
-               // await db.SaveChangesAsync();
+               await db.SaveChangesAsync();
 
                 var appSettings = ConfigurationManager.AppSettings;
 
@@ -53,6 +53,7 @@ namespace SpajamMadobenWebAPI.Controllers
                 var accountKey = appSettings["CloudStorageAccount"];
                 byte[] byteArray = System.Convert.FromBase64String(talkModel.Base64Audio);
                 var fileName = Guid.NewGuid().ToString();
+                //var fileName = appSettings["SpajamMadobenDBConnectionString"];
                 await UploadBlobStrage(accountKey, byteArray, fileName);
 
                 // GoogleSpeechAPIに送信
@@ -61,8 +62,14 @@ namespace SpajamMadobenWebAPI.Controllers
                 var responceArray = responseFromServer.Split('\n');
                 responseString = responceArray[1];
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                /*
+                var appSettings = ConfigurationManager.AppSettings;
+                var accountKey = appSettings["CloudStorageAccount"];
+                byte[] byteArray = System.Convert.FromBase64String("");
+                var task = UploadBlobStrage(accountKey, byteArray,  ex.Message);
+                */
                 // 握りつぶす
             }
 
@@ -137,7 +144,8 @@ namespace SpajamMadobenWebAPI.Controllers
         /// <returns></returns>
         private bool TalkExists(string id)
         {
-            return db.Talk.Count(e => e.UserID == id) > 0;
+            // return db.Talk.Count(e => e.UserID == id) > 0;
+            return false;
         }
     }
 }

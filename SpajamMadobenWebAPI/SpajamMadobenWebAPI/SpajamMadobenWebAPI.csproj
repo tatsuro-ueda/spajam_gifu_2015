@@ -276,23 +276,6 @@
     <Content Include="App_Data\1.flac" />
     <Content Include="App_Data\2.flac" />
     <Content Include="App_Data\3.flac" />
-    <EntityDeploy Include="Models\SpajamMadobenDBModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SpajamMadobenDBModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\SpajamMadobenDBModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SpajamMadobenDBModel.edmx</DependentUpon>
-      <LastGenOutput>SpajamMadobenDBModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\SpajamMadobenDBModel.edmx.diagram">
-      <DependentUpon>SpajamMadobenDBModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\SpajamMadobenDBModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SpajamMadobenDBModel.edmx</DependentUpon>
-      <LastGenOutput>SpajamMadobenDBModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -315,6 +298,23 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <EntityDeploy Include="Models\SpajamMadobenDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SpajamMadobenDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\SpajamMadobenDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SpajamMadobenDBModel.edmx</DependentUpon>
+      <LastGenOutput>SpajamMadobenDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\SpajamMadobenDBModel.edmx.diagram">
+      <DependentUpon>SpajamMadobenDBModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\SpajamMadobenDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SpajamMadobenDBModel.edmx</DependentUpon>
+      <LastGenOutput>SpajamMadobenDBModel.cs</LastGenOutput>
+    </Content>
     <None Include="Properties\PublishProfiles\SpajamMadobenWebAPI.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
