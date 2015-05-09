@@ -22,7 +22,7 @@ namespace SpajamMadobenWebAPI.Controllers
     /// </summary>
     public class SpajamMadobenController : ApiController
     {
-        private SpajamMadobenDBEntities2 db = new SpajamMadobenDBEntities2();
+        private SpajamMadobenDBEntities db = new SpajamMadobenDBEntities();
 
         // POST: api/Talks
         /// <summary>
@@ -40,12 +40,12 @@ namespace SpajamMadobenWebAPI.Controllers
                 // return BadRequest(ModelState);
             }
 
-            // db.Talk.Add(talkModel.Talk);
+            db.Talk.Add(talkModel.Talk);
 
             try
             {
                // DB登録
-               // await db.SaveChangesAsync();
+               await db.SaveChangesAsync();
 
                 var appSettings = ConfigurationManager.AppSettings;
 
@@ -137,7 +137,8 @@ namespace SpajamMadobenWebAPI.Controllers
         /// <returns></returns>
         private bool TalkExists(string id)
         {
-            return db.Talk.Count(e => e.UserID == id) > 0;
+            // return db.Talk.Count(e => e.UserID == id) > 0;
+            return false;
         }
     }
 }

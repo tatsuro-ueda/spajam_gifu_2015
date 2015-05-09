@@ -60,7 +60,7 @@
           <Property Name="TextMiningResult" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityContainer Name="SpajamMadobenDBEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SpajamMadobenDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Talk" EntityType="Self.Talk" />
           <EntitySet Name="Voice" EntityType="Self.Voice" />
         </EntityContainer>
@@ -69,7 +69,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SpajamMadobenDBModelStoreContainer" CdmEntityContainer="SpajamMadobenDBEntities2">
+        <EntityContainerMapping StorageEntityContainer="SpajamMadobenDBModelStoreContainer" CdmEntityContainer="SpajamMadobenDBEntities">
           <EntitySetMapping Name="Talk">
             <EntityTypeMapping TypeName="SpajamMadobenDBModel.Talk">
               <MappingFragment StoreEntitySet="Talk">
