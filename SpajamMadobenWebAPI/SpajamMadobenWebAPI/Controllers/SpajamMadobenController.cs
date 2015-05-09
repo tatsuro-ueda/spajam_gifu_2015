@@ -1,5 +1,6 @@
 ﻿using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Newtonsoft.Json;
 using SpajamMadobenWebAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -30,9 +31,9 @@ namespace SpajamMadobenWebAPI.Controllers
         /// <param name="talkModel">Request用jsonモデル</param>
         /// <returns></returns>
         [ResponseType(typeof(TalkModel))]
-        public async Task<string> PostTalk(TalkModel talkModel)
+        public async Task<SpajamMadobenWebAPI.Models.GoogleSpeechAPIResponseModels.GoogleSpeechAPIResponseModel> PostTalk(TalkModel talkModel)
         {
-            string responseFromServer = string.Empty;
+            string responseString = string.Empty;
 
             if (!ModelState.IsValid)
             {
@@ -43,7 +44,7 @@ namespace SpajamMadobenWebAPI.Controllers
 
             try
             {
-                // DB登録
+               // DB登録
                // await db.SaveChangesAsync();
 
                 var appSettings = ConfigurationManager.AppSettings;
@@ -56,14 +57,17 @@ namespace SpajamMadobenWebAPI.Controllers
 
                 // GoogleSpeechAPIに送信
                 var apiKey = appSettings["GoogleSpeechAPIKey"];
-                responseFromServer = await RequestGoogleSpeechAPI(apiKey, byteArray);
+                var responseFromServer = await RequestGoogleSpeechAPI(apiKey, byteArray);
+                var responceArray = responseFromServer.Split('\n');
+                responseString = responceArray[1];
             }
             catch (Exception)
             {
                 // 握りつぶす
             }
 
-            return responseFromServer;
+            var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<SpajamMadobenWebAPI.Models.GoogleSpeechAPIResponseModels.GoogleSpeechAPIResponseModel>(responseString));
+            return responseJson;
         }
 
         /// <summary>
@@ -92,7 +96,7 @@ namespace SpajamMadobenWebAPI.Controllers
 
                 var result = await httpClient.PostAsync(uri, param);
 
-                return await result.Content.ReadAsStringAsync(); ;
+                return await result.Content.ReadAsStringAsync();
             }
         }
 

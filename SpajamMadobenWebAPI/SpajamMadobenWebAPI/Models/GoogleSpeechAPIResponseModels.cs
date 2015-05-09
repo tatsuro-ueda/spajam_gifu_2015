@@ -5,9 +5,9 @@ using System.Web;
 
 namespace SpajamMadobenWebAPI.Models
 {
-    public class GoogleSpeechAPIResponseModel
+    public class GoogleSpeechAPIResponseModels
     {
-        public class Rootobject
+        public class GoogleSpeechAPIResponseModel
         {
             public Result[] result { get; set; }
             public int result_index { get; set; }
