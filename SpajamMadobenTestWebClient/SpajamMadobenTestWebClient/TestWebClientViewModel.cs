@@ -123,11 +123,11 @@ namespace SpajamMadobenTestWebClient
                 this.OnPropertyChagned("Server");
                 if (this.server_.ComboBoxItem == SERVER_TEST)
                 {
-                    this.URL = "http://localhost:24133/api/Service";
+                    this.URL = "http://localhost:24133/api/SpajamMadoben";
                     return;
                 }
 
-                this.URL = "http://spajammadobenwebapi.azurewebsites.net/api/Service";
+                this.URL = "http://spajammadobenwebapi.azurewebsites.net/api/SpajamMadoben";
             }
         }
 
