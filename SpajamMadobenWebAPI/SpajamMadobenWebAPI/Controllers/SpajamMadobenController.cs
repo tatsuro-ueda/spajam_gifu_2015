@@ -108,6 +108,35 @@ namespace SpajamMadobenWebAPI.Controllers
         }
 
         /// <summary>
+        /// MicrosoftBingVoiceRecognitionAPIにリクエスト送信
+        /// </summary>
+        /// <param name="byteArray">音声ファイルのByte配列</param>
+        /// <returns></returns>
+        private static async Task<string> RequestMicrosoftBingVoiceRecognitionAPI(byte[] byteArray)
+        {
+            var httpClient = new HttpClient();
+
+            //content-type指定
+            var mediaType = new MediaTypeWithQualityHeaderValue("audio/wav");
+            var parameter = new NameValueHeaderValue("samplerate", "8000");
+            mediaType.Parameters.Add(parameter);
+            // httpClient.DefaultRequestHeaders.Accept.Add(mediaType);
+
+            var url = "https://speech.platform.bing.com/recognize";
+            var uri = new Uri(url);
+
+            using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
+            {
+                var param = new StreamContent(ms);
+                param.Headers.ContentType = mediaType;
+
+                var result = await httpClient.PostAsync(uri, param);
+
+                return await result.Content.ReadAsStringAsync();
+            }
+        }
+
+        /// <summary>
         /// AzureBlobStrageにファイルをアップロードする
         /// </summary>
         /// <param name="accountKey">AzureStorageのアカウントキー</param>
