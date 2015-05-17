@@ -10,8 +10,8 @@
 $(document).ready(function(){
 	var show = "";
 	$.getJSON("http://spajammadobenwebapi.azurewebsites.net/api/Voices", function(json){
-  		json.each(function(){
-  			show += "<li>" + $(this).Voice.VoiceAnalysisResult + "</li>";
+  		json.forEach(function(value){
+  			show += "<li>" + value.VoiceAnalysisResult + "</li>";
   		});
 	});
 	$("#show").html(show);
