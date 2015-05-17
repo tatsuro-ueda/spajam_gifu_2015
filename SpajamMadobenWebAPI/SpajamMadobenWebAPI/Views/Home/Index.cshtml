@@ -11,7 +11,8 @@ $(window).load(function(){
 	$.getJSON("http://spajammadobenwebapi.azurewebsites.net/api/Voices", function(json){
   		var show = "";
   		json.forEach(function(value){
-  			show += "<li>" + "<img src='/Scripts/" + value.FileID +".png'>" + value.VoiceAnalysisResult + "</li>";
+  			show += "<img src='/Scripts/" + value.FileID +".png'>" 
+  					+ value.VoiceAnalysisResult + "<br/>";
   		});
   		$("#show").html(show);
 	});
