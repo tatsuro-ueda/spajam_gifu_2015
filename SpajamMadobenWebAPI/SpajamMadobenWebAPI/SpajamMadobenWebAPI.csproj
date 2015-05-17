@@ -270,8 +270,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <None Include="Jsons\GoogleSpeechResultJson.json" />
-    <Content Include="Scripts\1.jpeg" />
-    <Content Include="Scripts\2.jpeg" />
+    <Content Include="Scripts\1.png" />
+    <Content Include="Scripts\2.png" />
+    <Content Include="Scripts\3.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config" />
