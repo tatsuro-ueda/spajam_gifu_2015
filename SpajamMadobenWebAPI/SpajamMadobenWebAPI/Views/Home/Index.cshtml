@@ -6,9 +6,9 @@ kjfdlajfojasdlfjadsojfol
 <script type="text/javascript">
    
 $(document).ready(function(){
-	$("#rowArea").html("kkkkkk");
-	alert(1);
+	$.getJSON("http://spajammadobenwebapi.azurewebsites.net/api/Voices", function(json){
+  		alert("JSON Data: " + json);
+	});
 });
 
-alert(2);
 </script>
