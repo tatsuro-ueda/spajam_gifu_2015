@@ -25,8 +25,4 @@ UpgradeLog*.htm
 *.BASE.*
 *.LOCAL.*
 *.REMOTE.*
-_*.*
-*_.*
-*._*
-*.*_
 secret.config
