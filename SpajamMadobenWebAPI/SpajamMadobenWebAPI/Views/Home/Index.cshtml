@@ -1,15 +1,20 @@
 
 <div class="row" id="rowArea">
-kjfdlajfojasdlfjadsojfol
+<ul id="show">
+
+</ul>
 </div>
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
    
 $(document).ready(function(){
+	var show = "";
 	$.getJSON("http://spajammadobenwebapi.azurewebsites.net/api/Voices", function(json){
-  		alert("JSON Data: " + json);
+  		json.each(function(){
+  			show += "<li>" + $(this).Voice.VoiceAnalysisResult + "</li>";
+  		});
 	});
-	$("#rowArea").html("kkk");
+	$("#show").html(show);
 });
 
 </script>
