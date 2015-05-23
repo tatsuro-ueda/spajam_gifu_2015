@@ -103,7 +103,7 @@ namespace SpajamAPI.Controllers
             var audioCommentaryResultOriginal = responseJson.result[0].alternative[0].transcript; 
 
             // 音声解説ファイルの解析結果の漢字変換
-            var audioCommentaryResultConversion = await RequestGoogleJapaneseAPI(audioCommentaryResultOriginal);
+            // var audioCommentaryResultConversion = await RequestGoogleJapaneseAPI(audioCommentaryResultOriginal);
 
             // 音声解説ファイル変換結果の音声合成 TODO 本当は変換結果を送る
             var speechSynthesisFileID = await RequestVoiceTextAPI(audioCommentaryResultOriginal, appSettings);
@@ -116,7 +116,7 @@ namespace SpajamAPI.Controllers
                 SortID = 1,
                 FileID = fileID,
                 AudioCommentaryResultOriginal = audioCommentaryResultOriginal,
-                AudioCommentaryResultConversion = audioCommentaryResultConversion,
+                AudioCommentaryResultConversion = string.Empty, //TODO
                 SpeechSynthesisFileID = speechSynthesisFileID,
                 RegisteredUserID = request.RegisteredUserID,
                 RegisteredDateTime = DateTime.Now,
