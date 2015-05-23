@@ -28,7 +28,7 @@ namespace SpajamAPI.Controllers
         private SpajamMadobenDBEntities db = new SpajamMadobenDBEntities();
 
         // GET: api/DownLoad/5
-        public async Task<string> GetAudioCommentary(string id)
+        public async Task<DownLoadResponseModel> GetAudioCommentary(string id)
         {
             AudioCommentary audioCommentary = db.AudioCommentary.Where(master => master.SpotKey == id).First();
             if (audioCommentary == null)
@@ -39,7 +39,14 @@ namespace SpajamAPI.Controllers
             var appSettings = ConfigurationManager.AppSettings;
             var accountKey = appSettings["CloudStorageAccount"];
 
-            var response = await DownloadBlobStrage(accountKey, audioCommentary.FileID);
+            var base64 = await DownloadBlobStrage(accountKey, audioCommentary.FileID);
+
+            var response = new DownLoadResponseModel() 
+            {
+                AudioCommentary = audioCommentary,
+                Base64Audio = base64,
+            };
+
             return response;
         }
 

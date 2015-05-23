@@ -259,6 +259,7 @@
     <Compile Include="Models\Talk.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DownLoadResponseModel.cs" />
     <Compile Include="Models\Voice.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
