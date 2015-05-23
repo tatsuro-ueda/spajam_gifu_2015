@@ -100,7 +100,13 @@ namespace SpajamAPI.Controllers
             var responceArray = responseFromServer.Split('\n');
             var googleSpeechResponce = responceArray[1];
             var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<SpajamAPI.Models.GoogleSpeechAPIResponseModels.GoogleSpeechAPIResponseModel>(googleSpeechResponce));
-            var audioCommentaryResultOriginal = responseJson.result[0].alternative[0].transcript; 
+
+            string audioCommentaryResultOriginal = string.Empty;
+
+            if (responseJson != null)
+            {
+                audioCommentaryResultOriginal = responseJson.result[0].alternative[0].transcript; 
+            }
 
             // 音声解説ファイルの解析結果の漢字変換
             // var audioCommentaryResultConversion = await RequestGoogleJapaneseAPI(audioCommentaryResultOriginal);
@@ -257,8 +263,10 @@ namespace SpajamAPI.Controllers
             var httpClient = new HttpClient();
 
             //content-type指定
-            var mediaType = new MediaTypeWithQualityHeaderValue("audio/x-flac");
-            var parameter = new NameValueHeaderValue("rate", "16000");
+             var mediaType = new MediaTypeWithQualityHeaderValue("audio/x-flac");
+            // var parameter = new NameValueHeaderValue("rate", "16000");
+            //var mediaType = new MediaTypeWithQualityHeaderValue("audio/x-wav");
+            var parameter = new NameValueHeaderValue("rate", "44100");
             mediaType.Parameters.Add(parameter);
             // httpClient.DefaultRequestHeaders.Accept.Add(mediaType);
 
