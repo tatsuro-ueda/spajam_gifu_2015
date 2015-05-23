@@ -30,11 +30,11 @@ $(window).load(function(){
 	  url: "http://spajamapi.azurewebsites.net/api/SpotMasters",
 	  cache: false,
 	  async: false,
-	  success: function(data){
+	  success: function(xml){
 	    var show = "";
-	    var data = new Array(); //マーカー位置の緯度経度
+	    var data = new Array();
 	    
-	    data.forEach(function(value){
+	    xml.forEach(function(value){
   			show += "<img src='/Scripts/icon_ume.png'><B>" + value.SpotName + "</B><br/>"
   					 + "<div style='width: 600px' >" + value.SpotDescription + "</div><br/>";
   			data.push({position: new google.maps.LatLng(value.Latitude, value.Longitude), content: value.SpotName});
