@@ -16,6 +16,7 @@ using System.IO;
 using System.Configuration;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace SpajamAPI.Controllers
 {
@@ -331,9 +332,12 @@ namespace SpajamAPI.Controllers
                 });
 
             var result = await client.PostAsync(uri, param);
-            var response = await result.Content.ReadAsStringAsync();
-
-            return response;
+            var responseStream = await result.Content.ReadAsStreamAsync();
+            using (StreamReader sr = new StreamReader(responseStream, Encoding.GetEncoding("utf-8")))
+            {
+                var resultString = sr.ReadToEnd();
+                return resultString;
+            } 
         }
 
         protected override void Dispose(bool disposing)
