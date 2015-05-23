@@ -35,7 +35,7 @@ $(window).load(function(){
 	    var data = new Array(); 
 	    
 	    xml.forEach(function(value){
-  			show += "<img src='./icon_ume.png'><B>" + value.SpotName + "</B><br/>"
+  			show += "<img src='https://s3-ap-northeast-1.amazonaws.com/spajam-gifu/icon_ume.png'><B>" + value.SpotName + "</B><br/>"
   					 + "<div style='width: 375px' >" + value.SpotDescription + "</div><br/>";
   			data.push({position: new google.maps.LatLng(value.Latitude, value.Longitude), content: value.SpotName});
   		});
@@ -52,7 +52,7 @@ $(window).load(function(){
 <!--map-->
 <p style="position: relative;">
 	<span id="map" style="position: absolute; top: 55px; left: 55px; width: 320px; height: 320px;"></span>
-	<img src="./take_waku.png" width="375" height="375" />
+	<img src="https://s3-ap-northeast-1.amazonaws.com/spajam-gifu/take_waku.png" width="375" height="375" />
 </p>
 <!--map-->
 
