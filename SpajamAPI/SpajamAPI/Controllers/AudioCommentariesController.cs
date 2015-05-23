@@ -100,7 +100,8 @@ namespace SpajamAPI.Controllers
 
             // 音声解説ファイルの解析結果の変換
 
-            // 音声解説ファイル変換結果の音声合成
+            // 音声解説ファイル変換結果の音声合成 TODO 本当は変換結果を送る
+            var speechSynthesisFileID = await RequestVoiceTextAPI(audioCommentaryResultOriginal, appSettings);
 
             var audioCommentary = new AudioCommentary() 
             { 
@@ -111,7 +112,7 @@ namespace SpajamAPI.Controllers
                 FileID = fileID,
                 AudioCommentaryResultOriginal = audioCommentaryResultOriginal,
                 AudioCommentaryResultConversion = string.Empty, //TODO 解析結果(変換)
-                SpeechSynthesisFileID = Guid.NewGuid().ToString(),//TODO 音声合成したファイルID
+                SpeechSynthesisFileID = speechSynthesisFileID,
                 RegisteredUserID = request.RegisteredUserID,
                 RegisteredDateTime = DateTime.Now,
             };
@@ -185,6 +186,30 @@ namespace SpajamAPI.Controllers
             return Ok(audioCommentary);
         }
 
+        /// <summary>
+        /// AzureBlobStrageにファイルをアップロードする
+        /// </summary>
+        /// <param name="accountKey">AzureStorageのアカウントキー</param>
+        /// <param name="stream">ストリーム</param>
+        /// <param name="fileName">ファイル名</param>
+        /// <returns></returns>
+        private static async Task UploadBlobStrage(string accountKey, Stream stream, string fileName)
+        {
+
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(accountKey);
+
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+            // コンテナを作成
+            CloudBlobContainer container = blobClient.GetContainerReference("audios");
+
+            container.CreateIfNotExists();
+
+            // Blobを作成
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName + ".flac");
+
+            await blockBlob.UploadFromStreamAsync(stream);
+        }
 
         /// <summary>
         /// AzureBlobStrageにファイルをアップロードする
@@ -244,6 +269,41 @@ namespace SpajamAPI.Controllers
 
                 return await result.Content.ReadAsStringAsync();
             }
+        }
+
+        /// <summary>
+        /// VoiceTextAPIにリクエスト送信
+        /// </summary>
+        /// <param name="voiceText"></param>
+        /// <param name="appSettings"></param>
+        /// <returns>ファイルIDのstring</returns>
+        public async Task<string> RequestVoiceTextAPI(string voiceText, System.Collections.Specialized.NameValueCollection appSettings)
+        {
+            var username = appSettings["VoiceTextAPIUser"];
+            var url = "https://api.voicetext.jp/v1/tts";
+
+            var authHeader = new AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(System.Text.UTF8Encoding.UTF8.GetBytes(string.Format("{0}:{1}", username, ""))));
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = authHeader;
+
+            var uri = new Uri(url);
+
+            // Request設定
+            var param = new FormUrlEncodedContent(new Dictionary<string, string>
+                {
+                    { "text", voiceText },
+                    { "speaker", "haruka" },
+                });
+
+            var result = await client.PostAsync(uri, param);
+            var stream = await result.Content.ReadAsStreamAsync();
+
+            var accountKey = appSettings["CloudStorageAccount"];
+            var fileName = Guid.NewGuid().ToString();
+
+            await UploadBlobStrage(accountKey, stream, fileName);
+            return fileName;
         }
 
         protected override void Dispose(bool disposing)
