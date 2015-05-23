@@ -38,6 +38,75 @@ ShowTag=1
 ShowCommonAttributes=0
 
 [Relation]
+Entity1=SpotMaster
+Entity2=AudioCommentary
+RelationType1=2
+RelationType2=3
+Fields1=PlaceKey
+Fields2=SpotKey
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,2741,7259,2882,R,R
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=274
+Bar2=726
+Bar3=288
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=AudioCommentary
+LName=音声解説データ
+Comment=対象のiBeaconに登録された音声解説のデータ
+TableOption=
+Page=Main
+Left=500
+Top=400
+Field="音声解説キー","AudioCommentaryKey","@VARCHAR(36)","NOT NULL",0,"","音声解説データのキー(GUID)",$FFFFFFFF,""
+Field="音声解説タイトル","AudioCommentaryTitle","@VARCHAR(200)","NOT NULL",,"","音声解説のタイトル",$FFFFFFFF,""
+Field="スポットキー","SpotKey","@VARCHAR(36)","NOT NULL",,"","スポットマスターのキー(GUID)",$FFFFFFFF,""
+Field="並び順","SortID","BIGINT",,,"","並び順",$FFFFFFFF,""
+Field="音声解説元ファイルID","FileID","@VARCHAR(36)",,,"","ユーザーから送られた音声解説ファイルのID(GUID)",$FFFFFFFF,""
+Field="音声解説解析結果テキスト(原文)","AudioCommentaryResultOriginal","@VARCHAR(max)",,,"","録音した音声の解析結果テキストの原文",$FFFFFFFF,""
+Field="音声解説解析結果テキスト(変換後)","AudioCommentaryResultConversion","@VARCHAR(max)",,,"","録音した音声の解析結果テキストの原文を漢字変換したもの",$FFFFFFFF,""
+Field="音声合成ファイルID","SpeechSynthesisFileID","@VARCHAR(36)",,,"","録音した音声の解析結果テキストを音声合成したファイルID(GUID)",$FFFFFFFF,""
+Field="登録者ID","RegisteredUserID","@VARCHAR(36)","NOT NULL",,"","登録者のID(GUID)",$FFFFFFFF,""
+Field="登録日時","RegisteredDateTime","@DATETIME","NOT NULL",,"","データの登録日時",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20150523162939
+Position="Main",500,400,391,273
+
+[Entity]
+PName=SpotMaster
+LName=スポットマスター
+Comment=スポット(iBeaconの設置場所)を登録するマスタ
+TableOption=
+Page=Main
+Left=100
+Top=400
+Field="スポットキー","PlaceKey","@VARCHAR(36)","NOT NULL",0,"","スポットマスターのキー(GUID)",$FFFFFFFF,""
+Field="スポット名","PlaceName","@VARCHAR(max)","NOT NULL",,"","スポット名",$FFFFFFFF,""
+Field="スポット画像URL","PlaceImageURL","@VARCHAR(max)",,,"","スポット画像のURL",$FFFFFFFF,""
+Field="メジャーID","MajorID","@INT","NOT NULL",,"","iBeaconのメジャーID",$FFFFFFFF,""
+Field="マイナーID","MinorID","@INT","NOT NULL",,"","iBeaconのマイナーID",$FFFFFFFF,""
+Field="並び順","SortID","BIGINT",,,"","並び順",$FFFFFFFF,""
+Field="都道府県ID","PrefectureID","@INT",,,"","都道府県を一意に識別するID",$FFFFFFFF,""
+Field="市区町村ID","StateCityLineID","@INT",,,"","市区町村を一意に識別するID",$FFFFFFFF,""
+Field="緯度","Latitude","@DOUBLE(3,6)","NOT NULL",,"","iBeacon設置場所の緯度",$FFFFFFFF,""
+Field="経度","Longitude","@DOUBLE(3,6)","NOT NULL",,"","iBeaconの設置場所の経度",$FFFFFFFF,""
+Field="登録日時","RegisteredDateTime","@DATETIME","NOT NULL",,"","データを登録した日時",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20150523163156
+Position="Main",100,400,268,287
+
+[Relation]
 Entity1=Talk
 Entity2=Voice
 RelationType1=1
