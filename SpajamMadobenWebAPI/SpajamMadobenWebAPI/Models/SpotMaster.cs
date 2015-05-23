@@ -12,13 +12,19 @@ namespace SpajamMadobenWebAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Talk
+    public partial class SpotMaster
     {
-        public string UserID { get; set; }
-        public string TalkID { get; set; }
-        public string TalkTitle { get; set; }
-        public long SortID { get; set; }
-        public string Evaluation { get; set; }
-        public Nullable<long> EvaluationDetail { get; set; }
+        public string SpotKey { get; set; }
+        public string SpotName { get; set; }
+        public string SpotDescription { get; set; }
+        public string SpotImageURL { get; set; }
+        public int MajorID { get; set; }
+        public int MinorID { get; set; }
+        public Nullable<long> SortID { get; set; }
+        public Nullable<int> PrefectureID { get; set; }
+        public Nullable<int> StateCityLineID { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
+        public System.DateTime RegisteredDateTime { get; set; }
     }
 }

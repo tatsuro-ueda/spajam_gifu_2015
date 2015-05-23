@@ -12,13 +12,17 @@ namespace SpajamMadobenWebAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Talk
+    public partial class AudioCommentary
     {
-        public string UserID { get; set; }
-        public string TalkID { get; set; }
-        public string TalkTitle { get; set; }
-        public long SortID { get; set; }
-        public string Evaluation { get; set; }
-        public Nullable<long> EvaluationDetail { get; set; }
+        public string AudioCommentaryKey { get; set; }
+        public string AudioCommentaryTitle { get; set; }
+        public string SpotKey { get; set; }
+        public Nullable<long> SortID { get; set; }
+        public string FileID { get; set; }
+        public string AudioCommentaryResultOriginal { get; set; }
+        public string AudioCommentaryResultConversion { get; set; }
+        public string SpeechSynthesisFileID { get; set; }
+        public string RegisteredUserID { get; set; }
+        public System.DateTime RegisteredDateTime { get; set; }
     }
 }

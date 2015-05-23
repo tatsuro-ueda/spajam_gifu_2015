@@ -227,37 +227,45 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AudioCommentariesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MultipartFormDataController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\SpajamMadobenController.cs" />
+    <Compile Include="Controllers\SpotMastersController.cs" />
     <Compile Include="Controllers\TalksController.cs" />
     <Compile Include="Controllers\VoicesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AudioCommentary.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\GoogleSpeechAPIResponseModels.cs" />
-    <Compile Include="Models\SpajamMadobenDBModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SpajamMadobenDBModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SpajamMadobenDBModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SpajamMadobenDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SpajamMadobenDBModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SpajamMadobenDBModel.edmx</DependentUpon>
+    <Compile Include="Models\SpotMaster.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Talk.cs">
-      <DependentUpon>SpajamMadobenDBModel.tt</DependentUpon>
+      <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TalkModel.cs" />
     <Compile Include="Models\Voice.cs">
-      <DependentUpon>SpajamMadobenDBModel.tt</DependentUpon>
+      <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -301,22 +309,22 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <EntityDeploy Include="Models\SpajamMadobenDBModel.edmx">
+    <EntityDeploy Include="Models\DBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SpajamMadobenDBModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\SpajamMadobenDBModel.Context.tt">
+    <Content Include="Models\DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SpajamMadobenDBModel.edmx</DependentUpon>
-      <LastGenOutput>SpajamMadobenDBModel.Context.cs</LastGenOutput>
+      <DependentUpon>DBModel.edmx</DependentUpon>
+      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\SpajamMadobenDBModel.edmx.diagram">
-      <DependentUpon>SpajamMadobenDBModel.edmx</DependentUpon>
+    <Content Include="Models\DBModel.edmx.diagram">
+      <DependentUpon>DBModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\SpajamMadobenDBModel.tt">
+    <Content Include="Models\DBModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SpajamMadobenDBModel.edmx</DependentUpon>
-      <LastGenOutput>SpajamMadobenDBModel.cs</LastGenOutput>
+      <DependentUpon>DBModel.edmx</DependentUpon>
+      <LastGenOutput>DBModel.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\SpajamMadobenWebAPI.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

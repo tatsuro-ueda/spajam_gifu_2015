@@ -10,14 +10,13 @@
 namespace SpajamMadobenWebAPI.Models
 {
     using System;
-    using System.Configuration;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
     public partial class SpajamMadobenDBEntities : DbContext
     {
         public SpajamMadobenDBEntities()
-            : base(ConfigurationManager.AppSettings["SpajamMadobenDBConnectionString"])
+            : base("name=SpajamMadobenDBEntities")
         {
         }
     
@@ -26,6 +25,8 @@ namespace SpajamMadobenWebAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AudioCommentary> AudioCommentary { get; set; }
+        public virtual DbSet<SpotMaster> SpotMaster { get; set; }
         public virtual DbSet<Talk> Talk { get; set; }
         public virtual DbSet<Voice> Voice { get; set; }
     }

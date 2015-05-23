@@ -19,7 +19,8 @@ namespace SpajamMadobenWebAPI.Models
         public string VoiceID { get; set; }
         public string FileID { get; set; }
         public string VoiceAnalysisResult { get; set; }
-        public string TextMiningResult { get; set; }
+        public Nullable<long> TextMiningResult { get; set; }
+        public string TextMiningResultDetail { get; set; }
         public System.DateTime CreateDateTime { get; set; }
     }
 }
