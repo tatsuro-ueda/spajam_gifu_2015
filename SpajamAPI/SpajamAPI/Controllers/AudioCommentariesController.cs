@@ -88,11 +88,15 @@ namespace SpajamAPI.Controllers
 
             var appSettings = ConfigurationManager.AppSettings;
 
+
             // 音声解説ファイルのbase64変換+アップロード
             var accountKey = appSettings["CloudStorageAccount"];
             byte[] byteArray = System.Convert.FromBase64String(request.AudioBase64);
             var fileID = Guid.NewGuid().ToString();
             await UploadBlobStrage(accountKey, byteArray, fileID);
+
+            // 音声解説ファイルのダウンロード
+            var response = await DownloadBlobStrage(accountKey, fileID);
 
             // 音声解説ファイルの解析
             var apiKey = appSettings["GoogleSpeechAPIKey"];
@@ -249,6 +253,33 @@ namespace SpajamAPI.Controllers
             {
                 // Blobにアップロードする
                 await blockBlob.UploadFromStreamAsync(ms);
+            }
+        }
+
+        /// <summary>
+        /// AzureBlobStrageからファイルをダウンロードする
+        /// </summary>
+        /// <param name="accountKey">AzureStorageのアカウントキー</param>
+        /// <param name="fileName">ファイル名</param>
+        /// <returns></returns>
+        private static async Task<string> DownloadBlobStrage(string accountKey, string fileName)
+        {
+
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(accountKey);
+
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+            // コンテナを作成
+            CloudBlobContainer container = blobClient.GetContainerReference("audios");
+
+            var blockBlob = container.GetBlockBlobReference(fileName + ".flac");
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                ms.Position = 0;
+                await blockBlob.DownloadToStreamAsync(ms);
+                var byteArray = ms.ToArray();
+                return System.Convert.ToBase64String(byteArray); ;
             }
         }
 
