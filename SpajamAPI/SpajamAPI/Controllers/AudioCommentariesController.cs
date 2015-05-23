@@ -101,7 +101,8 @@ namespace SpajamAPI.Controllers
             var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<SpajamAPI.Models.GoogleSpeechAPIResponseModels.GoogleSpeechAPIResponseModel>(googleSpeechResponce));
             var audioCommentaryResultOriginal = responseJson.result[0].alternative[0].transcript; 
 
-            // 音声解説ファイルの解析結果の変換
+            // 音声解説ファイルの解析結果の漢字変換
+            var audioCommentaryResultConversion = await RequestGoogleJapaneseAPI(audioCommentaryResultOriginal);
 
             // 音声解説ファイル変換結果の音声合成 TODO 本当は変換結果を送る
             var speechSynthesisFileID = await RequestVoiceTextAPI(audioCommentaryResultOriginal, appSettings);
@@ -114,7 +115,7 @@ namespace SpajamAPI.Controllers
                 SortID = 1,
                 FileID = fileID,
                 AudioCommentaryResultOriginal = audioCommentaryResultOriginal,
-                AudioCommentaryResultConversion = string.Empty, //TODO 解析結果(変換)
+                AudioCommentaryResultConversion = audioCommentaryResultConversion,
                 SpeechSynthesisFileID = speechSynthesisFileID,
                 RegisteredUserID = request.RegisteredUserID,
                 RegisteredDateTime = DateTime.Now,
@@ -307,6 +308,32 @@ namespace SpajamAPI.Controllers
 
             await UploadBlobStrage(accountKey, stream, fileName);
             return fileName;
+        }
+
+        /// <summary>
+        /// Google日本語入力APIにリクエスト送信
+        /// </summary>
+        /// <param name="kanaText"></param>
+        /// <returns>ファイルIDのstring</returns>
+        public async Task<string> RequestGoogleJapaneseAPI(string kanaText)
+        {
+            var url = "http://www.google.com/transliterate";
+
+            var client = new HttpClient();
+
+            var uri = new Uri(url);
+
+            // Request設定
+            var param = new FormUrlEncodedContent(new Dictionary<string, string>
+                {
+                    { "langpair", "ja-Hira|ja" },
+                    { "text", kanaText },
+                });
+
+            var result = await client.PostAsync(uri, param);
+            var response = await result.Content.ReadAsStringAsync();
+
+            return response;
         }
 
         protected override void Dispose(bool disposing)
