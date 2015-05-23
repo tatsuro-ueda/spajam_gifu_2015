@@ -109,7 +109,7 @@ namespace SpajamAPI.Controllers
                 SpotKey = request.SpotKey,
                 SortID = 1,
                 FileID = fileID,
-                AudioCommentaryResultOriginal = audioCommentaryResultOriginal
+                AudioCommentaryResultOriginal = audioCommentaryResultOriginal,
                 AudioCommentaryResultConversion = string.Empty, //TODO 解析結果(変換)
                 SpeechSynthesisFileID = Guid.NewGuid().ToString(),//TODO 音声合成したファイルID
                 RegisteredUserID = request.RegisteredUserID,
