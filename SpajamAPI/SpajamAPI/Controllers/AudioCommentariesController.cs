@@ -79,7 +79,27 @@ namespace SpajamAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var audioCommentary = new AudioCommentary();
+            // 音声解説ファイルのbase64変換+アップロード
+
+            // 音声解説ファイルの解析
+
+            // 音声解説ファイルの解析結果の変換
+
+            // 音声解説ファイル変換結果の音声合成
+
+            var audioCommentary = new AudioCommentary() 
+            { 
+                AudioCommentaryKey = Guid.NewGuid().ToString(),
+                AudioCommentaryTitle = request.AudioCommentaryTitle,
+                SpotKey = request.SpotKey,
+                SortID = 1,
+                FileID = Guid.NewGuid().ToString(),//TODO 登録した音声解説ファイルID
+                AudioCommentaryResultOriginal = string.Empty, //TODO 解析結果(原文)
+                AudioCommentaryResultConversion = string.Empty, //TODO 解析結果(変換)
+                SpeechSynthesisFileID = Guid.NewGuid().ToString(),//TODO 音声合成したファイルID
+                RegisteredUserID = request.RegisteredUserID,
+                RegisteredDateTime = DateTime.Now,
+            };
 
             db.AudioCommentary.Add(audioCommentary);
 
