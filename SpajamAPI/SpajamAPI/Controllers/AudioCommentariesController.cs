@@ -22,6 +22,8 @@ namespace SpajamAPI.Controllers
 {
     public class AudioCommentariesController : ApiController
     {
+        private const string SPEECH_TEXT = "あーあーまいくのてすとちゅうー";
+
         private SpajamMadobenDBEntities db = new SpajamMadobenDBEntities();
 
         // GET: api/AudioCommentaries
@@ -96,7 +98,7 @@ namespace SpajamAPI.Controllers
             await UploadBlobStrage(accountKey, byteArray, fileID);
 
             // 音声解説ファイルのダウンロード
-            var response = await DownloadBlobStrage(accountKey, fileID);
+            // var response = await DownloadBlobStrage(accountKey, fileID);
 
             // 音声解説ファイルの解析
             var apiKey = appSettings["GoogleSpeechAPIKey"];
@@ -105,7 +107,7 @@ namespace SpajamAPI.Controllers
             var googleSpeechResponce = responceArray[1];
             var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<SpajamAPI.Models.GoogleSpeechAPIResponseModels.GoogleSpeechAPIResponseModel>(googleSpeechResponce));
 
-            string audioCommentaryResultOriginal = string.Empty;
+            string audioCommentaryResultOriginal = SPEECH_TEXT;
 
             if (responseJson != null)
             {
@@ -126,7 +128,7 @@ namespace SpajamAPI.Controllers
                 SortID = 1,
                 FileID = fileID,
                 AudioCommentaryResultOriginal = audioCommentaryResultOriginal,
-                AudioCommentaryResultConversion = string.Empty, //TODO
+                AudioCommentaryResultConversion = audioCommentaryResultOriginal, //TODO
                 SpeechSynthesisFileID = speechSynthesisFileID,
                 RegisteredUserID = request.RegisteredUserID,
                 RegisteredDateTime = DateTime.Now,
