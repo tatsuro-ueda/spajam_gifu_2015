@@ -15,6 +15,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using System.IO;
 using System.Configuration;
 using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace SpajamAPI.Controllers
 {
@@ -96,7 +97,9 @@ namespace SpajamAPI.Controllers
             var apiKey = appSettings["GoogleSpeechAPIKey"];
             var responseFromServer = await RequestGoogleSpeechAPI(apiKey, byteArray);
             var responceArray = responseFromServer.Split('\n');
-            var audioCommentaryResultOriginal = responceArray[1];
+            var googleSpeechResponce = responceArray[1];
+            var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<SpajamAPI.Models.GoogleSpeechAPIResponseModels.GoogleSpeechAPIResponseModel>(googleSpeechResponce));
+            var audioCommentaryResultOriginal = responseJson.result[0].alternative[0].transcript; 
 
             // 音声解説ファイルの解析結果の変換
 
