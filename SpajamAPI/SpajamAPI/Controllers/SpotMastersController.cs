@@ -24,12 +24,11 @@ namespace SpajamAPI.Controllers
         }
 
         // GET: api/SpotMasters/21
-        public IQueryable<SpotMaster> GetSpotMaster(string id)
+        public IQueryable<SpotMaster> GetSpotMaster(int prefectureID)
         {
-            return db.SpotMaster.Where(master => master.PrefectureID.ToString() == id);
+            return db.SpotMaster.Where(master => master.PrefectureID == prefectureID);
         }
 
-        /*
         // GET: api/SpotMasters/5
         [ResponseType(typeof(SpotMaster))]
         public async Task<IHttpActionResult> GetSpotMaster(string id)
@@ -42,7 +41,6 @@ namespace SpajamAPI.Controllers
 
             return Ok(spotMaster);
         }
-        */
 
         // PUT: api/SpotMasters/5
         [ResponseType(typeof(void))]

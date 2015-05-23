@@ -71,6 +71,38 @@ namespace SpajamAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [ResponseType(typeof(AudioCommentary))]
+        public async Task<IHttpActionResult> PostAudioCommentary(AudioCommentariesRequestModel request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var audioCommentary = new AudioCommentary();
+
+            db.AudioCommentary.Add(audioCommentary);
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (AudioCommentaryExists(audioCommentary.AudioCommentaryKey))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = audioCommentary.AudioCommentaryKey }, audioCommentary);
+        }
+        
+        /*
         // POST: api/AudioCommentaries
         [ResponseType(typeof(AudioCommentary))]
         public async Task<IHttpActionResult> PostAudioCommentary(AudioCommentary audioCommentary)
@@ -100,6 +132,7 @@ namespace SpajamAPI.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = audioCommentary.AudioCommentaryKey }, audioCommentary);
         }
+        */
 
         // DELETE: api/AudioCommentaries/5
         [ResponseType(typeof(AudioCommentary))]
