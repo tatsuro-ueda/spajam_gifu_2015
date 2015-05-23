@@ -206,7 +206,7 @@ namespace SpajamAPI.Controllers
             container.CreateIfNotExists();
 
             // Blobを作成
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName + ".flac");
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName + ".wav");
 
             await blockBlob.UploadFromStreamAsync(stream);
         }
