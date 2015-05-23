@@ -39,12 +39,12 @@ namespace SpajamAPI.Controllers
             var appSettings = ConfigurationManager.AppSettings;
             var accountKey = appSettings["CloudStorageAccount"];
 
-            var base64 = await DownloadBlobStrage(accountKey, audioCommentary.FileID);
+            var url = DownloadBlobStrage(accountKey, audioCommentary.FileID);
 
             var response = new DownLoadResponseModel() 
             {
                 AudioCommentary = audioCommentary,
-                Base64Audio = base64,
+                Base64Audio = url,
             };
 
             return response;
@@ -56,7 +56,7 @@ namespace SpajamAPI.Controllers
         /// <param name="accountKey">AzureStorageのアカウントキー</param>
         /// <param name="fileName">ファイル名</param>
         /// <returns></returns>
-        private static async Task<string> DownloadBlobStrage(string accountKey, string fileName)
+        private static string DownloadBlobStrage(string accountKey, string fileName)
         {
 
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(accountKey);
@@ -70,8 +70,8 @@ namespace SpajamAPI.Controllers
 
             var url = blockBlob.Uri.ToString();
 
-            // return url;
-
+            return url;
+            /*
             using (MemoryStream ms = new MemoryStream())
             {
                 ms.Position = 0;
@@ -79,6 +79,7 @@ namespace SpajamAPI.Controllers
                 var byteArray = ms.ToArray();
                 return System.Convert.ToBase64String(byteArray); ;
             }
+            */
         }
     }
 }
