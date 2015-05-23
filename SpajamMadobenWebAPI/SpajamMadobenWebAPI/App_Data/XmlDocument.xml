@@ -537,6 +537,13 @@
             <param name="byteArray">音声ファイルのByte配列</param>
             <returns></returns>
         </member>
+        <member name="M:SpajamMadobenWebAPI.Controllers.SpajamMadobenController.RequestMicrosoftBingVoiceRecognitionAPI(System.Byte[])">
+            <summary>
+            MicrosoftBingVoiceRecognitionAPIにリクエスト送信
+            </summary>
+            <param name="byteArray">音声ファイルのByte配列</param>
+            <returns></returns>
+        </member>
         <member name="M:SpajamMadobenWebAPI.Controllers.SpajamMadobenController.UploadBlobStrage(System.String,System.Byte[],System.String)">
             <summary>
             AzureBlobStrageにファイルをアップロードする
