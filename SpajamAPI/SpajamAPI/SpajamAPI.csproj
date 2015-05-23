@@ -209,6 +209,7 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AudioCommentariesRequestModel.cs" />
     <Compile Include="Models\AudioCommentary.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
