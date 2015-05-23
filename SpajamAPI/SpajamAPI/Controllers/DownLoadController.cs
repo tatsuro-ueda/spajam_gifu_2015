@@ -68,6 +68,10 @@ namespace SpajamAPI.Controllers
 
             var blockBlob = container.GetBlockBlobReference(fileName + ".wav");
 
+            var url = blockBlob.Uri.ToString();
+
+            // return url;
+
             using (MemoryStream ms = new MemoryStream())
             {
                 ms.Position = 0;
