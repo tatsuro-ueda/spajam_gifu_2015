@@ -30,7 +30,7 @@ namespace SpajamAPI.Controllers
         // GET: api/DownLoad/5
         public async Task<string> GetAudioCommentary(string id)
         {
-            AudioCommentary audioCommentary = await db.AudioCommentary.FindAsync(id);
+            AudioCommentary audioCommentary = db.AudioCommentary.Where(master => master.SpotKey == id).First();
             if (audioCommentary == null)
             {
                 return null;
@@ -39,7 +39,7 @@ namespace SpajamAPI.Controllers
             var appSettings = ConfigurationManager.AppSettings;
             var accountKey = appSettings["CloudStorageAccount"];
 
-            var response = await DownloadBlobStrage(accountKey, audioCommentary.SpeechSynthesisFileID);
+            var response = await DownloadBlobStrage(accountKey, audioCommentary.FileID);
             return response;
         }
 

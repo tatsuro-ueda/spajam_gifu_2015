@@ -249,7 +249,7 @@ namespace SpajamAPI.Controllers
             container.CreateIfNotExists();
 
             // Blobを作成
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName + ".flac");
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName + ".wav");
 
             // byte配列をMemoryStreamに変換
             using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
