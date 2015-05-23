@@ -22,6 +22,7 @@ namespace SpajamAPI.Controllers
 {
     public class AudioCommentariesController : ApiController
     {
+        // private const string SPEECH_TEXT = "関ヶ原の戦いは知っとるじゃろ？お昼を過ぎてから、東軍の家康が総がかりで西軍を押し始め、西軍の総大将石田三成は逃走したんじゃ。ところが途中で捕まってしまって、三条河原でさらし首になったのじゃが、その捕まった場所がこの坂なんじゃ。それ以来、毎年9月15日になるとむせび泣きが聞こえるようになってしまってのお。";
         private const string SPEECH_TEXT = "あーあーまいくのてすとちゅうー";
 
         private SpajamMadobenDBEntities db = new SpajamMadobenDBEntities();
