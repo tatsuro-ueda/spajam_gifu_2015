@@ -10,6 +10,11 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using SpajamAPI.Models;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System.IO;
+using System.Configuration;
+using System.Net.Http.Headers;
 
 namespace SpajamAPI.Controllers
 {
@@ -79,11 +84,19 @@ namespace SpajamAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            var appSettings = ConfigurationManager.AppSettings;
+
             // 音声解説ファイルのbase64変換+アップロード
-
-
+            var accountKey = appSettings["CloudStorageAccount"];
+            byte[] byteArray = System.Convert.FromBase64String(request.AudioBase64);
+            var fileID = Guid.NewGuid().ToString();
+            await UploadBlobStrage(accountKey, byteArray, fileID);
 
             // 音声解説ファイルの解析
+            var apiKey = appSettings["GoogleSpeechAPIKey"];
+            var responseFromServer = await RequestGoogleSpeechAPI(apiKey, byteArray);
+            var responceArray = responseFromServer.Split('\n');
+            var audioCommentaryResultOriginal = responceArray[1];
 
             // 音声解説ファイルの解析結果の変換
 
@@ -95,8 +108,8 @@ namespace SpajamAPI.Controllers
                 AudioCommentaryTitle = request.AudioCommentaryTitle,
                 SpotKey = request.SpotKey,
                 SortID = 1,
-                FileID = Guid.NewGuid().ToString(),//TODO 登録した音声解説ファイルID
-                AudioCommentaryResultOriginal = string.Empty, //TODO 解析結果(原文)
+                FileID = fileID,
+                AudioCommentaryResultOriginal = audioCommentaryResultOriginal
                 AudioCommentaryResultConversion = string.Empty, //TODO 解析結果(変換)
                 SpeechSynthesisFileID = Guid.NewGuid().ToString(),//TODO 音声合成したファイルID
                 RegisteredUserID = request.RegisteredUserID,
@@ -170,6 +183,67 @@ namespace SpajamAPI.Controllers
             await db.SaveChangesAsync();
 
             return Ok(audioCommentary);
+        }
+
+
+        /// <summary>
+        /// AzureBlobStrageにファイルをアップロードする
+        /// </summary>
+        /// <param name="accountKey">AzureStorageのアカウントキー</param>
+        /// <param name="byteArray">バイナリデータのbyte配列</param>
+        /// <param name="fileName">ファイル名</param>
+        /// <returns></returns>
+        private static async Task UploadBlobStrage(string accountKey, byte[] byteArray, string fileName)
+        {
+
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(accountKey);
+
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+            // コンテナを作成
+            CloudBlobContainer container = blobClient.GetContainerReference("audios");
+
+            container.CreateIfNotExists();
+
+            // Blobを作成
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName + ".flac");
+
+            // byte配列をMemoryStreamに変換
+            using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
+            {
+                // Blobにアップロードする
+                await blockBlob.UploadFromStreamAsync(ms);
+            }
+        }
+
+        /// <summary>
+        /// GoogleSpeechAPIにリクエスト送信
+        /// </summary>
+        /// <param name="key">APIキー</param>
+        /// <param name="byteArray">音声ファイルのByte配列</param>
+        /// <returns></returns>
+        private static async Task<string> RequestGoogleSpeechAPI(string key, byte[] byteArray)
+        {
+            var httpClient = new HttpClient();
+
+            //content-type指定
+            var mediaType = new MediaTypeWithQualityHeaderValue("audio/x-flac");
+            var parameter = new NameValueHeaderValue("rate", "16000");
+            mediaType.Parameters.Add(parameter);
+            // httpClient.DefaultRequestHeaders.Accept.Add(mediaType);
+
+            var url = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
+            var uri = new Uri(url + key);
+
+            using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
+            {
+                var param = new StreamContent(ms);
+                param.Headers.ContentType = mediaType;
+
+                var result = await httpClient.PostAsync(uri, param);
+
+                return await result.Content.ReadAsStringAsync();
+            }
         }
 
         protected override void Dispose(bool disposing)
