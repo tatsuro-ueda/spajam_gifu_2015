@@ -1,23 +1,60 @@
-
-<div class="row" id="rowArea">
-<ul id="show">
-
-</ul>
-</div>
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
-   
+function attachMessage(marker, msg) {
+    google.maps.event.addListener(marker, 'click', function(event) {
+      new google.maps.InfoWindow({
+        content: msg
+      }).open(marker.getMap(), marker);
+    });
+ }
+function makeMapInfo(data) {
+  var myMap = new google.maps.Map(document.getElementById('map'), {
+    zoom: 14,//地図縮尺
+    center: new google.maps.LatLng(35.361578, 136.625767),//地図の中心点
+    scrollwheel: false,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+ 
+  for (i = 0; i < data.length; i++) {
+    var myMarker = new google.maps.Marker({
+      position: data[i].position,
+      map: myMap
+    });
+    attachMessage(myMarker, data[i].content);
+  }
+}
+ 
 $(window).load(function(){
-	$.getJSON("http://spajammadobenwebapi.azurewebsites.net/api/Voices", function(json){
-  		var show = "";
-  		json.forEach(function(value){
-  			show += "<img src='/Scripts/" + value.FileID +".png'>" 
-  					+ value.VoiceAnalysisResult + "<br/>";
+	$.ajax({
+	  url: "http://spajamapi.azurewebsites.net/api/SpotMasters",
+	  cache: false,
+	  async: false,
+	  success: function(data){
+	    var show = "";
+	    var data = new Array(); //マーカー位置の緯度経度
+	    
+	    data.forEach(function(value){
+  			show += "<img src='/Scripts/icon_ume.png'><B>" + value.SpotName + "</B><br/>"
+  					 + "<div style='width: 600px' >" + value.SpotDescription + "</div><br/>";
+  			data.push({position: new google.maps.LatLng(value.Latitude, value.Longitude), content: value.SpotName});
   		});
-  		$("#show").html(show);
+  		
+  		makeMapInfo(data);
+  		$("#content").html(show);
+	  }
 	});
 	
 });
 
 </script>
 
+<!--map-->
+<p style="position: relative;">
+	<span id="map" style="position: absolute; top: 50px; left: 50px; width: 500px; height: 500px;"></span>
+	<img src="/Scripts/take_waku.png" width="600" height="600" />
+</p>
+<!--map-->
+
+<div id="content">
+</div>
