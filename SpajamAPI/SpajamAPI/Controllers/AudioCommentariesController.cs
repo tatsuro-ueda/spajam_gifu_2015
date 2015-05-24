@@ -89,8 +89,17 @@ namespace SpajamAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var appSettings = ConfigurationManager.AppSettings;
+            // データ削除
+            AudioCommentary delaudioCommentary = db.AudioCommentary.Where(master => master.SpotKey == request.SpotKey).First();
+            if (delaudioCommentary == null)
+            {
+                return null;
+            }
 
+            db.AudioCommentary.Remove(delaudioCommentary);
+            await db.SaveChangesAsync();
+
+            var appSettings = ConfigurationManager.AppSettings;
 
             // 音声解説ファイルのbase64変換+アップロード
             var accountKey = appSettings["CloudStorageAccount"];
