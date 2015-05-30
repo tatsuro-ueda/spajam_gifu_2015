@@ -26,3 +26,4 @@ UpgradeLog*.htm
 *.LOCAL.*
 *.REMOTE.*
 secret.config
+*.pubxml
