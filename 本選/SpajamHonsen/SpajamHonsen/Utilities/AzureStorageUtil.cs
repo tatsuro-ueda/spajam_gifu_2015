@@ -46,7 +46,7 @@ namespace SpajamHonsen.Utilities
         /// <param name="fileName">ファイル名</param>
         /// <param name="containerName">コンテナ名</param>
         /// <returns>Taskクラス</returns>
-        private async Task UploadBlobStrage(Stream stream, string fileName, string containerName)
+        public async Task UploadBlobStrage(Stream stream, string fileName, string containerName)
         {
             // コンテナを作成
             CloudBlobContainer container = blobClient.GetContainerReference(containerName);
@@ -66,7 +66,7 @@ namespace SpajamHonsen.Utilities
         /// <param name="fileName">ファイル名</param>
         /// <param name="containerName">コンテナ名</param>
         /// <returns>Taskクラス</returns>
-        private async Task UploadBlobStrage(byte[] byteArray, string fileName, string containerName)
+        public async Task UploadBlobStrage(byte[] byteArray, string fileName, string containerName)
         {
             CloudBlobContainer container = blobClient.GetContainerReference(containerName);
 
@@ -92,7 +92,7 @@ namespace SpajamHonsen.Utilities
         /// <param name="fileName">ファイル名</param>
         /// <param name="containerName">コンテナ名</param>
         /// <returns></returns>
-        private string GetBlobStrageUrl(string fileName, string containerName)
+        public string GetBlobStrageUrl(string fileName, string containerName)
         {
             CloudBlobContainer container = blobClient.GetContainerReference(containerName);
 
@@ -107,7 +107,7 @@ namespace SpajamHonsen.Utilities
         /// <param name="fileName">ファイル名</param>
         /// <param name="containerName">コンテナ名</param>
         /// <returns></returns>
-        private async Task<string> GetBlobStrageBase64Async(string fileName, string containerName)
+        public async Task<string> GetBlobStrageBase64Async(string fileName, string containerName)
         {
             CloudBlobContainer container = blobClient.GetContainerReference(containerName);
 

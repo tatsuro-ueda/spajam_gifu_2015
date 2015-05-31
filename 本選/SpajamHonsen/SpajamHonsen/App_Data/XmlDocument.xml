@@ -481,6 +481,37 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:SpajamHonsen.Utilities.AudioUtil">
+            <summary>
+            Spajam予選で使用した音声関連WEBAPIのユーティリティークラス
+            </summary>
+            <remarks>
+            Spajam予選で使用した音声関連WEBAPIのユーティリティークラス
+            </remarks>
+        </member>
+        <member name="M:SpajamHonsen.Utilities.AudioUtil.RequestGoogleSpeechAPI(System.String,System.Byte[])">
+            <summary>
+            GoogleSpeechAPIにリクエスト送信
+            </summary>
+            <param name="key">APIキー</param>
+            <param name="byteArray">音声ファイルのByte配列</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpajamHonsen.Utilities.AudioUtil.RequestVoiceTextAPI(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            VoiceTextAPIにリクエスト送信
+            </summary>
+            <param name="voiceText"></param>
+            <param name="appSettings"></param>
+            <returns>ファイルIDのstring</returns>
+        </member>
+        <member name="M:SpajamHonsen.Utilities.AudioUtil.RequestGoogleJapaneseAPI(System.String)">
+            <summary>
+            Google日本語入力APIにリクエスト送信
+            </summary>
+            <param name="kanaText"></param>
+            <returns>ファイルIDのstring</returns>
+        </member>
         <member name="T:SpajamHonsen.Utilities.AzureStorageUtil">
             <summary>
             AzureのストレージサービスのUtilityクラス
