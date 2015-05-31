@@ -1,0 +1,1 @@
+http://localhost:1337/api/APITest?text=‚«‚å‚¤‚Í‚¢‚¢‚Ä‚ñ‚«‚Å‚·‚Ë

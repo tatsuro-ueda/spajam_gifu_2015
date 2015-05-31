@@ -17,7 +17,7 @@ namespace SpajamHonsen.Controllers
     {
 
         #region POST: api/APITest
-        /* 未完了　Bing音声解析
+        /* TODO 未完了　BingVoiceRecognitionAPI(音声解析)
         /// <summary>
         /// Base64形式で音声ファイル(content-type:x-flac rete:16000)をPOSTしてBingVoiceRecognitionAPIで音声を解析して返す
         /// </summary>
@@ -30,7 +30,7 @@ namespace SpajamHonsen.Controllers
         }
         */
 
-        /* 完了 Google音声解析
+        /* 完了 GoogleSpeechAPI(音声解析)
         /// <summary>
         /// Base64形式で音声ファイル(content-type:x-flac rete:16000)をPOSTしてGoogleSpeechAPIで音声を解析して返す
         /// </summary>
@@ -43,8 +43,9 @@ namespace SpajamHonsen.Controllers
         }
         */
 
+        /* 完了 Google音声解析
         /// <summary>
-        /// リスエストのテキストをVoiceTextAPIで音声合成してAzureにアップする
+        /// リクエストのテキストをVoiceTextAPIで音声合成してAzureにアップする
         /// その後アップしたURLを返却する
         /// </summary>
         /// <param name="request">音声にしたいテキスト</param>
@@ -56,7 +57,20 @@ namespace SpajamHonsen.Controllers
             var azureStorageUtil = new AzureStorageUtil();
             return azureStorageUtil.GetBlobStrageUrl(fileID, "voicetext");
         }
+        */
 
+        /// <summary>
+        /// リクエストのテキストをGoogle日本語入力APIでひらがなを漢字変換して返す
+        /// その後アップしたURLを返却する
+        /// </summary>
+        /// <param name="text">ひらがなテキスト</param>
+        /// <returns></returns>
+        public string GetGoogleJapaneseAPIAsync(string text)
+        {
+            return GoogleUtil.RequestGoogleJapaneseAPI(text);
+        }
+        /* 完了 Google
+        */
         #endregion POST: api/APITest
     }
 }

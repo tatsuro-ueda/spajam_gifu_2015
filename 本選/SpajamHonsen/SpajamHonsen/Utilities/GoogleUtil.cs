@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SpajamHonsen.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -53,32 +55,31 @@ namespace SpajamHonsen.Utilities
             }
         }
 
+        // api/APITest?text=きょうはいいてんきですね
         /// <summary>
-        /// Google日本語入力APIにリクエスト送信
+        /// Google日本語入力APIにリクエスト送信しひらがなを漢字変換する
         /// </summary>
-        /// <param name="kanaText"></param>
-        /// <returns>ファイルIDのstring</returns>
-        public async Task<string> RequestGoogleJapaneseAPI(string kanaText)
+        /// <param name="kanaText">ひらがなの文字列</param>
+        /// <returns>ひらがなの漢字変換結果</returns>
+        public static string RequestGoogleJapaneseAPI(string kanaText)
         {
-            var url = "http://www.google.com/transliterate";
+            StringBuilder url = new StringBuilder("http://www.google.com/transliterate?langpair=ja-Hira|ja&text=");
+            url.Append(HttpUtility.UrlEncode(kanaText));
+            WebRequest req = WebRequest.Create(url.ToString());
 
-            var client = new HttpClient();
-
-            var uri = new Uri(url);
-
-            // Request設定
-            var param = new FormUrlEncodedContent(new Dictionary<string, string>
-                {
-                    { "langpair", "ja-Hira|ja" },
-                    { "text", kanaText },
-                });
-
-            var result = await client.PostAsync(uri, param);
-            var responseStream = await result.Content.ReadAsStreamAsync();
-            using (StreamReader sr = new StreamReader(responseStream, Encoding.GetEncoding("utf-8")))
+            using (WebResponse res = req.GetResponse())
+            using (Stream stm = res.GetResponseStream())
+            using (StreamReader sr = new StreamReader(stm, Encoding.GetEncoding("utf-8")))
             {
-                var resultString = sr.ReadToEnd();
-                return resultString;
+                JArray jar = JArray.Parse(sr.ReadToEnd());
+                StringBuilder kanji = new StringBuilder();
+                foreach (JToken jt in jar)
+                {
+                    var convArray = jt[1].ToArray();
+                    kanji.Append((string)convArray.First());
+                }
+
+                return kanji.ToString();
             }
         }
     }

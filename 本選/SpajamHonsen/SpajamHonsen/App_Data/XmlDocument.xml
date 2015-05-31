@@ -486,12 +486,12 @@
             WEBAPIテスト用のコントローラー
             </summary>
         </member>
-        <member name="M:SpajamHonsen.Controllers.APITestController.PostVoiceTextAPIAsync(SpajamHonsen.Models.TestRequestModel)">
+        <member name="M:SpajamHonsen.Controllers.APITestController.GetGoogleJapaneseAPIAsync(System.String)">
             <summary>
-            リスエストのテキストをVoiceTextAPIで音声合成してAzureにアップする
+            リクエストのテキストをGoogle日本語入力APIでひらがなを漢字変換して返す
             その後アップしたURLを返却する
             </summary>
-            <param name="request">音声にしたいテキスト</param>
+            <param name="text">ひらがなテキスト</param>
             <returns></returns>
         </member>
         <member name="T:SpajamHonsen.Models.TestRequestModel">
@@ -599,10 +599,10 @@
         </member>
         <member name="M:SpajamHonsen.Utilities.GoogleUtil.RequestGoogleJapaneseAPI(System.String)">
             <summary>
-            Google日本語入力APIにリクエスト送信
+            Google日本語入力APIにリクエスト送信しひらがなを漢字変換する
             </summary>
-            <param name="kanaText"></param>
-            <returns>ファイルIDのstring</returns>
+            <param name="kanaText">ひらがなの文字列</param>
+            <returns>ひらがなの漢字変換結果</returns>
         </member>
         <member name="T:SpajamHonsen.Utilities.MachineLeaningUtil">
             <summary>
