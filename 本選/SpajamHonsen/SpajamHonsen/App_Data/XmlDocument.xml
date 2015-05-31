@@ -481,5 +481,52 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:SpajamHonsen.Utilities.AzureStorageUtil">
+            <summary>
+            AzureのストレージサービスのUtilityクラス
+            </summary>
+            <remarks>
+            AzureのストレージサービスのUtilityクラス
+            </remarks>
+        </member>
+        <member name="M:SpajamHonsen.Utilities.AzureStorageUtil.#ctor">
+            <summary>
+            コンストラクタ
+            </summary>
+        </member>
+        <member name="M:SpajamHonsen.Utilities.AzureStorageUtil.UploadBlobStrage(System.IO.Stream,System.String,System.String)">
+            <summary>
+            AzureBlobStrageにファイルをアップロードする
+            </summary>
+            <param name="stream">ストリーム</param>
+            <param name="fileName">ファイル名</param>
+            <param name="containerName">コンテナ名</param>
+            <returns>Taskクラス</returns>
+        </member>
+        <member name="M:SpajamHonsen.Utilities.AzureStorageUtil.UploadBlobStrage(System.Byte[],System.String,System.String)">
+            <summary>
+            AzureBlobStrageにファイルをアップロードする
+            </summary>
+            <param name="byteArray">バイナリデータのbyte配列</param>
+            <param name="fileName">ファイル名</param>
+            <param name="containerName">コンテナ名</param>
+            <returns>Taskクラス</returns>
+        </member>
+        <member name="M:SpajamHonsen.Utilities.AzureStorageUtil.GetBlobStrageUrl(System.String,System.String)">
+            <summary>
+            AzureBlobStrageから対象ファイルのURLを取得する
+            </summary>
+            <param name="fileName">ファイル名</param>
+            <param name="containerName">コンテナ名</param>
+            <returns></returns>
+        </member>
+        <member name="M:SpajamHonsen.Utilities.AzureStorageUtil.GetBlobStrageBase64Async(System.String,System.String)">
+            <summary>
+            AzureBlobStrageから対象ファイルのBase64文字列を取得する
+            </summary>
+            <param name="fileName">ファイル名</param>
+            <param name="containerName">コンテナ名</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
