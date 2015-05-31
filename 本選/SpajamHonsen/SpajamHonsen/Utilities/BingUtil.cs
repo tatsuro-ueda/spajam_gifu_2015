@@ -15,14 +15,29 @@ namespace SpajamHonsen.Utilities
     /// <remarks>
     /// BingoAPIのユーティリティークラス
     /// </remarks>
-    public static class BingUtil
+    public class BingUtil
     {
+        #region Constractors
+        public BingUtil() 
+        {
+            //TODO Key
+            var admAuth = new AdmAuthentication("thirauti", "Hs9iRQTNGRpko9cMhU1sdpPyuKrrXD5u3oAOmPtoJAg");
+            var admToken = admAuth.GetAccessToken();
+            var authenticationHeaderValue = "Bearer " + admToken.access_token;
+        }        
+        #endregion Constractors
+
+        #region Fields
+        string authenticationHeaderValue;
+        #endregion Fields
+
+        #region Methods
         /// <summary>
         /// MicrosoftBingVoiceRecognitionAPIにリクエスト送信
         /// </summary>
         /// <param name="byteArray">音声ファイルのByte配列</param>
         /// <returns></returns>
-        public static async Task<string> RequestMicrosoftBingVoiceRecognitionAPIAsync(byte[] byteArray)
+        public async Task<string> RequestMicrosoftBingVoiceRecognitionAPIAsync(byte[] byteArray)
         {
             var httpClient = new HttpClient();
 
@@ -67,5 +82,38 @@ namespace SpajamHonsen.Utilities
                 return await result.Content.ReadAsStringAsync();
             }
         }
+
+        /// <summary>
+        /// MicrosoftTranslatorAPIにリクエスト送信
+        /// </summary>
+        /// <param name="text">翻訳対象文字列</param>
+        /// <param name="to">翻訳対象言語</param>
+        /// <returns></returns>
+        public async Task<string> RequestMicrosoftTranslatorAPITranslateAsync(string text, string to)
+        {
+            var url = "https://api.datamarket.azure.com/Bing/MicrosoftTranslator/v1/Translate";
+
+
+            var authHeader = new AuthenticationHeaderValue("Authorization", authenticationHeaderValue);
+
+            var client = new HttpClient();
+
+            client.DefaultRequestHeaders.Authorization = authHeader;
+
+            var param = new FormUrlEncodedContent(new Dictionary<string, string>
+                {
+                    { "Text", "hello" },
+                    { "From", "en" },
+                    { "To", "ja" },
+                });
+
+            var result = await client.PostAsync(url, param);
+
+            var ja = await result.Content.ReadAsStringAsync();
+
+            return ja;
+        }
+
+        #endregion Methods
     }
 }

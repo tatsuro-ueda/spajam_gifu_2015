@@ -59,6 +59,8 @@ namespace SpajamHonsen.Controllers
         }
         */
 
+
+        /* 完了 GetGoogleJapaneseAPI(ひらがな→漢字変換)
         /// <summary>
         /// リクエストのテキストをGoogle日本語入力APIでひらがなを漢字変換して返す
         /// その後アップしたURLを返却する
@@ -69,8 +71,19 @@ namespace SpajamHonsen.Controllers
         {
             return await GoogleUtil.RequestGoogleJapaneseAPI(text);
         }
-        /* 完了 Google
         */
+
+        /// <summary>
+        /// リクエストのテキストをMicrosoftTranslatorAPIで翻訳して返す
+        /// </summary>
+        /// <param name="text">翻訳対象テキスト</param>
+        /// <returns></returns>
+        public async Task<string> GetGoogleJapaneseAPIAsync(string text)
+        {
+            var bingUtil = new BingUtil();
+            return await bingUtil.RequestMicrosoftTranslatorAPITranslateAsync("", "");
+        }
+
         #endregion POST: api/APITest
     }
 }

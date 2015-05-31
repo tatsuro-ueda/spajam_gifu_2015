@@ -504,6 +504,11 @@
             base64文字列
             </summary>
         </member>
+        <member name="T:SpajamHonsen.Utilities.AdmAccessToken">
+            <summary>
+            AzureMarketPlaceのAPIのAccess用Tokenモデル
+            </summary>
+        </member>
         <member name="T:SpajamHonsen.Utilities.OthersUtil">
             <summary>
             Spajam予選で使用した音声関連WEBAPIのユーティリティークラス
