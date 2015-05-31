@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using SpajamHonsen.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -23,17 +25,12 @@ namespace SpajamHonsen.Utilities
         /// </summary>
         /// <param name="byteArray">音声ファイルのByte配列</param>
         /// <returns>音声解析結果文字列</returns>
-        private static async Task<string> RequestGoogleSpeechAPI(byte[] byteArray)
+        public static async Task<string> RequestGoogleSpeechAPIAsync(byte[] byteArray)
         {
             var httpClient = new HttpClient();
-
-            //content-type指定
             var mediaType = new MediaTypeWithQualityHeaderValue("audio/x-flac");
-            // var parameter = new NameValueHeaderValue("rate", "16000");
-            //var mediaType = new MediaTypeWithQualityHeaderValue("audio/x-wav");
-            var parameter = new NameValueHeaderValue("rate", "44100");
+            var parameter = new NameValueHeaderValue("rate", "16000");
             mediaType.Parameters.Add(parameter);
-            // httpClient.DefaultRequestHeaders.Accept.Add(mediaType);
 
             var url = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
             var appSettings = ConfigurationManager.AppSettings;
@@ -47,7 +44,11 @@ namespace SpajamHonsen.Utilities
 
                 var result = await httpClient.PostAsync(uri, param);
 
-                return await result.Content.ReadAsStringAsync();
+                var responseFromServer = await result.Content.ReadAsStringAsync();
+                var responceArray = responseFromServer.Split('\n');
+                var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<SpajamHonsen.Models.GoogleSpeechAPIResponseModel.Resuls>(responceArray[1]));
+
+                return responseJson.result[0].alternative[0].transcript;
             }
         }
     }

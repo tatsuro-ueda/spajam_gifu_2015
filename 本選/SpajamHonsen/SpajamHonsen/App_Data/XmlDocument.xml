@@ -595,7 +595,7 @@
             GoogleAPIのユーティリティークラス
             </remarks>
         </member>
-        <member name="M:SpajamHonsen.Utilities.GoogleUtil.RequestGoogleSpeechAPI(System.Byte[])">
+        <member name="M:SpajamHonsen.Utilities.GoogleUtil.RequestGoogleSpeechAPIAsync(System.Byte[])">
             <summary>
             GoogleSpeechAPIにリクエスト送信
             </summary>

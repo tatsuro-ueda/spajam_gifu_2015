@@ -24,7 +24,10 @@ namespace SpajamHonsen.Controllers
         public async Task<string> PostAPITestAsync(TestRequestModel request)
         {
             byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
-            return await BingUtil.RequestMicrosoftBingVoiceRecognitionAPIAsync(byteArray);
+
+
+            // TODO Bing音声解析 return await BingUtil.RequestMicrosoftBingVoiceRecognitionAPIAsync(byteArray);
+            return await GoogleUtil.RequestGoogleSpeechAPIAsync(byteArray);
         }
     }
 }
