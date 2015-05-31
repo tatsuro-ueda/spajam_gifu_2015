@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -49,6 +50,35 @@ namespace SpajamHonsen.Utilities
                 var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<SpajamHonsen.Models.GoogleSpeechAPIResponseModel.Resuls>(responceArray[1]));
 
                 return responseJson.result[0].alternative[0].transcript;
+            }
+        }
+
+        /// <summary>
+        /// Google日本語入力APIにリクエスト送信
+        /// </summary>
+        /// <param name="kanaText"></param>
+        /// <returns>ファイルIDのstring</returns>
+        public async Task<string> RequestGoogleJapaneseAPI(string kanaText)
+        {
+            var url = "http://www.google.com/transliterate";
+
+            var client = new HttpClient();
+
+            var uri = new Uri(url);
+
+            // Request設定
+            var param = new FormUrlEncodedContent(new Dictionary<string, string>
+                {
+                    { "langpair", "ja-Hira|ja" },
+                    { "text", kanaText },
+                });
+
+            var result = await client.PostAsync(uri, param);
+            var responseStream = await result.Content.ReadAsStreamAsync();
+            using (StreamReader sr = new StreamReader(responseStream, Encoding.GetEncoding("utf-8")))
+            {
+                var resultString = sr.ReadToEnd();
+                return resultString;
             }
         }
     }

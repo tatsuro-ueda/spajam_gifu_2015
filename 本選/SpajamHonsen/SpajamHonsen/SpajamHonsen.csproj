@@ -265,7 +265,7 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Utilities\AudioUtil.cs" />
+    <Compile Include="Utilities\OthersUtil.cs" />
     <Compile Include="Utilities\AzureStorageUtil.cs" />
     <Compile Include="Utilities\BingUtil.cs" />
     <Compile Include="Utilities\GoogleUtil.cs" />

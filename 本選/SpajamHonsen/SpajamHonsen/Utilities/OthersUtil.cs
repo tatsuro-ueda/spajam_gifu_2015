@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -14,18 +15,19 @@ namespace SpajamHonsen.Utilities
     /// Spajam予選で使用した音声関連WEBAPIのユーティリティークラス
     /// </summary>
     /// <remarks>
-    /// Spajam予選で使用した音声関連WEBAPIのユーティリティークラス
+    /// その他のWEBAPIのユーティリティークラス
     /// </remarks>
-    public class AudioUtil
+    public class OthersUtil
     {
         /// <summary>
         /// VoiceTextAPIにリクエスト送信
         /// </summary>
-        /// <param name="voiceText"></param>
-        /// <param name="appSettings"></param>
+        /// <param name="voiceText">音声合成するテキスト</param>
+        /// <param name="speaker">スピーカー</param>
         /// <returns>ファイルIDのstring</returns>
-        public async Task<string> RequestVoiceTextAPI(string voiceText, System.Collections.Specialized.NameValueCollection appSettings)
+        public async Task<string> RequestVoiceTextAPI(string voiceText,string speaker)
         {
+            var appSettings = ConfigurationManager.AppSettings;
             var username = appSettings["VoiceTextAPIUser"];
             var url = "https://api.voicetext.jp/v1/tts";
 
@@ -40,49 +42,18 @@ namespace SpajamHonsen.Utilities
             var param = new FormUrlEncodedContent(new Dictionary<string, string>
                 {
                     { "text", voiceText },
-                    { "speaker", "haruka" },
+                    { "speaker", speaker },
                 });
 
             var result = await client.PostAsync(uri, param);
             var stream = await result.Content.ReadAsStreamAsync();
 
             var fileName = Guid.NewGuid().ToString();
-            var containerName = "audios";
+            var containerName = "voicetext";
 
             var azureStorageUtil = new AzureStorageUtil();
             await azureStorageUtil.UploadBlobStrage(stream, fileName, containerName);
             return fileName;
         }
-
-        /// <summary>
-        /// Google日本語入力APIにリクエスト送信
-        /// </summary>
-        /// <param name="kanaText"></param>
-        /// <returns>ファイルIDのstring</returns>
-        public async Task<string> RequestGoogleJapaneseAPI(string kanaText)
-        {
-            var url = "http://www.google.com/transliterate";
-
-            var client = new HttpClient();
-
-            var uri = new Uri(url);
-
-            // Request設定
-            var param = new FormUrlEncodedContent(new Dictionary<string, string>
-                {
-                    { "langpair", "ja-Hira|ja" },
-                    { "text", kanaText },
-                });
-
-            var result = await client.PostAsync(uri, param);
-            var responseStream = await result.Content.ReadAsStreamAsync();
-            using (StreamReader sr = new StreamReader(responseStream, Encoding.GetEncoding("utf-8")))
-            {
-                var resultString = sr.ReadToEnd();
-                return resultString;
-            }
-        }
-
-
     }
 }

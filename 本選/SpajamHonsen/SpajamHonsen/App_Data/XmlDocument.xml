@@ -486,10 +486,12 @@
             WEBAPIテスト用のコントローラー
             </summary>
         </member>
-        <member name="M:SpajamHonsen.Controllers.APITestController.PostAPITestAsync(SpajamHonsen.Models.TestRequestModel)">
+        <member name="M:SpajamHonsen.Controllers.APITestController.PostVoiceTextAPIAsync(SpajamHonsen.Models.TestRequestModel)">
             <summary>
-            APIテスト用メソッド
+            リスエストのテキストをVoiceTextAPIで音声合成してAzureにアップする
+            その後アップしたURLを返却する
             </summary>
+            <param name="request">音声にしたいテキスト</param>
             <returns></returns>
         </member>
         <member name="T:SpajamHonsen.Models.TestRequestModel">
@@ -502,27 +504,20 @@
             base64文字列
             </summary>
         </member>
-        <member name="T:SpajamHonsen.Utilities.AudioUtil">
+        <member name="T:SpajamHonsen.Utilities.OthersUtil">
             <summary>
             Spajam予選で使用した音声関連WEBAPIのユーティリティークラス
             </summary>
             <remarks>
-            Spajam予選で使用した音声関連WEBAPIのユーティリティークラス
+            その他のWEBAPIのユーティリティークラス
             </remarks>
         </member>
-        <member name="M:SpajamHonsen.Utilities.AudioUtil.RequestVoiceTextAPI(System.String,System.Collections.Specialized.NameValueCollection)">
+        <member name="M:SpajamHonsen.Utilities.OthersUtil.RequestVoiceTextAPI(System.String,System.String)">
             <summary>
             VoiceTextAPIにリクエスト送信
             </summary>
-            <param name="voiceText"></param>
-            <param name="appSettings"></param>
-            <returns>ファイルIDのstring</returns>
-        </member>
-        <member name="M:SpajamHonsen.Utilities.AudioUtil.RequestGoogleJapaneseAPI(System.String)">
-            <summary>
-            Google日本語入力APIにリクエスト送信
-            </summary>
-            <param name="kanaText"></param>
+            <param name="voiceText">音声合成するテキスト</param>
+            <param name="speaker">スピーカー</param>
             <returns>ファイルIDのstring</returns>
         </member>
         <member name="T:SpajamHonsen.Utilities.AzureStorageUtil">
@@ -601,6 +596,13 @@
             </summary>
             <param name="byteArray">音声ファイルのByte配列</param>
             <returns>音声解析結果文字列</returns>
+        </member>
+        <member name="M:SpajamHonsen.Utilities.GoogleUtil.RequestGoogleJapaneseAPI(System.String)">
+            <summary>
+            Google日本語入力APIにリクエスト送信
+            </summary>
+            <param name="kanaText"></param>
+            <returns>ファイルIDのstring</returns>
         </member>
         <member name="T:SpajamHonsen.Utilities.MachineLeaningUtil">
             <summary>

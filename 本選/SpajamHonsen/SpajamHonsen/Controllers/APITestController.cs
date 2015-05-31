@@ -15,19 +15,48 @@ namespace SpajamHonsen.Controllers
      /// </summary>
     public class APITestController : ApiController
     {
-        
-        // GET: api/Talks
+
+        #region POST: api/APITest
+        /* 未完了　Bing音声解析
         /// <summary>
-        /// APIテスト用メソッド
+        /// Base64形式で音声ファイル(content-type:x-flac rete:16000)をPOSTしてBingVoiceRecognitionAPIで音声を解析して返す
         /// </summary>
-        /// <returns></returns>
-        public async Task<string> PostAPITestAsync(TestRequestModel request)
+        /// <param name="request"></param>
+        /// <returns>音声解析結果テキスト</returns>
+        public async Task<string> PostMicrosoftBingVoiceRecognitionAPIAsync(TestRequestModel request)
         {
             byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
+            return await BingUtil.RequestMicrosoftBingVoiceRecognitionAPIAsync(byteArray);
+        }
+        */
 
-
-            // TODO Bing音声解析 return await BingUtil.RequestMicrosoftBingVoiceRecognitionAPIAsync(byteArray);
+        /* 完了 Google音声解析
+        /// <summary>
+        /// Base64形式で音声ファイル(content-type:x-flac rete:16000)をPOSTしてGoogleSpeechAPIで音声を解析して返す
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>音声解析結果テキスト(1番目)</returns>
+        public async Task<string> PostGoogleSpeechAPIAsync(TestRequestModel request)
+        {
+            byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
             return await GoogleUtil.RequestGoogleSpeechAPIAsync(byteArray);
         }
+        */
+
+        /// <summary>
+        /// リスエストのテキストをVoiceTextAPIで音声合成してAzureにアップする
+        /// その後アップしたURLを返却する
+        /// </summary>
+        /// <param name="request">音声にしたいテキスト</param>
+        /// <returns></returns>
+        public async Task<string> PostVoiceTextAPIAsync(TestRequestModel request)
+        {
+            var othersUtil = new OthersUtil();
+            var fileID = await othersUtil.RequestVoiceTextAPI(request.Base64String, "hikari");
+            var azureStorageUtil = new AzureStorageUtil();
+            return azureStorageUtil.GetBlobStrageUrl(fileID, "voicetext");
+        }
+
+        #endregion POST: api/APITest
     }
 }
