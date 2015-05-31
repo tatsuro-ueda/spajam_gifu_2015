@@ -13,10 +13,10 @@ namespace SpajamHonsen.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SpajamHonsenDBEntities : DbContext
+    public partial class spajamthEntities : DbContext
     {
-        public SpajamHonsenDBEntities()
-            : base("name=SpajamHonsenDBEntities")
+        public spajamthEntities()
+            : base("name=spajamthEntities")
         {
         }
     

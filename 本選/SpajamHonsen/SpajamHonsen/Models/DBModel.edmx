@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SpajamHonsenDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="spajamthModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AudioCommentary">
           <Key>
             <PropertyRef Name="AudioCommentaryKey" />
@@ -63,7 +63,7 @@
           <Property Name="TextMiningResultDetail" Type="varchar(max)" />
           <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="SpajamHonsenDBModelStoreContainer">
+        <EntityContainer Name="spajamthModelStoreContainer">
           <EntitySet Name="AudioCommentary" EntityType="Self.AudioCommentary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpotMaster" EntityType="Self.SpotMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Talk" EntityType="Self.Talk" Schema="dbo" store:Type="Tables" />
@@ -73,7 +73,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SpajamHonsenDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="spajamthModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AudioCommentary">
           <Key>
             <PropertyRef Name="AudioCommentaryKey" />
@@ -132,7 +132,7 @@
           <Property Name="TextMiningResultDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityContainer Name="SpajamHonsenDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="spajamthEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AudioCommentary" EntityType="Self.AudioCommentary" />
           <EntitySet Name="SpotMaster" EntityType="Self.SpotMaster" />
           <EntitySet Name="Talk" EntityType="Self.Talk" />
@@ -143,9 +143,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SpajamHonsenDBModelStoreContainer" CdmEntityContainer="SpajamHonsenDBEntities">
+        <EntityContainerMapping StorageEntityContainer="spajamthModelStoreContainer" CdmEntityContainer="spajamthEntities">
           <EntitySetMapping Name="AudioCommentary">
-            <EntityTypeMapping TypeName="SpajamHonsenDBModel.AudioCommentary">
+            <EntityTypeMapping TypeName="spajamthModel.AudioCommentary">
               <MappingFragment StoreEntitySet="AudioCommentary">
                 <ScalarProperty Name="AudioCommentaryKey" ColumnName="AudioCommentaryKey" />
                 <ScalarProperty Name="AudioCommentaryTitle" ColumnName="AudioCommentaryTitle" />
@@ -161,7 +161,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SpotMaster">
-            <EntityTypeMapping TypeName="SpajamHonsenDBModel.SpotMaster">
+            <EntityTypeMapping TypeName="spajamthModel.SpotMaster">
               <MappingFragment StoreEntitySet="SpotMaster">
                 <ScalarProperty Name="SpotKey" ColumnName="SpotKey" />
                 <ScalarProperty Name="SpotName" ColumnName="SpotName" />
@@ -179,7 +179,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Talk">
-            <EntityTypeMapping TypeName="SpajamHonsenDBModel.Talk">
+            <EntityTypeMapping TypeName="spajamthModel.Talk">
               <MappingFragment StoreEntitySet="Talk">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="TalkID" ColumnName="TalkID" />
@@ -191,7 +191,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Voice">
-            <EntityTypeMapping TypeName="SpajamHonsenDBModel.Voice">
+            <EntityTypeMapping TypeName="spajamthModel.Voice">
               <MappingFragment StoreEntitySet="Voice">
                 <ScalarProperty Name="TalkID" ColumnName="TalkID" />
                 <ScalarProperty Name="IndexID" ColumnName="IndexID" />

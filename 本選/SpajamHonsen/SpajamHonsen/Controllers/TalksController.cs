@@ -15,7 +15,7 @@ namespace SpajamHonsen.Controllers
 {
     public class TalksController : ApiController
     {
-        private SpajamHonsenDBEntities db = new SpajamHonsenDBEntities();
+        private spajamthEntities db = new spajamthEntities();
 
         // GET: api/Talks
         public IQueryable<Talk> GetTalk()
@@ -23,7 +23,6 @@ namespace SpajamHonsen.Controllers
             return db.Talk;
         }
 
-        /*
         // GET: api/Talks/5
         [ResponseType(typeof(Talk))]
         public async Task<IHttpActionResult> GetTalk(string id)
@@ -35,28 +34,6 @@ namespace SpajamHonsen.Controllers
             }
 
             return Ok(talk);
-        }
-        */
-
-        [ResponseType(typeof(Talk))]
-        public async Task<string> GetTalk(string id)
-        {
-            var url = "http://openapi.baidu.com/public/2.0/bmt/translate";
-            var httpClient = new HttpClient();
-
-            var uri = new Uri(url);
-
-            var param = new FormUrlEncodedContent(new Dictionary<string, string>
-            {
-                { "client_id", "xRhWEdqmUx5A7cX2HGhMUWDl" },
-                { "q", "today" },
-                { "from", "auto" },
-                { "to", "auto" },
-            });
-
-            var result = await httpClient.PostAsync(uri, param);
-
-            return await result.Content.ReadAsStringAsync();
         }
 
         // PUT: api/Talks/5
