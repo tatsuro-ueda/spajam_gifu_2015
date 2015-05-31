@@ -5,6 +5,12 @@ using System.Web;
 
 namespace SpajamHonsen.Utilities
 {
+    /// <summary>
+    /// MachineLeaningAPIのユーティリティークラス
+    /// </summary>
+    /// <remarks>
+    /// MachineLeaningAPIのユーティリティークラス
+    /// </remarks>
     public class MachineLeaningUtil
     {
     }

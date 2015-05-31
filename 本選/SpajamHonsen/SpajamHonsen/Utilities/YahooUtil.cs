@@ -5,6 +5,12 @@ using System.Web;
 
 namespace SpajamHonsen.Utilities
 {
+    /// <summary>
+    /// YahooAPIのユーティリティークラス
+    /// </summary>
+    /// <remarks>
+    /// YahooAPIのユーティリティークラス
+    /// </remarks>
     public class YahooUtil
     {
     }

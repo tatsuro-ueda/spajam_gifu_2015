@@ -5,6 +5,12 @@ using System.Web;
 
 namespace SpajamHonsen.Utilities
 {
+    /// <summary>
+    /// ProjectOxfordAPIのユーティリティークラス
+    /// </summary>
+    /// <remarks>
+    /// ProjectOxfordAPIのユーティリティークラス
+    /// </remarks>
     public class OxfordUtil
     {
     }
