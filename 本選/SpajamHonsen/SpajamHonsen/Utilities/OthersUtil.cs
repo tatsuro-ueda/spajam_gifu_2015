@@ -38,7 +38,6 @@ namespace SpajamHonsen.Utilities
 
             var uri = new Uri(url);
 
-            // Request設定
             var param = new FormUrlEncodedContent(new Dictionary<string, string>
                 {
                     { "text", voiceText },

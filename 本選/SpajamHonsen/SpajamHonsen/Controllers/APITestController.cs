@@ -65,9 +65,9 @@ namespace SpajamHonsen.Controllers
         /// </summary>
         /// <param name="text">ひらがなテキスト</param>
         /// <returns></returns>
-        public string GetGoogleJapaneseAPIAsync(string text)
+        public async Task<string> GetGoogleJapaneseAPIAsync(string text)
         {
-            return GoogleUtil.RequestGoogleJapaneseAPI(text);
+            return await GoogleUtil.RequestGoogleJapaneseAPI(text);
         }
         /* 完了 Google
         */

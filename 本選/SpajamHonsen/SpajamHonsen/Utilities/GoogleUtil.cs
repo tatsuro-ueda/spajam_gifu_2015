@@ -55,20 +55,22 @@ namespace SpajamHonsen.Utilities
             }
         }
 
-        // api/APITest?text=きょうはいいてんきですね
+        //api/APITest?text=きょうはいいてんきですね
         /// <summary>
         /// Google日本語入力APIにリクエスト送信しひらがなを漢字変換する
         /// </summary>
         /// <param name="kanaText">ひらがなの文字列</param>
         /// <returns>ひらがなの漢字変換結果</returns>
-        public static string RequestGoogleJapaneseAPI(string kanaText)
+        public static async Task<string> RequestGoogleJapaneseAPI(string kanaText)
         {
+
             StringBuilder url = new StringBuilder("http://www.google.com/transliterate?langpair=ja-Hira|ja&text=");
             url.Append(HttpUtility.UrlEncode(kanaText));
-            WebRequest req = WebRequest.Create(url.ToString());
 
-            using (WebResponse res = req.GetResponse())
-            using (Stream stm = res.GetResponseStream())
+            var httpClient = new HttpClient();
+            var result = await httpClient.GetAsync(url.ToString());
+
+            using (Stream stm = await result.Content.ReadAsStreamAsync())
             using (StreamReader sr = new StreamReader(stm, Encoding.GetEncoding("utf-8")))
             {
                 JArray jar = JArray.Parse(sr.ReadToEnd());
@@ -79,7 +81,8 @@ namespace SpajamHonsen.Utilities
                     kanji.Append((string)convArray.First());
                 }
 
-                return kanji.ToString();
+                var k =  kanji.ToString();
+                return k;
             }
         }
     }
