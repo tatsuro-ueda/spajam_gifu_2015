@@ -18,39 +18,6 @@ namespace SpajamHonsen.Utilities
     /// </remarks>
     public class AudioUtil
     {
-
-        /// <summary>
-        /// GoogleSpeechAPIにリクエスト送信
-        /// </summary>
-        /// <param name="key">APIキー</param>
-        /// <param name="byteArray">音声ファイルのByte配列</param>
-        /// <returns></returns>
-        private static async Task<string> RequestGoogleSpeechAPI(string key, byte[] byteArray)
-        {
-            var httpClient = new HttpClient();
-
-            //content-type指定
-            var mediaType = new MediaTypeWithQualityHeaderValue("audio/x-flac");
-            // var parameter = new NameValueHeaderValue("rate", "16000");
-            //var mediaType = new MediaTypeWithQualityHeaderValue("audio/x-wav");
-            var parameter = new NameValueHeaderValue("rate", "44100");
-            mediaType.Parameters.Add(parameter);
-            // httpClient.DefaultRequestHeaders.Accept.Add(mediaType);
-
-            var url = "https://www.google.com/speech-api/v2/recognize?output=json&lang=ja-jp&key=";
-            var uri = new Uri(url + key);
-
-            using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
-            {
-                var param = new StreamContent(ms);
-                param.Headers.ContentType = mediaType;
-
-                var result = await httpClient.PostAsync(uri, param);
-
-                return await result.Content.ReadAsStringAsync();
-            }
-        }
-
         /// <summary>
         /// VoiceTextAPIにリクエスト送信
         /// </summary>

@@ -221,6 +221,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\APITestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TalksController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -255,6 +256,7 @@
     <Compile Include="Models\Talk.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TestRequestModel.cs" />
     <Compile Include="Models\Voice.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -265,6 +267,7 @@
     <Compile Include="Utilities\AudioUtil.cs" />
     <Compile Include="Utilities\AzureStorageUtil.cs" />
     <Compile Include="Utilities\BingUtil.cs" />
+    <Compile Include="Utilities\GoogleUtil.cs" />
     <Compile Include="Utilities\MachineLeaningUtil.cs" />
     <Compile Include="Utilities\OxfordUtil.cs" />
     <Compile Include="Utilities\YahooUtil.cs" />
@@ -348,6 +351,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Enums\" />
+    <Folder Include="Views\APITest\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

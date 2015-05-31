@@ -481,6 +481,27 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:SpajamHonsen.Controllers.APITestController">
+            <summary>
+            WEBAPIテスト用のコントローラー
+            </summary>
+        </member>
+        <member name="M:SpajamHonsen.Controllers.APITestController.PostAPITestAsync(SpajamHonsen.Models.TestRequestModel)">
+            <summary>
+            APIテスト用メソッド
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SpajamHonsen.Models.TestRequestModel">
+            <summary>
+            APIテスト用Requestモデルクラス
+            </summary>
+        </member>
+        <member name="P:SpajamHonsen.Models.TestRequestModel.Base64String">
+            <summary>
+            base64文字列
+            </summary>
+        </member>
         <member name="T:SpajamHonsen.Utilities.AudioUtil">
             <summary>
             Spajam予選で使用した音声関連WEBAPIのユーティリティークラス
@@ -488,14 +509,6 @@
             <remarks>
             Spajam予選で使用した音声関連WEBAPIのユーティリティークラス
             </remarks>
-        </member>
-        <member name="M:SpajamHonsen.Utilities.AudioUtil.RequestGoogleSpeechAPI(System.String,System.Byte[])">
-            <summary>
-            GoogleSpeechAPIにリクエスト送信
-            </summary>
-            <param name="key">APIキー</param>
-            <param name="byteArray">音声ファイルのByte配列</param>
-            <returns></returns>
         </member>
         <member name="M:SpajamHonsen.Utilities.AudioUtil.RequestVoiceTextAPI(System.String,System.Collections.Specialized.NameValueCollection)">
             <summary>
@@ -558,6 +571,60 @@
             <param name="fileName">ファイル名</param>
             <param name="containerName">コンテナ名</param>
             <returns></returns>
+        </member>
+        <member name="T:SpajamHonsen.Utilities.BingUtil">
+            <summary>
+            BingoAPIのユーティリティークラス
+            </summary>
+            <remarks>
+            BingoAPIのユーティリティークラス
+            </remarks>
+        </member>
+        <member name="M:SpajamHonsen.Utilities.BingUtil.RequestMicrosoftBingVoiceRecognitionAPIAsync(System.Byte[])">
+            <summary>
+            MicrosoftBingVoiceRecognitionAPIにリクエスト送信
+            </summary>
+            <param name="byteArray">音声ファイルのByte配列</param>
+            <returns></returns>
+        </member>
+        <member name="T:SpajamHonsen.Utilities.GoogleUtil">
+            <summary>
+            GoogleAPIのユーティリティークラス
+            </summary>
+            <remarks>
+            GoogleAPIのユーティリティークラス
+            </remarks>
+        </member>
+        <member name="M:SpajamHonsen.Utilities.GoogleUtil.RequestGoogleSpeechAPI(System.Byte[])">
+            <summary>
+            GoogleSpeechAPIにリクエスト送信
+            </summary>
+            <param name="byteArray">音声ファイルのByte配列</param>
+            <returns>音声解析結果文字列</returns>
+        </member>
+        <member name="T:SpajamHonsen.Utilities.MachineLeaningUtil">
+            <summary>
+            MachineLeaningAPIのユーティリティークラス
+            </summary>
+            <remarks>
+            MachineLeaningAPIのユーティリティークラス
+            </remarks>
+        </member>
+        <member name="T:SpajamHonsen.Utilities.OxfordUtil">
+            <summary>
+            ProjectOxfordAPIのユーティリティークラス
+            </summary>
+            <remarks>
+            ProjectOxfordAPIのユーティリティークラス
+            </remarks>
+        </member>
+        <member name="T:SpajamHonsen.Utilities.YahooUtil">
+            <summary>
+            YahooAPIのユーティリティークラス
+            </summary>
+            <remarks>
+            YahooAPIのユーティリティークラス
+            </remarks>
         </member>
     </members>
 </doc>
