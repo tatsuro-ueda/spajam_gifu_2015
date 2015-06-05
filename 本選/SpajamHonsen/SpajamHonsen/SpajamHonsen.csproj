@@ -64,6 +64,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Channels" />
     <Reference Include="System.Spatial, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\System.Spatial.5.6.2\lib\net40\System.Spatial.dll</HintPath>
@@ -268,6 +270,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\AdmAuthentication.cs" />
     <Compile Include="Utilities\AdmAccessToken.cs" />
+    <Compile Include="Utilities\CBingTranslate.cs" />
     <Compile Include="Utilities\OthersUtil.cs" />
     <Compile Include="Utilities\AzureStorageUtil.cs" />
     <Compile Include="Utilities\BingUtil.cs" />
