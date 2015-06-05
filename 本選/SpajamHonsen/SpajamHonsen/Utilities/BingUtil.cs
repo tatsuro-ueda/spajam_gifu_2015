@@ -21,9 +21,9 @@ namespace SpajamHonsen.Utilities
         public BingUtil() 
         {
             //TODO Key
-            var admAuth = new AdmAuthentication("thirauti", "Hs9iRQTNGRpko9cMhU1sdpPyuKrrXD5u3oAOmPtoJAg=");
-            var admToken = admAuth.GetAccessToken();
-            authenticationHeaderValue = "Bearer " + admToken.access_token;
+           // var admAuth = new AdmAuthentication("thirauti", "Hs9iRQTNGRpko9cMhU1sdpPyuKrrXD5u3oAOmPtoJAg=");
+           // var admToken = admAuth.GetAccessToken();
+           //  authenticationHeaderValue = "Bearer " + admToken.access_token;
         }        
         #endregion Constractors
 

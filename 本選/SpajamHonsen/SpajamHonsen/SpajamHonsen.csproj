@@ -274,9 +274,8 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Utilities\AdmAuthentication.cs" />
-    <Compile Include="Utilities\AdmAccessToken.cs" />
     <Compile Include="Utilities\CBingTranslate.cs" />
+    <Compile Include="Utilities\FfmpegUtil.cs" />
     <Compile Include="Utilities\OthersUtil.cs" />
     <Compile Include="Utilities\AzureStorageUtil.cs" />
     <Compile Include="Utilities\BingUtil.cs" />
@@ -290,6 +289,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Resource Include="ffmpeg\ffmpeg.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
@@ -364,6 +366,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Enums\" />
+    <Folder Include="temp\" />
     <Folder Include="Views\APITest\" />
   </ItemGroup>
   <ItemGroup>
