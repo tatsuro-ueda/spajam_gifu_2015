@@ -161,46 +161,26 @@ namespace SpajamHonsen.Controllers
                 var othersUtil = new OthersUtil();
                 var voiceTextFileName = await othersUtil.RequestVoiceTextAPI(speechText, "hikari");
                 result = azureStorageUtil.GetBlobStrageUrl(voiceTextFileName, "voicetext");
-            }
 
-            /*
-            // 音声解説ファイル変換結果の音声合成 TODO 本当は変換結果を送る
-            var speechSynthesisFileID = await RequestVoiceTextAPI(audioCommentaryResultOriginal, appSettings);
-
-            var audioCommentary = new AudioCommentary()
-            {
-                AudioCommentaryKey = Guid.NewGuid().ToString(),
-                AudioCommentaryTitle = request.AudioCommentaryTitle,
-                SpotKey = request.SpotKey,
-                SortID = 1,
-                FileID = fileID,
-                AudioCommentaryResultOriginal = audioCommentaryResultOriginal,
-                AudioCommentaryResultConversion = audioCommentaryResultOriginal, //TODO
-                SpeechSynthesisFileID = speechSynthesisFileID,
-                RegisteredUserID = request.RegisteredUserID,
-                RegisteredDateTime = DateTime.Now,
-            };
-
-            db.AudioCommentary.Add(audioCommentary);
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (AudioCommentaryExists(audioCommentary.AudioCommentaryKey))
+                // DB登録
+                var audioCommentary = new AudioCommentary()
                 {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                    AudioCommentaryKey = Guid.NewGuid().ToString(),
+                    AudioCommentaryTitle = request.AudioCommentaryTitle,
+                    SpotKey = request.SpotKey,
+                    SortID = 1,
+                    FileID = fileName,
+                    AudioCommentaryResultOriginal = speechText,
+                    AudioCommentaryResultConversion = kanjiText,
+                    SpeechSynthesisFileID = voiceTextFileName,
+                    RegisteredUserID = request.RegisteredUserID,
+                    RegisteredDateTime = DateTime.Now,
+                };
+
+                db.AudioCommentary.Add(audioCommentary);
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = audioCommentary.AudioCommentaryKey }, audioCommentary);
-            */
+            await db.SaveChangesAsync();
 
             return result;
         }
