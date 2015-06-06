@@ -26,14 +26,14 @@ namespace SpajamHonsen.Utilities
             string outputFilePath = string.Empty;
             try
             {
-                string ffmpegFilePath = "~/ffmpeg/ffmpeg.exe";
+                string ffmpegFilePath = HttpContext.Current.Server.MapPath("~/ffmpeg/ffmpeg.exe");
                 // FileInfo fi = new FileInfo(HttpContext.Current.Server.MapPath(filePath));
                 // string filename = Path.GetFileNameWithoutExtension(fi.Name);
                 // string extension = Path.GetExtension(fi.Name);
                 // input = HttpContext.Current.Server.MapPath(filePath);
-                outputFilePath = HttpContext.Current.Server.MapPath("~/Temp/Audios/" + Guid.NewGuid().ToString());
+                outputFilePath = HttpContext.Current.Server.MapPath("~/ffmpeg/" + Guid.NewGuid().ToString());
 
-                var processInfo = new ProcessStartInfo(HttpContext.Current.Server.MapPath(ffmpegFilePath), " -i \"" + inputFilePath + "\" -ar " + rate + " \"" + outputFilePath + "\"")
+                var processInfo = new ProcessStartInfo(ffmpegFilePath, " -i \"" + inputFilePath + "\" -ar " + rate + " \"" + outputFilePath + "\"")
                 {
                     UseShellExecute = false,
                     CreateNoWindow = true,
@@ -44,10 +44,10 @@ namespace SpajamHonsen.Utilities
                 try
                 {
                     Process process = System.Diagnostics.Process.Start(processInfo);
-                    // result = process.StandardError.ReadToEnd();
-                    result = outputFilePath;
+                    result = process.StandardError.ReadToEnd();
                     process.WaitForExit();
-                    process.Close();
+                    process.Close(); 
+                    result = outputFilePath;
                 }
                 catch (Exception)
                 {

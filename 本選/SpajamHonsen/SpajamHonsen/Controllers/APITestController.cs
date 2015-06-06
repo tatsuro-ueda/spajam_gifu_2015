@@ -48,7 +48,7 @@ namespace SpajamHonsen.Controllers
         {
             byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
 
-            var filePath = HttpContext.Current.Server.MapPath("~/Temp/Audios/" + Guid.NewGuid().ToString());
+            var filePath = HttpContext.Current.Server.MapPath("~/ffmpeg/" + Guid.NewGuid().ToString());
             //ファイルを作成して書き込む
             using (System.IO.FileStream fs = 
                 new System.IO.FileStream(
