@@ -13,28 +13,27 @@ namespace SpajamHonsen.Utilities
     /// <remarks>
     /// FFmpegのユーティリティークラス
     /// </remarks>
-    public class FfmpegUtil
+    public static class FFmpegUtil
     {
         /// <summary>
         /// 音声ファイルのレートを変換する
         /// </summary>
         /// <param name="inputFilePath">インプットファイルのパス</param>
         /// <returns>アウトプットファイルのパス</returns>
-        public static string ConvertAudioRate(string filePath, string rate)
+        public static string ConvertAudioRate(string inputFilePath, string rate)
         {
             string result = string.Empty;
-            string input = string.Empty;
-            string output = string.Empty;
+            string outputFilePath = string.Empty;
             try
             {
                 string ffmpegFilePath = "~/ffmpeg/ffmpeg.exe";
-                FileInfo fi = new FileInfo(HttpContext.Current.Server.MapPath(filePath));
-                string filename = Path.GetFileNameWithoutExtension(fi.Name);
-                string extension = Path.GetExtension(fi.Name);
-                input = HttpContext.Current.Server.MapPath(filePath);
-                output = HttpContext.Current.Server.MapPath("~/temp/" + filename);
+                // FileInfo fi = new FileInfo(HttpContext.Current.Server.MapPath(filePath));
+                // string filename = Path.GetFileNameWithoutExtension(fi.Name);
+                // string extension = Path.GetExtension(fi.Name);
+                // input = HttpContext.Current.Server.MapPath(filePath);
+                outputFilePath = HttpContext.Current.Server.MapPath("~/Temp/Audios/" + Guid.NewGuid().ToString());
 
-                var processInfo = new ProcessStartInfo(HttpContext.Current.Server.MapPath(ffmpegFilePath), " -i \"" + input + "\" -ar " + rate + " \"" + output + "\"")
+                var processInfo = new ProcessStartInfo(HttpContext.Current.Server.MapPath(ffmpegFilePath), " -i \"" + inputFilePath + "\" -ar " + rate + " \"" + outputFilePath + "\"")
                 {
                     UseShellExecute = false,
                     CreateNoWindow = true,
@@ -46,7 +45,7 @@ namespace SpajamHonsen.Utilities
                 {
                     Process process = System.Diagnostics.Process.Start(processInfo);
                     // result = process.StandardError.ReadToEnd();
-                    result = output;
+                    result = outputFilePath;
                     process.WaitForExit();
                     process.Close();
                 }

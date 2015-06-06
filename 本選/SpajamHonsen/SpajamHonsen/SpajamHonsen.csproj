@@ -275,7 +275,7 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\CBingTranslate.cs" />
-    <Compile Include="Utilities\FfmpegUtil.cs" />
+    <Compile Include="Utilities\FFmpegUtil.cs" />
     <Compile Include="Utilities\OthersUtil.cs" />
     <Compile Include="Utilities\AzureStorageUtil.cs" />
     <Compile Include="Utilities\BingUtil.cs" />
@@ -366,7 +366,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Enums\" />
-    <Folder Include="temp\" />
+    <Folder Include="Temp\Audios\" />
     <Folder Include="Views\APITest\" />
   </ItemGroup>
   <ItemGroup>
