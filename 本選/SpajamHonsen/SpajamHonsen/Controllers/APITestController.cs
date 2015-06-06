@@ -32,7 +32,6 @@ namespace SpajamHonsen.Controllers
             return result;
             // return await bingUtil.RequestMicrosoftTranslatorAPITranslateAsync("", "");
         }
-
         #endregion GET: api/APITest
 
         #region POST: api/APITest
@@ -61,7 +60,6 @@ namespace SpajamHonsen.Controllers
            }
 
             var result = FFmpegUtil.ConvertAudioRate(filePath, "16000");
-
 
             return result;
             // return await GoogleUtil.RequestGoogleSpeechAPIAsync(byteArray);
