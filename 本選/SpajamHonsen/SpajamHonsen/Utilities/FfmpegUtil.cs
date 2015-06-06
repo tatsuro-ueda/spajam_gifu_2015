@@ -24,7 +24,7 @@ namespace SpajamHonsen.Utilities
             try
             {
                 string ffmpegFilePath = HttpContext.Current.Server.MapPath("~/ffmpeg/ffmpeg.exe");
-                outputFilePath = HttpContext.Current.Server.MapPath("~/ffmpeg/" + Guid.NewGuid().ToString() + ".wav");
+                outputFilePath = HttpContext.Current.Server.MapPath("~/ffmpeg/" + Guid.NewGuid().ToString() + ".flac");
 
                 var processInfo = new ProcessStartInfo(ffmpegFilePath, " -i " + inputFilePath + " -ar " + rate + " " + outputFilePath)
                 {
