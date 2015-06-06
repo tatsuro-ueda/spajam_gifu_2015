@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Web;
 
 namespace SpajamHonsen.Utilities
@@ -27,13 +24,9 @@ namespace SpajamHonsen.Utilities
             try
             {
                 string ffmpegFilePath = HttpContext.Current.Server.MapPath("~/ffmpeg/ffmpeg.exe");
-                // FileInfo fi = new FileInfo(HttpContext.Current.Server.MapPath(filePath));
-                // string filename = Path.GetFileNameWithoutExtension(fi.Name);
-                // string extension = Path.GetExtension(fi.Name);
-                // input = HttpContext.Current.Server.MapPath(filePath);
-                outputFilePath = HttpContext.Current.Server.MapPath("~/ffmpeg/" + Guid.NewGuid().ToString());
+                outputFilePath = HttpContext.Current.Server.MapPath("~/ffmpeg/" + Guid.NewGuid().ToString() + ".wav");
 
-                var processInfo = new ProcessStartInfo(ffmpegFilePath, " -i \"" + inputFilePath + "\" -ar " + rate + " \"" + outputFilePath + "\"")
+                var processInfo = new ProcessStartInfo(ffmpegFilePath, " -i " + inputFilePath + " -ar " + rate + " " + outputFilePath)
                 {
                     UseShellExecute = false,
                     CreateNoWindow = true,
@@ -59,7 +52,7 @@ namespace SpajamHonsen.Utilities
                 string error = ex.Message;
             }
 
-            return result;
+            return outputFilePath;
         }
     }
 }
