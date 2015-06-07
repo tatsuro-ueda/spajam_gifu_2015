@@ -22,7 +22,7 @@ namespace SpajamHonsen.Controllers
         /// </summary>
         /// <param name="text">翻訳対象テキスト</param>
         /// <returns></returns>
-        public async Task<string> GetGoogleJapaneseAPIAsync(string text)
+        public async Task<string> GetMicrosoftTranslatorAPIAsync(string text)
         {
             var bingUtil = new BingUtil();
 
