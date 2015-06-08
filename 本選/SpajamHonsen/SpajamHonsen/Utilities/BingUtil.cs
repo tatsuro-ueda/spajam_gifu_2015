@@ -92,14 +92,15 @@ namespace SpajamHonsen.Utilities
         /// <returns></returns>
         public async Task<string> RequestMicrosoftTranslatorAPITranslateAsync(string text, string to)
         {
-            var builder = new UriBuilder("https://api.datamarket.azure.com/Bing/MicrosoftTranslator/v1/Translate");
+            var builder = new UriBuilder("http://api.microsofttranslator.com/v2/Http.svc/Translate");
             builder.Port = -1;
 
             // QueryStringの設定
             var query = HttpUtility.ParseQueryString(builder.Query);
-            query["Text"] = "hello";
-            query["From"] = "en";
-            query["To"] = "ja";
+            query["text"] = System.Web.HttpUtility.UrlEncode("hello");
+            query["from"] = "en";
+            query["to"] = "ja";
+            // query["contentType"] = "text/plain";
 
             builder.Query = query.ToString();
 

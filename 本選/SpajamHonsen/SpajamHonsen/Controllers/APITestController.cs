@@ -24,13 +24,14 @@ namespace SpajamHonsen.Controllers
         /// <returns></returns>
         public async Task<string> GetMicrosoftTranslatorAPIAsync(string text)
         {
-            var bingUtil = new BingUtil();
-
+            /*
             var cbingTranslate = new CBingTranslate();
             cbingTranslate.Init("thirauti", "Hs9iRQTNGRpko9cMhU1sdpPyuKrrXD5u3oAOmPtoJAg=");
             var result = cbingTranslate.TranslateMethod("ありがとう", "ja", "en");
+            */
 
-            // var result = await bingUtil.RequestMicrosoftTranslatorAPITranslateAsync("", "");
+            var bingUtil = new BingUtil();
+            var result = await bingUtil.RequestMicrosoftTranslatorAPITranslateAsync("", "");
             return result;
         }
         #endregion GET: api/APITest
