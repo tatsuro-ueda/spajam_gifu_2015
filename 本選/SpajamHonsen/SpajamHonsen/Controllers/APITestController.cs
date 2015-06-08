@@ -29,8 +29,9 @@ namespace SpajamHonsen.Controllers
             var cbingTranslate = new CBingTranslate();
             cbingTranslate.Init("thirauti", "Hs9iRQTNGRpko9cMhU1sdpPyuKrrXD5u3oAOmPtoJAg=");
             var result = cbingTranslate.TranslateMethod("ありがとう", "ja", "en");
+
+            // var result = await bingUtil.RequestMicrosoftTranslatorAPITranslateAsync("", "");
             return result;
-            // return await bingUtil.RequestMicrosoftTranslatorAPITranslateAsync("", "");
         }
         #endregion GET: api/APITest
 

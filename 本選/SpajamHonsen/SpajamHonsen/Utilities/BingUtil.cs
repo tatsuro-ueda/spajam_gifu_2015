@@ -21,9 +21,10 @@ namespace SpajamHonsen.Utilities
         public BingUtil() 
         {
             //TODO Key
-           // var admAuth = new AdmAuthentication("thirauti", "Hs9iRQTNGRpko9cMhU1sdpPyuKrrXD5u3oAOmPtoJAg=");
-           // var admToken = admAuth.GetAccessToken();
-           //  authenticationHeaderValue = "Bearer " + admToken.access_token;
+            var admAuth = new SpajamHonsen.AccessToken.BingAPIToken.AdmAuthentication("thirauti", "Hs9iRQTNGRpko9cMhU1sdpPyuKrrXD5u3oAOmPtoJAg=");
+            var admToken = admAuth.GetAccessToken();
+            authenticationHeaderValue = "Bearer " + admToken.access_token;
+          
         }        
         #endregion Constractors
 
@@ -91,8 +92,18 @@ namespace SpajamHonsen.Utilities
         /// <returns></returns>
         public async Task<string> RequestMicrosoftTranslatorAPITranslateAsync(string text, string to)
         {
-            var url = "https://api.datamarket.azure.com/Bing/MicrosoftTranslator/v1/Translate";
+            var builder = new UriBuilder("https://api.datamarket.azure.com/Bing/MicrosoftTranslator/v1/Translate");
+            builder.Port = -1;
 
+            // QueryStringの設定
+            var query = HttpUtility.ParseQueryString(builder.Query);
+            query["Text"] = "hello";
+            query["From"] = "en";
+            query["To"] = "ja";
+
+            builder.Query = query.ToString();
+
+            string url = builder.ToString();
 
             var authHeader = new AuthenticationHeaderValue("Authorization", authenticationHeaderValue);
 
@@ -100,18 +111,18 @@ namespace SpajamHonsen.Utilities
 
             client.DefaultRequestHeaders.Authorization = authHeader;
 
-            var param = new FormUrlEncodedContent(new Dictionary<string, string>
-                {
-                    { "Text", "hello" },
-                    { "From", "en" },
-                    { "To", "ja" },
-                });
+            var result = await client.GetAsync(url);
 
-            var result = await client.PostAsync(url, param);
+            var ja = await result.Content.ReadAsStreamAsync();
 
-            var ja = await result.Content.ReadAsStringAsync();
+            string translation;
+            using (Stream stream = await result.Content.ReadAsStreamAsync())
+            {
+                System.Runtime.Serialization.DataContractSerializer dcs = new System.Runtime.Serialization.DataContractSerializer(Type.GetType("System.String"));
+                translation = (string)dcs.ReadObject(stream);
+            }
 
-            return ja;
+            return translation;
         }
 
         #endregion Methods
