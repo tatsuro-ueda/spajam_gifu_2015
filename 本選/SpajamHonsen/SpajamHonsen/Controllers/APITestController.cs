@@ -47,10 +47,13 @@ namespace SpajamHonsen.Controllers
         /// <returns>翻訳結果</returns>
         public async Task<string> GetOxfordVisoinAPIAsync()
         {
+            string analyzeImageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/visionsample.jpg'}";
+            string ocrImageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/ocrsample.jpg'}";
+
             var oxfordUtil = new OxfordUtil();
-            // var result = await oxfordUtil.AnalyzeAnImageAsync();
-            var result = await oxfordUtil.OCRApiAsync();
-            // var result = await oxfordUtil.GenerateThumbnailAsync();
+            // var result = await oxfordUtil.AnalyzeAnImageAsync(analyzeImageUrl);
+            // var result = await oxfordUtil.OCRApiAsync(ocrImageUrl, "en", true);
+            var result = await oxfordUtil.GenerateThumbnailAsync(ocrImageUrl, 100, 100);
             
             return result.ToString();
         }

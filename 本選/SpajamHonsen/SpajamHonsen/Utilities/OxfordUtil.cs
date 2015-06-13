@@ -36,14 +36,12 @@ namespace SpajamHonsen.Utilities
         #endregion Fields
 
         #region VisionAPI
-        // public static string imageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/visionsample.jpg'}";
-        private string imageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/ocrsample.jpg'}";
-
         /// <summary>
-        /// 画像解析
+        /// VisionAPIによる画像解析を行う
         /// </summary>
-        /// <returns></returns>
-        public async Task<VisionAPIAnalyzeanImageResponseModel> AnalyzeAnImageAsync()
+        /// <param name="imageUrl">解析対象の画像URL</param>
+        /// <returns>VisionAPI(画像解析)のResponceクラス</returns>
+        public async Task<VisionAPIAnalyzeanImageResponseModel> AnalyzeAnImageAsync(string imageUrl)
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["visualFeatures"] = "All";
@@ -73,16 +71,17 @@ namespace SpajamHonsen.Utilities
         }
 
         /// <summary>
-        /// OCR(画像の文字認識)
+        /// VisionAPIによるOCR(画像の文字認識)を行う
         /// </summary>
+        /// <param name="imageUrl">解析画像のURL</param>
+        /// <param name="language">言語(jp/cn/en)</param>
+        /// <param name="detectOrientation">画像のむき true/false</param>
         /// <returns></returns>
-        public async Task<VisionAPIOCRResponseModel> OCRApiAsync()
+        public async Task<VisionAPIOCRResponseModel> OCRApiAsync(string imageUrl, string language, bool detectOrientation)
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
-
-            queryString["language"] = "en";
-            queryString["detectOrientation "] = "true";
-
+            queryString["language"] = language;
+            queryString["detectOrientation "] = detectOrientation.ToString();
             queryString["subscription-key"] = subscriptionKey;
 
             var uri = "https://api.projectoxford.ai/vision/v1/ocr?" + queryString;
@@ -109,16 +108,17 @@ namespace SpajamHonsen.Utilities
         }
 
         /// <summary>
-        /// サムネイルの作成
+        /// VisionAPIによるサムネイルの作成を行う
         /// </summary>
         /// <param name="imageUrl"></param>
-        /// <param name="localPath"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         /// <returns></returns>
-        public async Task<string> GenerateThumbnailAsync()
+        public async Task<string> GenerateThumbnailAsync(string imageUrl, double width, double height)
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
-            queryString["width"] = "50";
-            queryString["height"] = "60";
+            queryString["width"] = width.ToString();
+            queryString["height"] = height.ToString();
             queryString["smartCropping"] = "true";
             queryString["subscription-key"] = subscriptionKey;
 
