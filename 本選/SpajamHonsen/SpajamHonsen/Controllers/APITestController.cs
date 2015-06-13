@@ -49,6 +49,17 @@ namespace SpajamHonsen.Controllers
         {
             string analyzeImageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/visionsample.jpg'}";
             string ocrImageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/ocrsample.jpg'}";
+            
+            /*
+            // 画像ファイルのアップロード
+            byte[] byteArray = System.Convert.FromBase64String(request.AudioBase64);
+            var azureStorageUtil = new AzureStorageUtil();
+            var fileName = Guid.NewGuid().ToString();
+            await azureStorageUtil.UploadBlobStrage(byteArray, fileName, "visions");
+
+            // 画像のURLを取得
+            var imageUrl = azureStorageUtil.GetBlobStrageUrl(fileName, "visions");
+            */
 
             var oxfordUtil = new OxfordUtil();
             // var result = await oxfordUtil.AnalyzeAnImageAsync(analyzeImageUrl);
