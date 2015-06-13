@@ -48,7 +48,9 @@ namespace SpajamHonsen.Controllers
         public async Task<string> GetOxfordVisoinAPIAsync()
         {
             // var result = OxfordUtil.AnalyzeAnImage();
-            var result = OxfordUtil.OCRApi();
+            // var result = OxfordUtil.OCRApi();
+            var result = await OxfordUtil.GenerateThumbnailAsync();
+            
             return result;
         }
         #endregion GET: api/APITest
