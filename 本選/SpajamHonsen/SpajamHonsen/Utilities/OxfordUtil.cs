@@ -21,8 +21,8 @@ namespace SpajamHonsen.Utilities
         // TODO Key
         public static string subscriptionKey = "43d9ba4539fc424db63371ee47e2aa5d";
 
-        // public static string imageUrl = @"{'Url':'http://www.ytravelblog.com/wp-content/uploads/2010/10/Vastness-of-the-Salar-de-Uyuni1.jpg'}";
-        public static string imageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/visionsample.jpg'}";
+        // public static string imageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/visionsample.jpg'}";
+        public static string imageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/ocrsample.jpg'}";
         public static string localpath = @"C:\Users\XXXX\Pictures\Vastness-of-the-Salar-de-Uyuni1.jpg";
         public static string thumbnailSavePath = @"C:\Vision\";
         static void Main(string[] args)
@@ -66,56 +66,32 @@ namespace SpajamHonsen.Utilities
             return responseString;
         }
 
-        public static void OCRApi(string imageUrl, string localPath)
+        public static string OCRApi()
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
 
-            // Specify values for optional parameters, as needed
             queryString["language"] = "en";
             queryString["detectOrientation "] = "true";
 
-            // Specify your subscription key
             queryString["subscription-key"] = subscriptionKey;
 
-            // Specify values for path parameters (shown as {...})
             var uri = "https://api.projectoxford.ai/vision/v1/ocr?" + queryString;
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
             request.Method = "POST";
 
-            // Specify request body
-            if (imageUrl != null)
+            byte[] byteData = Encoding.UTF8.GetBytes(imageUrl);
+            request.ContentType = @"application/json";
+            request.ContentLength = byteData.Length;
+            var responseString = "";
+            using (var stream = request.GetRequestStream())
             {
-                byte[] byteData = Encoding.UTF8.GetBytes(imageUrl);
-                request.ContentType = @"application/json";
-                request.ContentLength = byteData.Length;
-                var responseString = "";
-                using (var stream = request.GetRequestStream())
-                {
-                    stream.Write(byteData, 0, byteData.Length);
-                }
-
-                var response = (HttpWebResponse)request.GetResponse();
-                responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-
-                Console.WriteLine(responseString);
+                stream.Write(byteData, 0, byteData.Length);
             }
 
-            if (localPath != null)
-            {
-                request.ContentType = "application/octet-stream";
-                byte[] img = File.ReadAllBytes(localpath);
-                request.ContentLength = img.Length;
-                var responseString = "";
-                using (var stream = request.GetRequestStream())
-                {
-                    stream.Write(img, 0, img.Length);
-                }
-
-                var response = (HttpWebResponse)request.GetResponse();
-                responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-                Console.WriteLine(responseString);
-            }
+            var response = (HttpWebResponse)request.GetResponse();
+            responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            return responseString;
         }
 
         public static void GenerateThumbnail(string imageUrl, string localPath)

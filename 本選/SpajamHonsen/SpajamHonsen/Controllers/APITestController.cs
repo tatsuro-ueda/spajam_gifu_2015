@@ -41,15 +41,14 @@ namespace SpajamHonsen.Controllers
             return result;
         }
 
-
         /// <summary>
         /// OxfordVisoinAPIのテスト
         /// </summary>
         /// <returns>翻訳結果</returns>
         public async Task<string> GetOxfordVisoinAPIAsync()
         {
-            var result = OxfordUtil.AnalyzeAnImage();
-
+            // var result = OxfordUtil.AnalyzeAnImage();
+            var result = OxfordUtil.OCRApi();
             return result;
         }
         #endregion GET: api/APITest
