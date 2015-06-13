@@ -19,7 +19,7 @@ namespace SpajamHonsen.Controllers
 {
     public class AudioCommentariesController : ApiController
     {
-        private spajamthEntities db = new spajamthEntities();
+        private spajamhonsenEntities db = new spajamhonsenEntities();
 
         // GET: api/AudioCommentaries
         public IQueryable<AudioCommentary> GetAudioCommentary()

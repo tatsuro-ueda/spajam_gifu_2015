@@ -15,7 +15,7 @@ namespace SpajamHonsen.Controllers
 {
     public class TalksController : ApiController
     {
-        private spajamthEntities db = new spajamthEntities();
+        private spajamhonsenEntities db = new spajamhonsenEntities();
 
         // GET: api/Talks
         public IQueryable<Talk> GetTalk()

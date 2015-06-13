@@ -15,7 +15,7 @@ namespace SpajamHonsen.Controllers
 {
     public class SpotMastersController : ApiController
     {
-        private spajamthEntities db = new spajamthEntities();
+        private spajamhonsenEntities db = new spajamhonsenEntities();
 
         // GET: api/SpotMasters
         public IQueryable<SpotMaster> GetSpotMaster()
