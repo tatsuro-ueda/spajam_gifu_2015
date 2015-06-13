@@ -41,7 +41,7 @@ namespace SpajamHonsen.Utilities
         /// 画像解析
         /// </summary>
         /// <returns></returns>
-        public async Task<string> AnalyzeAnImage()
+        public async Task<string> AnalyzeAnImageAsync()
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["visualFeatures"] = "All";
@@ -73,7 +73,7 @@ namespace SpajamHonsen.Utilities
         /// OCR(画像の文字認識)
         /// </summary>
         /// <returns></returns>
-        public string OCRApi()
+        public async Task<string> OCRApiAsync()
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
 
@@ -84,20 +84,23 @@ namespace SpajamHonsen.Utilities
 
             var uri = "https://api.projectoxford.ai/vision/v1/ocr?" + queryString;
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.Method = "POST";
+            HttpClient httpClient = new HttpClient();
 
-            byte[] byteData = Encoding.UTF8.GetBytes(imageUrl);
-            request.ContentType = @"application/json";
-            request.ContentLength = byteData.Length;
-            var responseString = "";
-            using (var stream = request.GetRequestStream())
+            var mediaType = new MediaTypeWithQualityHeaderValue("application/json");
+            byte[] byteArray = Encoding.UTF8.GetBytes(imageUrl);
+
+            var responseString = string.Empty;
+            using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
             {
-                stream.Write(byteData, 0, byteData.Length);
+                var param = new StreamContent(ms);
+                param.Headers.ContentType = mediaType;
+
+                var result = await httpClient.PostAsync(uri, param);
+
+                var responseStream = await result.Content.ReadAsStreamAsync();
+                responseString = new StreamReader(responseStream).ReadToEnd();
             }
 
-            var response = (HttpWebResponse)request.GetResponse();
-            responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
             return responseString;
         }
 
