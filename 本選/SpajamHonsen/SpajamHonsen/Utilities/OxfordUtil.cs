@@ -119,22 +119,27 @@ namespace SpajamHonsen.Utilities
             queryString["subscription-key"] = subscriptionKey;
 
             var uri = "https://api.projectoxford.ai/vision/v1/thumbnails?" + queryString;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.Method = "POST";
 
-            byte[] byteData = Encoding.UTF8.GetBytes(imageUrl);
-            request.ContentType = @"application/json";
-            request.ContentLength = byteData.Length;
-            using (var stream = request.GetRequestStream())
+            HttpClient httpClient = new HttpClient();
+
+            var mediaType = new MediaTypeWithQualityHeaderValue("application/json");
+            byte[] byteArray = Encoding.UTF8.GetBytes(imageUrl);
+
+            Stream responseStream = null;
+            using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
             {
-                stream.Write(byteData, 0, byteData.Length);
+                var param = new StreamContent(ms);
+                param.Headers.ContentType = mediaType;
+
+                var result = await httpClient.PostAsync(uri, param);
+
+                responseStream = await result.Content.ReadAsStreamAsync();
             }
-
-            var response = (HttpWebResponse)request.GetResponse();
-
+            
+            // 作成したサムネイル画像をAzureにアップロードする
             var azureStorageUtil = new AzureStorageUtil();
             var fileName = Guid.NewGuid().ToString() + ".jpg";
-            await azureStorageUtil.UploadBlobStrage(response.GetResponseStream(), fileName, "visions");
+            await azureStorageUtil.UploadBlobStrage(responseStream, fileName, "visions");
             return fileName;
         }
         #endregion VisionAPI
