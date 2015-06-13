@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -18,18 +19,27 @@ namespace SpajamHonsen.Utilities
     /// </remarks>
     public class OxfordUtil
     {
-        #region VisionAPI
-        // TODO Key
-        public static string subscriptionKey = "43d9ba4539fc424db63371ee47e2aa5d";
+        #region Consraters
+        public OxfordUtil() 
+        { 
+            var appSettings = ConfigurationManager.AppSettings;
+            subscriptionKey = appSettings["VisionAPIKey"];
+        }
+        #endregion Consraters
 
+        #region Fields
+        private string subscriptionKey = "";
+        #endregion Fields
+
+        #region VisionAPI
         // public static string imageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/visionsample.jpg'}";
-        public static string imageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/ocrsample.jpg'}";
+        private string imageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/ocrsample.jpg'}";
 
         /// <summary>
         /// 画像解析
         /// </summary>
         /// <returns></returns>
-        public static string AnalyzeAnImage()
+        public string AnalyzeAnImage()
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["visualFeatures"] = "All";
@@ -57,7 +67,7 @@ namespace SpajamHonsen.Utilities
         /// OCR(画像の文字認識)
         /// </summary>
         /// <returns></returns>
-        public static string OCRApi()
+        public string OCRApi()
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
 
@@ -91,7 +101,7 @@ namespace SpajamHonsen.Utilities
         /// <param name="imageUrl"></param>
         /// <param name="localPath"></param>
         /// <returns></returns>
-        public static async Task<string> GenerateThumbnailAsync()
+        public async Task<string> GenerateThumbnailAsync()
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["width"] = "50";
