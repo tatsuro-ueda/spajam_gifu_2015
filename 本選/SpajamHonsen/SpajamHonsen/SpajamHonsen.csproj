@@ -229,6 +229,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="AzureMarketplace\AccessTokenMessageHandler.cs" />
+    <Compile Include="AzureMarketplace\AdmAccessToken.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\APITestController.cs" />
     <Compile Include="Controllers\AudioCommentariesController.cs" />
@@ -280,7 +282,6 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\BaiduUtil.cs" />
-    <Compile Include="Utilities\CBingTranslate.cs" />
     <Compile Include="Utilities\FFmpegUtil.cs" />
     <Compile Include="Utilities\OthersUtil.cs" />
     <Compile Include="Utilities\AzureStorageUtil.cs" />

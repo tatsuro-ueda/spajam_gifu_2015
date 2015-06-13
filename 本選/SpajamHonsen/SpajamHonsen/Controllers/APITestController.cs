@@ -1,5 +1,4 @@
-﻿using BingTranslrate;
-using SpajamHonsen.Models;
+﻿using SpajamHonsen.Models;
 using SpajamHonsen.Utilities;
 using System;
 using System.Collections.Generic;
@@ -21,16 +20,14 @@ namespace SpajamHonsen.Controllers
         /// リクエストのテキストをMicrosoftTranslatorAPIで翻訳して返す
         /// </summary>
         /// <param name="text">翻訳対象テキスト</param>
-        /// <returns></returns>
-        public async Task<string> GetGoogleJapaneseAPIAsync(string text)
+        /// <param name="from">翻訳元言語</param>
+        /// <param name="to">翻訳先言語</param>
+        /// <returns>翻訳結果</returns>
+        public async Task<string> GetMicrosoftTranslatorAPIAsync(string text, string from, string to)
         {
-            var bingUtil = new BingUtil();
-
-            var cbingTranslate = new CBingTranslate();
-            cbingTranslate.Init("thirauti", "Hs9iRQTNGRpko9cMhU1sdpPyuKrrXD5u3oAOmPtoJAg=");
-            var result = cbingTranslate.TranslateMethod("ありがとう", "ja", "en");
+            // var bingUtil = new BingUtil();
+            var result = await BingUtil.RequestMicrosoftTranslatorAPITranslateAsync(text, from, to);
             return result;
-            // return await bingUtil.RequestMicrosoftTranslatorAPITranslateAsync("", "");
         }
         #endregion GET: api/APITest
 
