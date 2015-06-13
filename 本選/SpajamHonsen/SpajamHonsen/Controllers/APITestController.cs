@@ -17,16 +17,27 @@ namespace SpajamHonsen.Controllers
     {
         #region GET: api/APITest
         /// <summary>
-        /// リクエストのテキストをMicrosoftTranslatorAPIで翻訳して返す
+        /// リクエストテキストをMicrosoftTranslatorAPIで翻訳して返す
         /// </summary>
         /// <param name="text">翻訳対象テキスト</param>
         /// <param name="from">翻訳元言語</param>
-        /// <param name="to">翻訳先言語</param>
+        /// <param name="to">翻訳結果言語</param>
         /// <returns>翻訳結果</returns>
         public async Task<string> GetMicrosoftTranslatorAPIAsync(string text, string from, string to)
         {
             // var bingUtil = new BingUtil();
-            var result = await BingUtil.RequestMicrosoftTranslatorAPITranslateAsync(text, from, to);
+            var result = await BingUtil.RequestMicrosoftTranslatorAPIAsync(text, from, to);
+            return result;
+        }
+
+        /// <summary>
+        /// BingSynonimsAPIでリクエストテキストの類義語を返す
+        /// </summary>
+        /// <param name="synonim">類義語取得対象テキスト</param>
+        /// <returns>翻訳結果</returns>
+        public async Task<string> GetBingSynonimsAPIAsync(string synonim)
+        {
+            var result = await BingUtil.RequestBingSynonymaAPIAsync(synonim);
             return result;
         }
         #endregion GET: api/APITest

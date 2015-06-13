@@ -74,10 +74,14 @@ namespace SpajamHonsen.Utilities
         /// <summary>
         /// MicrosoftTranslatorAPIにリクエスト送信
         /// </summary>
+        /// <remarks>
+        /// MicrosoftTranslatorAPIにリクエスト送信して翻訳結果を取得する
+        /// </remarks>
         /// <param name="text">翻訳対象文字列</param>
-        /// <param name="to">翻訳対象言語</param>
-        /// <returns></returns>
-        public static async Task<string> RequestMicrosoftTranslatorAPITranslateAsync(string text, string from, string to)
+        /// <param name="from">翻訳対象言語</param>
+        /// <param name="to">翻訳結果言語</param>
+        /// <returns>翻訳結果</returns>
+        public static async Task<string> RequestMicrosoftTranslatorAPIAsync(string text, string from, string to)
         {
             string url = "http://api.microsofttranslator.com/v2/Http.svc/Translate?&text=" +
                 System.Web.HttpUtility.UrlEncode(text) + "&from=" + from + "&to=" + to + "&contentType=text%2fplain";
@@ -85,8 +89,6 @@ namespace SpajamHonsen.Utilities
             HttpClient client = new HttpClient(new AccessTokenMessageHandler(new HttpClientHandler()));
 
             var result = await client.GetAsync(url);
-
-            var ja = await result.Content.ReadAsStreamAsync();
 
             string translation;
             using (Stream stream = await result.Content.ReadAsStreamAsync())
@@ -98,8 +100,31 @@ namespace SpajamHonsen.Utilities
             return translation;
         }
 
+        /// <summary>
+        /// BingSynonymaAPIにリクエスト送信
+        /// </summary>
+        /// <remarks>
+        /// BingSynonymaAPIにリクエスト送信して類義語を取得する
+        /// </remarks>
+        /// <param name="synonym">類義語取得対象文字列</param>
+        /// <returns>類義語のリスト</returns>
+        public static async Task<string> RequestBingSynonymaAPIAsync(string synonym)
+        {
+            string url = "https://api.datamarket.azure.com/Bing/Synonyms/v1/GetSynonyms?Query=%27" + synonym + "%27";
 
+            HttpClient client = new HttpClient(new AccessTokenMessageHandler(new HttpClientHandler()));
 
+            var result = await client.GetAsync(url);
+
+            string synonyms;
+            using (Stream stream = await result.Content.ReadAsStreamAsync())
+            {
+                System.Runtime.Serialization.DataContractSerializer dcs = new System.Runtime.Serialization.DataContractSerializer(Type.GetType("System.String"));
+                synonyms = (string)dcs.ReadObject(stream);
+            }
+
+            return synonyms;
+        }
 
         #endregion Methods
     }
