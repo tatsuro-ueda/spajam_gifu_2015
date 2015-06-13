@@ -48,7 +48,7 @@ namespace SpajamHonsen.Utilities
             var stream = await result.Content.ReadAsStreamAsync();
 
             var fileName = Guid.NewGuid().ToString();
-            var containerName = "voicetext";
+            var containerName = "voices";
 
             var azureStorageUtil = new AzureStorageUtil();
             await azureStorageUtil.UploadBlobStrage(stream, fileName, containerName);
