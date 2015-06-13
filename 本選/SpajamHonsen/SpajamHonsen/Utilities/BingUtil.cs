@@ -17,30 +17,15 @@ namespace SpajamHonsen.Utilities
     /// <remarks>
     /// BingoAPIのユーティリティークラス
     /// </remarks>
-    public class BingUtil
+    public static class BingUtil
     {
-        #region Constractors
-        public BingUtil() 
-        {
-            //TODO Key
-            var admAuth = new SpajamHonsen.AccessToken.BingAPIToken.AdmAuthentication("thirauti", "Hs9iRQTNGRpko9cMhU1sdpPyuKrrXD5u3oAOmPtoJAg=");
-            var admToken = admAuth.GetAccessToken();
-            authenticationHeaderValue = "Bearer " + admToken.access_token;
-          
-        }        
-        #endregion Constractors
-
-        #region Fields
-        string authenticationHeaderValue;
-        #endregion Fields
-
         #region Methods
         /// <summary>
         /// MicrosoftBingVoiceRecognitionAPIにリクエスト送信
         /// </summary>
         /// <param name="byteArray">音声ファイルのByte配列</param>
         /// <returns></returns>
-        public async Task<string> RequestMicrosoftBingVoiceRecognitionAPIAsync(byte[] byteArray)
+        public static async Task<string> RequestMicrosoftBingVoiceRecognitionAPIAsync(byte[] byteArray)
         {
             var httpClient = new HttpClient();
 
@@ -92,54 +77,7 @@ namespace SpajamHonsen.Utilities
         /// <param name="text">翻訳対象文字列</param>
         /// <param name="to">翻訳対象言語</param>
         /// <returns></returns>
-        public async Task<string> RequestMicrosoftTranslatorAPITranslateAsync(string text, string from, string to)
-        {
-            /*
-            var builder = new UriBuilder("http://api.microsofttranslator.com/v2/Http.svc/Translate");
-            builder.Port = -1;
-
-            // QueryStringの設定
-            var query = HttpUtility.ParseQueryString(builder.Query);
-            query["text"] = System.Web.HttpUtility.UrlEncode(text);
-            query["from"] = from;
-            query["to"] = to;
-            query["contentType"] = "text/plain";
-
-            builder.Query = query.ToString();
-
-            string url = builder.ToString();
-            */
-
-            string url = "http://api.microsofttranslator.com/v2/Http.svc/Translate?&text=" +
-                System.Web.HttpUtility.UrlEncode(text) + "&from=" + from + "&to=" + to + "&contentType=text%2fplain";
-
-            var authHeader = new AuthenticationHeaderValue("Authorization", authenticationHeaderValue);
-
-            var client = new HttpClient();
-
-            client.DefaultRequestHeaders.Authorization = authHeader;
-
-            var result = await client.GetAsync(url);
-
-            var ja = await result.Content.ReadAsStreamAsync();
-
-            string translation;
-            using (Stream stream = await result.Content.ReadAsStreamAsync())
-            {
-                System.Runtime.Serialization.DataContractSerializer dcs = new System.Runtime.Serialization.DataContractSerializer(Type.GetType("System.String"));
-                translation = (string)dcs.ReadObject(stream);
-            }
-
-            return translation;
-        }
-
-            /// <summary>
-        /// MicrosoftTranslatorAPIにリクエスト送信
-        /// </summary>
-        /// <param name="text">翻訳対象文字列</param>
-        /// <param name="to">翻訳対象言語</param>
-        /// <returns></returns>
-        public async Task<string> RequestMicrosoftTranslatorAPITranslateNewAsync(string text, string from, string to)
+        public static async Task<string> RequestMicrosoftTranslatorAPITranslateAsync(string text, string from, string to)
         {
             string url = "http://api.microsofttranslator.com/v2/Http.svc/Translate?&text=" +
                 System.Web.HttpUtility.UrlEncode(text) + "&from=" + from + "&to=" + to + "&contentType=text%2fplain";

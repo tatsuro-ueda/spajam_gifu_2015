@@ -5,6 +5,8 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace SpajamHonsen.AzureMarketplace
 {
@@ -17,10 +19,7 @@ namespace SpajamHonsen.AzureMarketplace
     {
         // You need to obtain a valid application key from the Azure Marketplace,
         // see http://msdn.microsoft.com/en-us/library/hh454950.aspx for details
-        // TODO Key
-        private readonly string _clientId = "thirauti";
-        private readonly string _clientSecret = "Hs9iRQTNGRpko9cMhU1sdpPyuKrrXD5u3oAOmPtoJAg=";
-
+        
         private readonly Uri _dataMarketAddress = new Uri("https://datamarket.accesscontrol.windows.net/v2/OAuth2-13");
 
         // We use a single HttpClient instance for all requests to Azure Marketplace
@@ -40,6 +39,9 @@ namespace SpajamHonsen.AzureMarketplace
         {
             // First we issue async HTML form POST request to the Azure Marketplace to obtain an Access Token. 
             // See http://msdn.microsoft.com/en-us/library/hh454950.aspx for details
+            var appSettings = ConfigurationManager.AppSettings;
+            var _clientId = appSettings["AzureMarketPlaceClientID"];
+            var _clientSecret = appSettings["AzureMarketPlaceClientSecret"];
 
             // Create form parameters that we will send to data market.
             Dictionary<string, string> properties = new Dictionary<string, string>
