@@ -40,7 +40,8 @@ namespace SpajamHonsen.AccessToken
                 this.clientId = clientId;
                 this.cientSecret = clientSecret;
                 //If clientid or client secret has special characters, encode before sending request
-                this.request = string.Format("grant_type=client_credentials&client_id={0}&client_secret={1}&scope=http://api.microsofttranslator.com", HttpUtility.UrlEncode(clientId), HttpUtility.UrlEncode(clientSecret));
+                this.request = string.Format("grant_type=client_credentials&client_id={0}&client_secret={1}&scope=http://api.microsofttranslator.com", 
+                    HttpUtility.UrlEncode(clientId), HttpUtility.UrlEncode(clientSecret));
             }
 
             public AdmAccessToken GetAccessToken()

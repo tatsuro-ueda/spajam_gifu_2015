@@ -1,8 +1,10 @@
-﻿using System;
+﻿using SpajamHonsen.AzureMarketplace;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
@@ -90,21 +92,26 @@ namespace SpajamHonsen.Utilities
         /// <param name="text">翻訳対象文字列</param>
         /// <param name="to">翻訳対象言語</param>
         /// <returns></returns>
-        public async Task<string> RequestMicrosoftTranslatorAPITranslateAsync(string text, string to)
+        public async Task<string> RequestMicrosoftTranslatorAPITranslateAsync(string text, string from, string to)
         {
+            /*
             var builder = new UriBuilder("http://api.microsofttranslator.com/v2/Http.svc/Translate");
             builder.Port = -1;
 
             // QueryStringの設定
             var query = HttpUtility.ParseQueryString(builder.Query);
-            query["text"] = System.Web.HttpUtility.UrlEncode("hello");
-            query["from"] = "en";
-            query["to"] = "ja";
-            // query["contentType"] = "text/plain";
+            query["text"] = System.Web.HttpUtility.UrlEncode(text);
+            query["from"] = from;
+            query["to"] = to;
+            query["contentType"] = "text/plain";
 
             builder.Query = query.ToString();
 
             string url = builder.ToString();
+            */
+
+            string url = "http://api.microsofttranslator.com/v2/Http.svc/Translate?&text=" +
+                System.Web.HttpUtility.UrlEncode(text) + "&from=" + from + "&to=" + to + "&contentType=text%2fplain";
 
             var authHeader = new AuthenticationHeaderValue("Authorization", authenticationHeaderValue);
 
@@ -125,6 +132,36 @@ namespace SpajamHonsen.Utilities
 
             return translation;
         }
+
+            /// <summary>
+        /// MicrosoftTranslatorAPIにリクエスト送信
+        /// </summary>
+        /// <param name="text">翻訳対象文字列</param>
+        /// <param name="to">翻訳対象言語</param>
+        /// <returns></returns>
+        public async Task<string> RequestMicrosoftTranslatorAPITranslateNewAsync(string text, string from, string to)
+        {
+            string url = "http://api.microsofttranslator.com/v2/Http.svc/Translate?&text=" +
+                System.Web.HttpUtility.UrlEncode(text) + "&from=" + from + "&to=" + to + "&contentType=text%2fplain";
+
+            HttpClient client = new HttpClient(new AccessTokenMessageHandler(new HttpClientHandler()));
+
+            var result = await client.GetAsync(url);
+
+            var ja = await result.Content.ReadAsStreamAsync();
+
+            string translation;
+            using (Stream stream = await result.Content.ReadAsStreamAsync())
+            {
+                System.Runtime.Serialization.DataContractSerializer dcs = new System.Runtime.Serialization.DataContractSerializer(Type.GetType("System.String"));
+                translation = (string)dcs.ReadObject(stream);
+            }
+
+            return translation;
+        }
+
+
+
 
         #endregion Methods
     }

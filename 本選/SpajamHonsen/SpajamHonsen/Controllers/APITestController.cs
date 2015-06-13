@@ -31,7 +31,8 @@ namespace SpajamHonsen.Controllers
             */
 
             var bingUtil = new BingUtil();
-            var result = await bingUtil.RequestMicrosoftTranslatorAPITranslateAsync("", "");
+            var result = await bingUtil.RequestMicrosoftTranslatorAPITranslateNewAsync("ありがとう", "ja", "en");
+            
             return result;
         }
         #endregion GET: api/APITest
