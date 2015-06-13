@@ -5,6 +5,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -39,27 +41,31 @@ namespace SpajamHonsen.Utilities
         /// 画像解析
         /// </summary>
         /// <returns></returns>
-        public string AnalyzeAnImage()
+        public async Task<string> AnalyzeAnImage()
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["visualFeatures"] = "All";
             queryString["subscription-key"] = subscriptionKey;
 
             var uri = "https://api.projectoxford.ai/vision/v1/analyses?" + queryString;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.Method = "POST";
 
-            byte[] byteData = Encoding.UTF8.GetBytes(imageUrl);
-            request.ContentType = @"application/json";
-            request.ContentLength = byteData.Length;
-            var responseString = "";
-            using (var stream = request.GetRequestStream())
+            HttpClient httpClient = new HttpClient();
+
+            var mediaType = new MediaTypeWithQualityHeaderValue("application/json");
+            byte[] byteArray = Encoding.UTF8.GetBytes(imageUrl);
+
+            var responseString = string.Empty;
+            using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
             {
-                stream.Write(byteData, 0, byteData.Length);
+                var param = new StreamContent(ms);
+                param.Headers.ContentType = mediaType;
+
+                var result = await httpClient.PostAsync(uri, param);
+
+                var responseStream = await result.Content.ReadAsStreamAsync();
+                responseString = new StreamReader(responseStream).ReadToEnd();
             }
 
-            var response = (HttpWebResponse)request.GetResponse();
-            responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
             return responseString;
         }
 
