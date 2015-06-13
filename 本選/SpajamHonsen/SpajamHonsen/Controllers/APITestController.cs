@@ -40,6 +40,18 @@ namespace SpajamHonsen.Controllers
             var result = await BingUtil.RequestBingSynonymaAPIAsync(synonim);
             return result;
         }
+
+
+        /// <summary>
+        /// OxfordVisoinAPIのテスト
+        /// </summary>
+        /// <returns>翻訳結果</returns>
+        public async Task<string> GetOxfordVisoinAPIAsync()
+        {
+            var result = OxfordUtil.AnalyzeAnImage();
+
+            return result;
+        }
         #endregion GET: api/APITest
 
         #region POST: api/APITest
