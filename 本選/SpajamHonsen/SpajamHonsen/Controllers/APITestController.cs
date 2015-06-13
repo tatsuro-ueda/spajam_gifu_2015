@@ -40,6 +40,34 @@ namespace SpajamHonsen.Controllers
             var result = await BingUtil.RequestBingSynonymaAPIAsync(synonim);
             return result;
         }
+
+        /// <summary>
+        /// OxfordVisoinAPIのテスト
+        /// </summary>
+        /// <returns>翻訳結果</returns>
+        public async Task<string> GetOxfordVisoinAPIAsync()
+        {
+            string analyzeImageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/visionsample.jpg'}";
+            string ocrImageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/ocrsample.jpg'}";
+            
+            /*
+            // 画像ファイルのアップロード
+            byte[] byteArray = System.Convert.FromBase64String(request.AudioBase64);
+            var azureStorageUtil = new AzureStorageUtil();
+            var fileName = Guid.NewGuid().ToString();
+            await azureStorageUtil.UploadBlobStrage(byteArray, fileName, "visions");
+
+            // 画像のURLを取得
+            var imageUrl = azureStorageUtil.GetBlobStrageUrl(fileName, "visions");
+            */
+
+            var oxfordUtil = new OxfordUtil();
+            // var result = await oxfordUtil.AnalyzeAnImageAsync(analyzeImageUrl);
+            // var result = await oxfordUtil.OCRApiAsync(ocrImageUrl, "en", true);
+            var result = await oxfordUtil.GenerateThumbnailAsync(ocrImageUrl, 100, 100);
+            
+            return result.ToString();
+        }
         #endregion GET: api/APITest
 
         #region POST: api/APITest

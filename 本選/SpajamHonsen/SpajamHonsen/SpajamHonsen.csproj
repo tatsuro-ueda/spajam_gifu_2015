@@ -265,8 +265,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\GoogleSpeechAPIResponseModels.cs" />
+    <Compile Include="Models\JsonResponse\GoogleSpeechAPIResponseModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\JsonResponse\VisionAPIAnalyzeanImageResponseModel.cs" />
+    <Compile Include="Models\JsonResponse\VisionAPIOCRResponseModel.cs" />
     <Compile Include="Models\SpotMaster.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
