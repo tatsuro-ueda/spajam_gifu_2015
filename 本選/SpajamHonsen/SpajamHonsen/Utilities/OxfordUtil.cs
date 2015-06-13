@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using SpajamHonsen.Models.JsonResponse;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
@@ -41,7 +43,7 @@ namespace SpajamHonsen.Utilities
         /// 画像解析
         /// </summary>
         /// <returns></returns>
-        public async Task<string> AnalyzeAnImageAsync()
+        public async Task<VisionAPIAnalyzeanImageResponseModel> AnalyzeAnImageAsync()
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["visualFeatures"] = "All";
@@ -66,14 +68,15 @@ namespace SpajamHonsen.Utilities
                 responseString = new StreamReader(responseStream).ReadToEnd();
             }
 
-            return responseString;
+            var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<VisionAPIAnalyzeanImageResponseModel>(responseString));
+            return responseJson;
         }
 
         /// <summary>
         /// OCR(画像の文字認識)
         /// </summary>
         /// <returns></returns>
-        public async Task<string> OCRApiAsync()
+        public async Task<VisionAPIOCRResponseModel> OCRApiAsync()
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
 
@@ -101,7 +104,8 @@ namespace SpajamHonsen.Utilities
                 responseString = new StreamReader(responseStream).ReadToEnd();
             }
 
-            return responseString;
+            var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<VisionAPIOCRResponseModel>(responseString));
+            return responseJson;
         }
 
         /// <summary>

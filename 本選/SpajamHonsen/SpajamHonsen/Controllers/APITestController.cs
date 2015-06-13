@@ -49,10 +49,10 @@ namespace SpajamHonsen.Controllers
         {
             var oxfordUtil = new OxfordUtil();
             // var result = await oxfordUtil.AnalyzeAnImageAsync();
-            // var result = await oxfordUtil.OCRApiAsync();
-            var result = await oxfordUtil.GenerateThumbnailAsync();
+            var result = await oxfordUtil.OCRApiAsync();
+            // var result = await oxfordUtil.GenerateThumbnailAsync();
             
-            return result;
+            return result.ToString();
         }
         #endregion GET: api/APITest
 
