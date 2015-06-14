@@ -123,7 +123,7 @@ namespace SpajamHonsen.Controllers
                 fs.Write(byteArray, 0, byteArray.Length);
            }
 
-            var result = FFmpegUtil.ConvertAudioRate(filePath, "16000");
+            var result = FFmpegUtil.ConvertAudioFormat(filePath, "mp3");
 
             return result;
         }
