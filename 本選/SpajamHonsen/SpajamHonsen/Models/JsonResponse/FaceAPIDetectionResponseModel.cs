@@ -5,7 +5,7 @@ using System.Web;
 
 namespace SpajamHonsen.Models.JsonResponse
 {
-    public class FacesAPIDetectionResponseModel
+    public class FaceAPIDetectionResponseModel
     {
         public string faceId { get; set; }
         public Facerectangle faceRectangle { get; set; }

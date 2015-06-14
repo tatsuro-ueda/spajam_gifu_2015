@@ -160,15 +160,15 @@ namespace SpajamHonsen.Utilities
         }
         #endregion VisionAPI
 
-        #region FacesAPI
+        #region FaceAPI
         /// <summary>
-        /// FacesAPI(顔認識)の実行
+        /// FaceAPI(顔認識)の実行
         /// </summary>
         /// <param name="imageUrl">解析画像のURL</param>
         /// <param name="width">生成するサムネイルの幅</param>
         /// <param name="height">生成するサムネイルの高さ</param>
         /// <returns></returns>
-        public async Task<FacesAPIDetectionResponseModel[]> DetectionAsync(string imageUrl, bool analyzesFaceLandmarks, bool analyzesAge, bool analyzesGender, bool analyzesHeadPose)
+        public async Task<FaceAPIDetectionResponseModel[]> DetectionAsync(string imageUrl, bool analyzesFaceLandmarks, bool analyzesAge, bool analyzesGender, bool analyzesHeadPose)
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["analyzesFaceLandmarks"] = analyzesFaceLandmarks.ToString();
@@ -194,9 +194,9 @@ namespace SpajamHonsen.Utilities
 
                 responseString = await result.Content.ReadAsStringAsync();
             }
-            var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<FacesAPIDetectionResponseModel[]>(responseString));
+            var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<FaceAPIDetectionResponseModel[]>(responseString));
             return responseJson;
         }
-        #endregion FacesAPI
+        #endregion FaceAPI
     }
 }

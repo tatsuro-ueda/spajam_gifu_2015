@@ -75,12 +75,12 @@ namespace SpajamHonsen.Controllers
          }
          */
 
-        // 未完了　OxfordFacesAPI(顔認識)
+        // 未完了　OxfordFaceAPI(顔認識)
         /// <summary>
-        /// OxfordFacesAPIのテスト
+        /// OxfordFaceAPIのテスト
         /// </summary>
         /// <returns>翻訳結果</returns>
-        public async Task<string> GetOxfordFacesAPIAsync()
+        public async Task<string> GetOxfordFaceAPIAsync()
         {
             string familyImageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/visionsample.jpg'}";
             
