@@ -16,6 +16,7 @@ namespace SpajamHonsen.Controllers
     public class APITestController : ApiController
     {
         #region GET: api/APITest
+        /* 完了 MicrosoftTranslatorAPI(翻訳)
         /// <summary>
         /// リクエストテキストをMicrosoftTranslatorAPIで翻訳して返す
         /// </summary>
@@ -25,11 +26,12 @@ namespace SpajamHonsen.Controllers
         /// <returns>翻訳結果</returns>
         public async Task<string> GetMicrosoftTranslatorAPIAsync(string text, string from, string to)
         {
-            // var bingUtil = new BingUtil();
             var result = await BingUtil.RequestMicrosoftTranslatorAPIAsync(text, from, to);
             return result;
         }
+        */
 
+        /* 未完了　BingSynonimsAPI(類義語)
         /// <summary>
         /// BingSynonimsAPIでリクエストテキストの類義語を返す
         /// </summary>
@@ -40,7 +42,9 @@ namespace SpajamHonsen.Controllers
             var result = await BingUtil.RequestBingSynonymaAPIAsync(synonim);
             return result;
         }
+        */
 
+        /* 完了　OxfordVisoinAPI(画像解析、文字認識、サムネイル作成)
         /// <summary>
         /// OxfordVisoinAPIのテスト
         /// </summary>
@@ -60,14 +64,15 @@ namespace SpajamHonsen.Controllers
             // 画像のURLを取得
             var imageUrl = azureStorageUtil.GetBlobStrageUrl(fileName, "visions");
             */
-
-            var oxfordUtil = new OxfordUtil();
-            // var result = await oxfordUtil.AnalyzeAnImageAsync(analyzeImageUrl);
-            // var result = await oxfordUtil.OCRApiAsync(ocrImageUrl, "en", true);
-            var result = await oxfordUtil.GenerateThumbnailAsync(ocrImageUrl, 100, 100);
+            /*
+              var oxfordUtil = new OxfordUtil();
+              // var result = await oxfordUtil.AnalyzeAnImageAsync(analyzeImageUrl);
+              // var result = await oxfordUtil.OCRApiAsync(ocrImageUrl, "en", true);
+              var result = await oxfordUtil.GenerateThumbnailAsync(ocrImageUrl, 100, 100);
             
-            return result.ToString();
-        }
+              return result.ToString();
+          }
+          */
         #endregion GET: api/APITest
 
         #region POST: api/APITest
@@ -100,7 +105,7 @@ namespace SpajamHonsen.Controllers
         }
         */
 
-        // 完了 FFmpeg(形式変換)
+        /* 完了 FFmpeg(形式変換)
         /// <summary>
         /// Base64形式で音声ファイル(content-type:x-wav rete:44100)をPOSTして
         /// MP3形式に変換してファイルパスを返す
@@ -127,6 +132,7 @@ namespace SpajamHonsen.Controllers
 
             return result;
         }
+        */
 
         /* 完了 GoogleSpeechAPI(音声解析)
         /// <summary>
