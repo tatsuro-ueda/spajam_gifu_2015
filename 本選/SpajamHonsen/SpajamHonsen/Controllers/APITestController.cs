@@ -64,46 +64,62 @@ namespace SpajamHonsen.Controllers
             // 画像のURLを取得
             var imageUrl = azureStorageUtil.GetBlobStrageUrl(fileName, "visions");
             */
+
             /*
-              var oxfordUtil = new OxfordUtil();
+              var oxfordUtil = new OxfordUtil(OxfordAPIType.Vision);
               // var result = await oxfordUtil.AnalyzeAnImageAsync(analyzeImageUrl);
               // var result = await oxfordUtil.OCRApiAsync(ocrImageUrl, "en", true);
               var result = await oxfordUtil.GenerateThumbnailAsync(ocrImageUrl, 100, 100);
             
               return result.ToString();
-          }
-          */
+         }
+         */
+
+        // 未完了　OxfordFacesAPI(顔認識)
+        /// <summary>
+        /// OxfordFacesAPIのテスト
+        /// </summary>
+        /// <returns>翻訳結果</returns>
+        public async Task<string> GetOxfordFacesAPIAsync()
+        {
+            string familyImageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/visionsample.jpg'}";
+            
+            var oxfordUtil = new OxfordUtil(SpajamHonsen.Utilities.OxfordUtil.OxfordAPIType.Faces);
+            var result = await oxfordUtil.DetectionAsync();
+            
+            return result.ToString();
+         }
         #endregion GET: api/APITest
 
-        #region POST: api/APITest
-        /* 完了 FFmpeg(レート変換)
-        /// <summary>
-        /// Base64形式で音声ファイル(content-type:x-wav rete:44100)をPOSTして
-        /// 音声ファイル(content-type:x-flac rete:16000)に変換してファイルパスを返す
-        /// </summary>
-        /// <param name="request">音声ファイルのBase64文字列</param>
-        /// <returns>変換後のファイルのパス</returns>
-        public async Task<string> PostConvertAudioRateAsync(TestRequestModel request)
-        {
-            byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
+    #region POST: api/APITest
+    /* 完了 FFmpeg(レート変換)
+    /// <summary>
+    /// Base64形式で音声ファイル(content-type:x-wav rete:44100)をPOSTして
+    /// 音声ファイル(content-type:x-flac rete:16000)に変換してファイルパスを返す
+    /// </summary>
+    /// <param name="request">音声ファイルのBase64文字列</param>
+    /// <returns>変換後のファイルのパス</returns>
+    public async Task<string> PostConvertAudioRateAsync(TestRequestModel request)
+    {
+        byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
 
-            var filePath = HttpContext.Current.Server.MapPath("~/ffmpeg/" + Guid.NewGuid().ToString());
-            //ファイルを作成して書き込む
-            using (System.IO.FileStream fs = 
-                new System.IO.FileStream(
-                    filePath,
-                    System.IO.FileMode.Create,
-                    System.IO.FileAccess.Write))
-           {
-                //バイト型配列の内容をすべて書き込む
-                fs.Write(byteArray, 0, byteArray.Length);
-           }
+        var filePath = HttpContext.Current.Server.MapPath("~/ffmpeg/" + Guid.NewGuid().ToString());
+        //ファイルを作成して書き込む
+        using (System.IO.FileStream fs = 
+            new System.IO.FileStream(
+                filePath,
+                System.IO.FileMode.Create,
+                System.IO.FileAccess.Write))
+       {
+            //バイト型配列の内容をすべて書き込む
+            fs.Write(byteArray, 0, byteArray.Length);
+       }
 
-            var result = FFmpegUtil.ConvertAudioRate(filePath, "16000");
+        var result = FFmpegUtil.ConvertAudioRate(filePath, "16000");
 
-            return result;
-        }
-        */
+        return result;
+    }
+    */
 
         /* 完了 FFmpeg(形式変換)
         /// <summary>
