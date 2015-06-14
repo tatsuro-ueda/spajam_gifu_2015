@@ -267,9 +267,11 @@
     </Compile>
     <Compile Include="Models\JsonRequest\FaceAPIFindSimilarFacesRequestModel.cs" />
     <Compile Include="Models\JsonRequest\FaceAPIGroupingRequestModel.cs" />
+    <Compile Include="Models\JsonRequest\FaceAPIIdentificationRequestModel.cs" />
     <Compile Include="Models\JsonResponse\FaceAPIDetectionResponseModel.cs" />
     <Compile Include="Models\JsonResponse\FaceAPIFindSimilarFacesResponseModel.cs" />
     <Compile Include="Models\JsonResponse\FaceAPIGroupingResponseModel.cs" />
+    <Compile Include="Models\JsonResponse\FaceAPIIdentificationResponseModel.cs" />
     <Compile Include="Models\JsonResponse\FaceAPIVerificationResponseModel.cs" />
     <Compile Include="Models\JsonResponse\GoogleSpeechAPIResponseModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />

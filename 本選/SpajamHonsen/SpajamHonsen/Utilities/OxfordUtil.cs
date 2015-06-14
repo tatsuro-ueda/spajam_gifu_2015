@@ -283,6 +283,34 @@ namespace SpajamHonsen.Utilities
             var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<FaceAPIGroupingResponseModel>(responseString));
             return responseJson;
         }
+
+        /// <summary>
+        /// FaceAPIIdentification
+        /// 識別　(グループから似ている人を検出)
+        /// の実行
+        /// </summary>
+        /// <param name="request">リクエストモデル</param>
+        /// <returns>レスポンスモデル</returns>
+        public async Task<FaceAPIIdentificationResponseModel> IdentificationAsync(FaceAPIIdentificationRequestModel request)
+        {
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            queryString["subscription-key"] = subscriptionKey;
+
+            var uri = "https://api.projectoxford.ai/face/v0/identifications?" + queryString;
+
+            HttpClient httpClient = new HttpClient();
+
+            var requestString = await JsonConvert.SerializeObjectAsync(request);
+
+            HttpContent param = new StringContent(requestString, System.Text.Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PostAsync(uri, param);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<FaceAPIIdentificationResponseModel>(responseString));
+            return responseJson;
+        }
         #endregion FaceAPI
     }
 }
