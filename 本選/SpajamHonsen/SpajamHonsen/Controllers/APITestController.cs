@@ -76,7 +76,7 @@ namespace SpajamHonsen.Controllers
          }
          */
 
-        // 未完了　OxfordFaceAPI(顔認識)
+        /* 完了　OxfordFaceAPI(顔認識)
         /// <summary>
         /// OxfordFaceAPIのテスト
         /// </summary>
@@ -105,6 +105,7 @@ namespace SpajamHonsen.Controllers
             var result = await oxfordUtil.GroupingAsync(request);
             */
 
+            /*
             // リクエストの作成
             var request = new FaceAPIIdentificationRequestModel();
             request.faceIds = new String[] { "f0773255-b1ba-4bfd-b9a1-3463a2abeca8", "2c7c7fdf-601f-4532-ad56-806b8694988a", "f0773255-b1ba-4bfd-b9a1-3463a2abeca8", "2c7c7fdf-601f-4532-ad56-806b8694988a" };
@@ -115,6 +116,7 @@ namespace SpajamHonsen.Controllers
             
             return result.ToString();
          }
+         */
         #endregion GET: api/APITest
 
     #region POST: api/APITest
