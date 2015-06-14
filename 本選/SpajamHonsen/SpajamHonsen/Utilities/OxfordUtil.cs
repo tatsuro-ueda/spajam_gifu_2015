@@ -256,6 +256,33 @@ namespace SpajamHonsen.Utilities
             return responseJson;
         }
 
+        /// <summary>
+        /// FaceAPIGrouping
+        /// グループ化　（所属グループを返す）
+        /// の実行
+        /// </summary>
+        /// <param name="request">リクエストモデル</param>
+        /// <returns>レスポンスモデル</returns>
+        public async Task<FaceAPIGroupingResponseModel> GroupingAsync(FaceAPIGroupingRequestModel request)
+        {
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            queryString["subscription-key"] = subscriptionKey;
+
+            var uri = "https://api.projectoxford.ai/face/v0/groupings?" + queryString;
+
+            HttpClient httpClient = new HttpClient();
+
+            var requestString = await JsonConvert.SerializeObjectAsync(request);
+
+            HttpContent param = new StringContent(requestString, System.Text.Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PostAsync(uri, param);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<FaceAPIGroupingResponseModel>(responseString));
+            return responseJson;
+        }
         #endregion FaceAPI
     }
 }
