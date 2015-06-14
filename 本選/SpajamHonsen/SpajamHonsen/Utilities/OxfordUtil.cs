@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SpajamHonsen.Models.JsonRequest;
 using SpajamHonsen.Models.JsonResponse;
 using System;
 using System.Collections.Generic;
@@ -224,6 +225,34 @@ namespace SpajamHonsen.Utilities
             var responseString = await response.Content.ReadAsStringAsync();
 
             var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<FaceAPIVerificationResponseModel>(responseString));
+            return responseJson;
+        }
+
+        /// <summary>
+        /// FaceAPIFindSimilarFaces
+        /// 同様の顔を探す　（候補者のリストから似ている人を検出）
+        /// の実行
+        /// </summary>
+        /// <param name="request">リクエストモデル</param>
+        /// <returns>レスポンスモデル</returns>
+        public async Task<FaceAPIFindSimilarFacesResponseModel[]> FindSimilarFacesAsync(FaceAPIFindSimilarFacesRequestModel request)
+        {
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            queryString["subscription-key"] = subscriptionKey;
+
+            var uri = "https://api.projectoxford.ai/face/v0/findsimilars?" + queryString;
+
+            HttpClient httpClient = new HttpClient();
+
+            var requestString = await JsonConvert.SerializeObjectAsync(request);
+
+            HttpContent param = new StringContent(requestString, System.Text.Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PostAsync(uri, param);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<FaceAPIFindSimilarFacesResponseModel[]>(responseString));
             return responseJson;
         }
 

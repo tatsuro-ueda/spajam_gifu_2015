@@ -1,4 +1,5 @@
 ﻿using SpajamHonsen.Models;
+using SpajamHonsen.Models.JsonRequest;
 using SpajamHonsen.Utilities;
 using System;
 using System.Collections.Generic;
@@ -86,8 +87,15 @@ namespace SpajamHonsen.Controllers
             
             var oxfordUtil = new OxfordUtil(SpajamHonsen.Utilities.OxfordUtil.OxfordAPIType.Faces);
             // var result = await oxfordUtil.DetectionAsync(familyImageUrl, true, true, true, true);
-            var result = await oxfordUtil.VerificationAsync("f0773255-b1ba-4bfd-b9a1-3463a2abeca8", "2c7c7fdf-601f-4532-ad56-806b8694988a");
-  
+            // var result = await oxfordUtil.VerificationAsync("f0773255-b1ba-4bfd-b9a1-3463a2abeca8", "2c7c7fdf-601f-4532-ad56-806b8694988a");
+            
+            // リクエストの作成
+            var request = new FaceAPIFindSimilarFacesRequestModel();
+            request.faceId = "f0773255-b1ba-4bfd-b9a1-3463a2abeca8";
+            request.faceIds = new String[] { "f0773255-b1ba-4bfd-b9a1-3463a2abeca8", "2c7c7fdf-601f-4532-ad56-806b8694988a", "f0773255-b1ba-4bfd-b9a1-3463a2abeca8", "2c7c7fdf-601f-4532-ad56-806b8694988a" };
+
+            var result = await oxfordUtil.FindSimilarFacesAsync(request);
+            
             return result.ToString();
          }
         #endregion GET: api/APITest
