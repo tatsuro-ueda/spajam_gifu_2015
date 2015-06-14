@@ -165,8 +165,10 @@ namespace SpajamHonsen.Utilities
         /// FaceAPI(顔認識)の実行
         /// </summary>
         /// <param name="imageUrl">解析画像のURL</param>
-        /// <param name="width">生成するサムネイルの幅</param>
-        /// <param name="height">生成するサムネイルの高さ</param>
+        /// <param name="analyzesFaceLandmarks">顔認識</param>
+        /// <param name="analyzesAge">年齢</param>
+        /// <param name="analyzesGender">性別</param>
+        /// <param name="analyzesHeadPose">顔の向き</param>
         /// <returns></returns>
         public async Task<FaceAPIDetectionResponseModel[]> DetectionAsync(string imageUrl, bool analyzesFaceLandmarks, bool analyzesAge, bool analyzesGender, bool analyzesHeadPose)
         {
@@ -197,6 +199,33 @@ namespace SpajamHonsen.Utilities
             var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<FaceAPIDetectionResponseModel[]>(responseString));
             return responseJson;
         }
+
+        /// <summary>
+        /// FaceAPIVerification(検証(同一人物かの確認))の実行
+        /// </summary>
+        /// <param name="faceId1">比較対象の顔ID1</param>
+        /// <param name="faceId2">比較対象の顔ID2</param>
+        /// <returns>レスポンスモデル</returns>
+        public async Task<string> VerificationAsync(string faceId1, string faceId2)
+        {
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            queryString["subscription-key"] = subscriptionKey;
+
+            var uri = "https://api.projectoxford.ai/face/v0/verifications?" + queryString;
+
+            HttpClient httpClient = new HttpClient();
+
+            var request = "{\"faceId1\":\"" + faceId1 + "\","  + "\"faceId2\":\"" + faceId2 + "\"}";
+
+            HttpContent param = new StringContent(request, System.Text.Encoding.UTF8, "application/json");
+                  
+            var response = await httpClient.PostAsync(uri, param);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            return responseString;
+        }
+
         #endregion FaceAPI
     }
 }
