@@ -86,7 +86,6 @@ namespace SpajamHonsen.Controllers
             
             var oxfordUtil = new OxfordUtil(SpajamHonsen.Utilities.OxfordUtil.OxfordAPIType.Faces);
             // var result = await oxfordUtil.DetectionAsync(familyImageUrl, true, true, true, true);
-
             var result = await oxfordUtil.VerificationAsync("f0773255-b1ba-4bfd-b9a1-3463a2abeca8", "2c7c7fdf-601f-4532-ad56-806b8694988a");
   
             return result.ToString();

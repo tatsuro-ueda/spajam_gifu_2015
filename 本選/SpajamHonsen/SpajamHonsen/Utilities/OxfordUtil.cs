@@ -206,7 +206,7 @@ namespace SpajamHonsen.Utilities
         /// <param name="faceId1">比較対象の顔ID1</param>
         /// <param name="faceId2">比較対象の顔ID2</param>
         /// <returns>レスポンスモデル</returns>
-        public async Task<string> VerificationAsync(string faceId1, string faceId2)
+        public async Task<FaceAPIVerificationResponseModel> VerificationAsync(string faceId1, string faceId2)
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["subscription-key"] = subscriptionKey;
@@ -223,7 +223,8 @@ namespace SpajamHonsen.Utilities
 
             var responseString = await response.Content.ReadAsStringAsync();
 
-            return responseString;
+            var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<FaceAPIVerificationResponseModel>(responseString));
+            return responseJson;
         }
 
         #endregion FaceAPI

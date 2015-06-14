@@ -266,6 +266,7 @@
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\JsonResponse\FaceAPIDetectionResponseModel.cs" />
+    <Compile Include="Models\JsonResponse\FaceAPIVerificationResponseModel.cs" />
     <Compile Include="Models\JsonResponse\GoogleSpeechAPIResponseModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JsonResponse\VisionAPIAnalyzeanImageResponseModel.cs" />
