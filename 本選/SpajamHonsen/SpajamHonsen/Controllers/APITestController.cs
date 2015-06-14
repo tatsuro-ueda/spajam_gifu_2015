@@ -71,16 +71,14 @@ namespace SpajamHonsen.Controllers
         #endregion GET: api/APITest
 
         #region POST: api/APITest
-        /*
-        // GoogleSpeechAPI(音声解析)
+        /* 完了 FFmpeg(レート変換)
         /// <summary>
         /// Base64形式で音声ファイル(content-type:x-wav rete:44100)をPOSTして
-        /// 音声ファイル(content-type:x-flac rete:16000)に変換して
-        /// GoogleSpeechAPIで音声を解析して返す
+        /// 音声ファイル(content-type:x-flac rete:16000)に変換してファイルパスを返す
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns>音声解析結果テキスト(1番目)</returns>
-        public async Task<string> PostGoogleSpeechAPIAsync(TestRequestModel request)
+        /// <param name="request">音声ファイルのBase64文字列</param>
+        /// <returns>変換後のファイルのパス</returns>
+        public async Task<string> PostConvertAudioRateAsync(TestRequestModel request)
         {
             byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
 
@@ -99,7 +97,75 @@ namespace SpajamHonsen.Controllers
             var result = FFmpegUtil.ConvertAudioRate(filePath, "16000");
 
             return result;
-            // return await GoogleUtil.RequestGoogleSpeechAPIAsync(byteArray);
+        }
+        */
+
+        // 完了 FFmpeg(形式変換)
+        /// <summary>
+        /// Base64形式で音声ファイル(content-type:x-wav rete:44100)をPOSTして
+        /// MP3形式に変換してファイルパスを返す
+        /// </summary>
+        /// <param name="request">音声ファイルのBase64文字列</param>
+        /// <returns>変換後のファイルのパス</returns>
+        public async Task<string> PostConvertAudioFormatAsync(TestRequestModel request)
+        {
+            byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
+
+            var filePath = HttpContext.Current.Server.MapPath("~/ffmpeg/" + Guid.NewGuid().ToString());
+            //ファイルを作成して書き込む
+            using (System.IO.FileStream fs = 
+                new System.IO.FileStream(
+                    filePath,
+                    System.IO.FileMode.Create,
+                    System.IO.FileAccess.Write))
+           {
+                //バイト型配列の内容をすべて書き込む
+                fs.Write(byteArray, 0, byteArray.Length);
+           }
+
+            var result = FFmpegUtil.ConvertAudioRate(filePath, "16000");
+
+            return result;
+        }
+
+        /* 完了 GoogleSpeechAPI(音声解析)
+        /// <summary>
+        /// Base64形式で音声ファイル(content-type:x-flac rete:16000)をPOSTしてGoogleSpeechAPIで音声を解析して返す
+        /// </summary>
+        /// <param name="request">テスト用リクエストモデル</param>
+        /// <returns>音声解析結果テキスト(1番目)</returns>
+        public async Task<string> PostGoogleSpeechAPIAsync(TestRequestModel request)
+        {
+            byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
+            return await GoogleUtil.RequestGoogleSpeechAPIAsync(byteArray);
+        }
+        */
+
+        /* 完了 VoiceTextAPI(音声合成(日本語のみ))
+        /// <summary>
+        /// リクエストのテキストをVoiceTextAPIで音声合成してAzureにアップする
+        /// その後アップしたURLを返却する
+        /// </summary>
+        /// <param name="request">音声にしたいテキスト</param>
+        /// <returns>アップロードした音声ファイルのURL</returns>
+        public async Task<string> PostVoiceTextAPIAsync(TestRequestModel request)
+        {
+            var othersUtil = new OthersUtil();
+            var fileID = await othersUtil.RequestVoiceTextAPI(request.Base64String, "show");
+            var azureStorageUtil = new AzureStorageUtil();
+            return azureStorageUtil.GetBlobStrageUrl(fileID, "voices");
+        }
+        */
+
+        /* 完了 GetGoogleJapaneseAPI(ひらがな→漢字変換)
+        /// <summary>
+        /// リクエストのテキストをGoogle日本語入力APIでひらがなを漢字変換して返す
+        /// </summary>
+        /// <param name="text">ひらがなテキスト</param>
+        /// <returns>漢字変換後のテキスト</returns>
+        public async Task<string> GetGoogleJapaneseAPIAsync(string text)
+        {
+            return await GoogleUtil.RequestGoogleJapaneseAPI(text);
         }
         */
 
@@ -113,47 +179,6 @@ namespace SpajamHonsen.Controllers
         {
             byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
             return await BingUtil.RequestMicrosoftBingVoiceRecognitionAPIAsync(byteArray);
-        }
-        */
-
-        /* 完了 GoogleSpeechAPI(音声解析)
-        /// <summary>
-        /// Base64形式で音声ファイル(content-type:x-flac rete:16000)をPOSTしてGoogleSpeechAPIで音声を解析して返す
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns>音声解析結果テキスト(1番目)</returns>
-        public async Task<string> PostGoogleSpeechAPIAsync(TestRequestModel request)
-        {
-            byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
-            return await GoogleUtil.RequestGoogleSpeechAPIAsync(byteArray);
-        }
-        */
-
-        /* 完了 VoiceTextAPI */
-        /// <summary>
-        /// リクエストのテキストをVoiceTextAPIで音声合成してAzureにアップする
-        /// その後アップしたURLを返却する
-        /// </summary>
-        /// <param name="request">音声にしたいテキスト</param>
-        /// <returns></returns>
-        public async Task<string> PostVoiceTextAPIAsync(TestRequestModel request)
-        {
-            var othersUtil = new OthersUtil();
-            var fileID = await othersUtil.RequestVoiceTextAPI(request.Base64String, "show");
-            var azureStorageUtil = new AzureStorageUtil();
-            return azureStorageUtil.GetBlobStrageUrl(fileID, "voices");
-        }
-
-        /* 完了 GetGoogleJapaneseAPI(ひらがな→漢字変換)
-        /// <summary>
-        /// リクエストのテキストをGoogle日本語入力APIでひらがなを漢字変換して返す
-        /// その後アップしたURLを返却する
-        /// </summary>
-        /// <param name="text">ひらがなテキスト</param>
-        /// <returns></returns>
-        public async Task<string> GetGoogleJapaneseAPIAsync(string text)
-        {
-            return await GoogleUtil.RequestGoogleJapaneseAPI(text);
         }
         */
         #endregion POST: api/APITest
