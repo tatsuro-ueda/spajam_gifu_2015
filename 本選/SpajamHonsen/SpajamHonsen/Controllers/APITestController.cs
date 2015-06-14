@@ -85,7 +85,7 @@ namespace SpajamHonsen.Controllers
             string familyImageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/visionsample.jpg'}";
             
             var oxfordUtil = new OxfordUtil(SpajamHonsen.Utilities.OxfordUtil.OxfordAPIType.Faces);
-            var result = await oxfordUtil.DetectionAsync();
+            var result = await oxfordUtil.DetectionAsync(familyImageUrl, true, true, true, true);
             
             return result.ToString();
          }

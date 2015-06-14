@@ -122,9 +122,9 @@ namespace SpajamHonsen.Utilities
         /// <summary>
         /// VisionAPIによるサムネイルの作成を行う
         /// </summary>
-        /// <param name="imageUrl"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
+        /// <param name="imageUrl">解析画像のURL</param>
+        /// <param name="width">生成するサムネイルの幅</param>
+        /// <param name="height">生成するサムネイルの高さ</param>
         /// <returns>Azureにアップロードしたサムネイルのファイル名</returns>
         public async Task<string> GenerateThumbnailAsync(string imageUrl, double width, double height)
         {
@@ -164,33 +164,17 @@ namespace SpajamHonsen.Utilities
         /// <summary>
         /// FacesAPI(顔認識)の実行
         /// </summary>
+        /// <param name="imageUrl">解析画像のURL</param>
+        /// <param name="width">生成するサムネイルの幅</param>
+        /// <param name="height">生成するサムネイルの高さ</param>
         /// <returns></returns>
-        public async Task<string> DetectionAsync()
+        public async Task<FacesAPIDetectionResponseModel[]> DetectionAsync(string imageUrl, bool analyzesFaceLandmarks, bool analyzesAge, bool analyzesGender, bool analyzesHeadPose)
         {
-            /*
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://api.projectoxford.ai/face/v0/detections?subscription-key=" + subscriptionKey);
-            request.Method = "POST";
-            request.ContentType = "application/octet-stream";
-
-            string imageUrl = "https://spajamhonsenstorage.blob.core.windows.net/visions/visionsample.jpg"; 
-            byte[] byteArray = Encoding.UTF8.GetBytes(imageUrl);
-            Stream responseStream = null;
-            using (Stream stream = request.GetRequestStream())
-            {
-                stream.Write(byteArray, 0, byteArray.Length);
-
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                {
-                    responseStream = response.GetResponseStream();
-                }
-            }  
-            */
-
             var queryString = HttpUtility.ParseQueryString(string.Empty);
-            queryString["analyzesFaceLandmarks"] = "true";
-            queryString["analyzesAge"] = "true";
-            queryString["analyzesGender"] = "true";
-            queryString["analyzesHeadPose"] = "true";
+            queryString["analyzesFaceLandmarks"] = analyzesFaceLandmarks.ToString();
+            queryString["analyzesAge"] = analyzesAge.ToString();
+            queryString["analyzesGender"] = analyzesGender.ToString();
+            queryString["analyzesHeadPose"] = analyzesHeadPose.ToString();
             queryString["subscription-key"] = subscriptionKey;
 
             var uri = "https://api.projectoxford.ai/face/v0/detections?" + queryString;
@@ -198,7 +182,6 @@ namespace SpajamHonsen.Utilities
             HttpClient httpClient = new HttpClient();
 
             var mediaType = new MediaTypeWithQualityHeaderValue("application/json");
-            string imageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/visionsample.jpg'}";
             byte[] byteArray = Encoding.UTF8.GetBytes(imageUrl);
 
             string responseString = string.Empty;
@@ -211,7 +194,8 @@ namespace SpajamHonsen.Utilities
 
                 responseString = await result.Content.ReadAsStringAsync();
             }
-            return responseString;
+            var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<FacesAPIDetectionResponseModel[]>(responseString));
+            return responseJson;
         }
         #endregion FacesAPI
     }
