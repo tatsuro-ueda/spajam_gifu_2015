@@ -152,7 +152,7 @@ namespace SpajamHonsen.Utilities
         /// </remarks>
         /// <param name="keyword">類義語取得キーワード</param>
         /// <returns>類義語のリスト</returns>
-        public async Task<string> RequestBingSynonymAPIAsync(string keyword)
+        public async Task<SpajamHonsen.Models.JsonResponse.BingSynonymAPIResponseModel.feed> RequestBingSynonymAPIAsync(string keyword)
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["Query"] = "'" + HttpUtility.UrlEncode(keyword) + "'";
@@ -166,19 +166,10 @@ namespace SpajamHonsen.Utilities
 
             var resultStr = await client.GetStringAsync(url);
 
-            return resultStr;
-            /*
-            var result = await client.GetAsync(url);
-
-            string synonyms;
-            using (Stream stream = await result.Content.ReadAsStreamAsync())
-            {
-                System.Runtime.Serialization.DataContractSerializer dcs = new System.Runtime.Serialization.DataContractSerializer(Type.GetType("System.String"));
-                synonyms = (string)dcs.ReadObject(stream);
-            }
-
-            return synonyms;
-            */
+            System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(SpajamHonsen.Models.JsonResponse.BingSynonymAPIResponseModel.feed));
+            XmlTextReader reader = new XmlTextReader(new StringReader(resultStr));
+            var responseModel = (SpajamHonsen.Models.JsonResponse.BingSynonymAPIResponseModel.feed)serializer.Deserialize(reader);
+            return responseModel;
         }
 
         #endregion Methods

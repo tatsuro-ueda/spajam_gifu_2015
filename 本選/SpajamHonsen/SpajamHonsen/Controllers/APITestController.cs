@@ -42,7 +42,7 @@ namespace SpajamHonsen.Controllers
         {
             var bingUtil = new BingUtil();
             var result = await bingUtil.RequestBingSynonymAPIAsync(keyword);
-            return result;
+            return result.ToString();
         }
 
         /* 完了　OxfordVisoinAPI(画像解析、文字認識、サムネイル作成)
