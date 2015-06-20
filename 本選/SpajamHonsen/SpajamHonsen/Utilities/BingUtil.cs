@@ -150,14 +150,24 @@ namespace SpajamHonsen.Utilities
         /// <remarks>
         /// BingSynonymAPIにリクエスト送信して類義語を取得する
         /// </remarks>
-        /// <param name="synonym">類義語取得対象文字列</param>
+        /// <param name="keyword">類義語取得キーワード</param>
         /// <returns>類義語のリスト</returns>
-        public static async Task<string> RequestBingSynonymAPIAsync(string synonym)
+        public async Task<string> RequestBingSynonymAPIAsync(string keyword)
         {
-            string url = "https://api.datamarket.azure.com/Bing/Synonyms/v1/GetSynonyms?Query=%27" + synonym + "%27";
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            queryString["Query"] = "'" + HttpUtility.UrlEncode(keyword) + "'";
 
-            HttpClient client = new HttpClient(new AccessTokenMessageHandler(new HttpClientHandler()));
+            string url = "https://api.datamarket.azure.com/Bing/Synonyms/v1/GetSynonyms?" + queryString;
 
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.Credentials = new NetworkCredential(accountKey, accountKey);
+
+            HttpClient client = new HttpClient(handler);
+
+            var resultStr = await client.GetStringAsync(url);
+
+            return resultStr;
+            /*
             var result = await client.GetAsync(url);
 
             string synonyms;
@@ -168,6 +178,7 @@ namespace SpajamHonsen.Utilities
             }
 
             return synonyms;
+            */
         }
 
         #endregion Methods

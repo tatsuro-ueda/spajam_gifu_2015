@@ -32,18 +32,18 @@ namespace SpajamHonsen.Controllers
         }
         */
 
-        /* 未完了　BingSynonimsAPI(類義語)
+        // 未完了　BingSynonimsAPI(類義語)
         /// <summary>
         /// BingSynonimsAPIでリクエストテキストの類義語を返す
         /// </summary>
-        /// <param name="synonim">類義語取得対象テキスト</param>
+        /// <param name="synonim">類義語取得対象キーワード</param>
         /// <returns>翻訳結果</returns>
-        public async Task<string> GetBingSynonimsAPIAsync(string synonim)
+        public async Task<string> GetBingSynonimsAPIAsync(string keyword)
         {
-            var result = await BingUtil.RequestBingSynonymaAPIAsync(synonim);
+            var bingUtil = new BingUtil();
+            var result = await bingUtil.RequestBingSynonymAPIAsync(keyword);
             return result;
         }
-        */
 
         /* 完了　OxfordVisoinAPI(画像解析、文字認識、サムネイル作成)
         /// <summary>
@@ -132,9 +132,9 @@ namespace SpajamHonsen.Controllers
         }
         */
 
-        // 未完了　BingSearchAPI(Bing検索API)
+        /* 完了　BingSearchAPI(Bing検索API)
         /// <summary>
-        /// YahooQuestionSearchAPIでYahoo知恵袋の検索結果を返す
+        /// BingSearchAPIでBingの検索結果を返す
         /// </summary>
         /// <param name="keyword">検索キーワード</param>
         /// <returns>検索結果</returns>
@@ -144,6 +144,7 @@ namespace SpajamHonsen.Controllers
             var result = await bingUtil.RequestBingSearchAPIAsync(keyword);
             return result.ToString();
         }
+        */
         
         #endregion GET: api/APITest
 
