@@ -39,7 +39,6 @@ namespace SpajamHonsen.Utilities
         /// <returns>レスポンスモデル</returns>
         public async Task<SpajamHonsen.Models.JsonResponse.YahooQuestionSearchAPIResponseModel.ResultSet> RequestYahooQuestionSearchAPIAsync(string keyword)
         {
-
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["appid"] = appID;
             queryString["query"] = HttpUtility.UrlEncode(keyword);

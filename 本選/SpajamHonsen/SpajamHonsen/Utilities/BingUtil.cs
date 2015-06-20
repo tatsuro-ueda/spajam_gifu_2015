@@ -1,13 +1,16 @@
 ﻿using SpajamHonsen.AzureMarketplace;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
+using System.Xml;
 
 namespace SpajamHonsen.Utilities
 {
@@ -17,8 +20,20 @@ namespace SpajamHonsen.Utilities
     /// <remarks>
     /// BingoAPIのユーティリティークラス
     /// </remarks>
-    public static class BingUtil
+    public class BingUtil
     {
+        #region Fields
+        private string accountKey = "";
+        #endregion Fields
+
+        #region Consraters
+        public BingUtil() 
+        { 
+            var appSettings = ConfigurationManager.AppSettings;
+            accountKey = appSettings["AzureMarketPlaceAccountKey"];
+        }
+        #endregion Consraters
+
         #region Methods
         /// <summary>
         /// MicrosoftBingVoiceRecognitionAPIにリクエスト送信
@@ -101,14 +116,43 @@ namespace SpajamHonsen.Utilities
         }
 
         /// <summary>
-        /// BingSynonymaAPIにリクエスト送信
+        /// BingSearchAPIにリクエスト送信
         /// </summary>
         /// <remarks>
-        /// BingSynonymaAPIにリクエスト送信して類義語を取得する
+        /// BingSearchAPIにリクエスト送信して検索結果を取得する
+        /// </remarks>
+        /// <param name="keyword">検索キーワード</param>
+        /// <returns>検索結果</returns>
+        public async Task<SpajamHonsen.Models.JsonResponse.BingSearchAPIResponseModel.feed> RequestBingSearchAPIAsync(string keyword)
+        {
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            queryString["Query"] = "'" + HttpUtility.UrlEncode(keyword) + "'";
+            queryString["Sources"] = "'web+image+video+news+spell'";
+
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.Credentials = new NetworkCredential(accountKey, accountKey);
+
+            string url = "https://api.datamarket.azure.com/Bing/Search/v1/Composite?" + queryString;
+
+            HttpClient client = new HttpClient(handler);
+
+            var resultStr = await client.GetStringAsync(url);
+
+            System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(SpajamHonsen.Models.JsonResponse.BingSearchAPIResponseModel.feed));
+            XmlTextReader reader = new XmlTextReader(new StringReader(resultStr));
+            var responseModel = (SpajamHonsen.Models.JsonResponse.BingSearchAPIResponseModel.feed)serializer.Deserialize(reader);
+            return responseModel;
+        }
+
+        /// <summary>
+        /// BingSynonymAPIにリクエスト送信
+        /// </summary>
+        /// <remarks>
+        /// BingSynonymAPIにリクエスト送信して類義語を取得する
         /// </remarks>
         /// <param name="synonym">類義語取得対象文字列</param>
         /// <returns>類義語のリスト</returns>
-        public static async Task<string> RequestBingSynonymaAPIAsync(string synonym)
+        public static async Task<string> RequestBingSynonymAPIAsync(string synonym)
         {
             string url = "https://api.datamarket.azure.com/Bing/Synonyms/v1/GetSynonyms?Query=%27" + synonym + "%27";
 
