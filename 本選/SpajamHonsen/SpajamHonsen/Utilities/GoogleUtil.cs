@@ -21,7 +21,7 @@ namespace SpajamHonsen.Utilities
     /// <remarks>
     /// GoogleAPIのユーティリティークラス
     /// </remarks>
-    public class GoogleUtil
+    public static class GoogleUtil
     {
         /// <summary>
         /// GoogleSpeechAPIにリクエスト送信

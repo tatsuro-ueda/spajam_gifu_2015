@@ -317,6 +317,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JsonResponse\VisionAPIAnalyzeanImageResponseModel.cs" />
     <Compile Include="Models\JsonResponse\VisionAPIOCRResponseModel.cs" />
+    <Compile Include="Models\JsonResponse\YahooQuestionSearchAPIResponseModel.cs" />
     <Compile Include="Models\SpotMaster.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -337,7 +338,6 @@
     <Compile Include="Utilities\AzureStorageUtil.cs" />
     <Compile Include="Utilities\BingUtil.cs" />
     <Compile Include="Utilities\GoogleUtil.cs" />
-    <Compile Include="Utilities\MachineLeaningUtil.cs" />
     <Compile Include="Utilities\OxfordUtil.cs" />
     <Compile Include="Utilities\YahooUtil.cs" />
   </ItemGroup>

@@ -117,37 +117,51 @@ namespace SpajamHonsen.Controllers
             return result.ToString();
          }
          */
+
+        // 未完了　YahooQuestionSearchAPI(Yahoo知恵袋　質問検索API)
+        /// <summary>
+        /// YahooQuestionSearchAPIでYahoo知恵袋の検索結果を返す
+        /// </summary>
+        /// <param name="keyword">検索キーワード</param>
+        /// <returns>検索結果</returns>
+        public async Task<string> GetYahooQuestionSearchAPIAsync(string keyword)
+        {
+            var yahooUtil = new YahooUtil();
+            var result = await yahooUtil.RequestYahooQuestionSearchAPIAsync(keyword);
+            return result.ToString();
+        }
+        
         #endregion GET: api/APITest
 
-    #region POST: api/APITest
-    /* 完了 FFmpeg(レート変換)
-    /// <summary>
-    /// Base64形式で音声ファイル(content-type:x-wav rete:44100)をPOSTして
-    /// 音声ファイル(content-type:x-flac rete:16000)に変換してファイルパスを返す
-    /// </summary>
-    /// <param name="request">音声ファイルのBase64文字列</param>
-    /// <returns>変換後のファイルのパス</returns>
-    public async Task<string> PostConvertAudioRateAsync(TestRequestModel request)
-    {
-        byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
+        #region POST: api/APITest
+        /* 完了 FFmpeg(レート変換)
+        /// <summary>
+        /// Base64形式で音声ファイル(content-type:x-wav rete:44100)をPOSTして
+        /// 音声ファイル(content-type:x-flac rete:16000)に変換してファイルパスを返す
+        /// </summary>
+        /// <param name="request">音声ファイルのBase64文字列</param>
+        /// <returns>変換後のファイルのパス</returns>
+        public async Task<string> PostConvertAudioRateAsync(TestRequestModel request)
+        {
+            byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
 
-        var filePath = HttpContext.Current.Server.MapPath("~/ffmpeg/" + Guid.NewGuid().ToString());
-        //ファイルを作成して書き込む
-        using (System.IO.FileStream fs = 
-            new System.IO.FileStream(
-                filePath,
-                System.IO.FileMode.Create,
-                System.IO.FileAccess.Write))
-       {
-            //バイト型配列の内容をすべて書き込む
-            fs.Write(byteArray, 0, byteArray.Length);
-       }
+            var filePath = HttpContext.Current.Server.MapPath("~/ffmpeg/" + Guid.NewGuid().ToString());
+            //ファイルを作成して書き込む
+            using (System.IO.FileStream fs = 
+                new System.IO.FileStream(
+                    filePath,
+                    System.IO.FileMode.Create,
+                    System.IO.FileAccess.Write))
+           {
+                //バイト型配列の内容をすべて書き込む
+                fs.Write(byteArray, 0, byteArray.Length);
+           }
 
-        var result = FFmpegUtil.ConvertAudioRate(filePath, "16000");
+            var result = FFmpegUtil.ConvertAudioRate(filePath, "16000");
 
-        return result;
-    }
-    */
+            return result;
+        }
+        */
 
         /* 完了 FFmpeg(形式変換)
         /// <summary>
