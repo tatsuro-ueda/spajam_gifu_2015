@@ -236,6 +236,7 @@
     <Compile Include="Controllers\AudioCommentariesController.cs" />
     <Compile Include="Controllers\BaiduTranslateController.cs" />
     <Compile Include="Controllers\BaiduVoiceController.cs" />
+    <Compile Include="Controllers\DeviceTokensController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SpotMastersController.cs" />
     <Compile Include="Controllers\TalksController.cs" />
@@ -265,6 +266,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DeviceToken.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JsonRequest\DeviceTokenRegistRequestModel.cs" />
     <Compile Include="Models\JsonRequest\FaceAPIFindSimilarFacesRequestModel.cs" />
     <Compile Include="Models\JsonRequest\FaceAPIGroupingRequestModel.cs" />
     <Compile Include="Models\JsonRequest\FaceAPIIdentificationRequestModel.cs" />

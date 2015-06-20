@@ -1,7 +1,22 @@
+Drop Table DeviceToken;
 Drop Table AudioCommentary;
 Drop Table SpotMaster;
 Drop Table Talk;
 Drop Table Voice;
+
+-- Project Name : SpajamMadoben
+-- Date/Time    : 2015/06/20 10:31:22
+-- Author       : 平内　孝尚
+-- RDBMS Type   : Microsoft SQL Server 2008 ～
+-- Application  : A5:SQL Mk-2
+
+-- デバイストークンテーブル
+create table DeviceToken (
+  DeviceTokenID VARCHAR(36) not null
+  , DeviceToken VARBINARY(max) not null
+  , CreateDateTime DATETIME not null
+  , constraint DeviceToken_PKC primary key (DeviceTokenID)
+) ;
 
 -- 音声解説データ
 create table AudioCommentary (
@@ -59,6 +74,11 @@ create table Talk (
   , constraint Talk_PKC primary key (UserID,TalkID)
 ) ;
 
+EXECUTE sp_addextendedproperty N'MS_Description', N'デバイストークンテーブル	 Push通知対象端末のデバイストークン情報を保存する', N'SCHEMA', N'dbo', N'TABLE', N'DeviceToken', NULL, NULL;
+EXECUTE sp_addextendedproperty N'MS_Description', N'デバイストークンID	 デバイストークンを一意に識別するキー(GUID)', N'SCHEMA', N'dbo', N'TABLE', N'DeviceToken', N'COLUMN', N'DeviceTokenID';
+EXECUTE sp_addextendedproperty N'MS_Description', N'デバイストークン	 デバイストークン', N'SCHEMA', N'dbo', N'TABLE', N'DeviceToken', N'COLUMN', N'DeviceToken';
+EXECUTE sp_addextendedproperty N'MS_Description', N'作成日時', N'SCHEMA', N'dbo', N'TABLE', N'DeviceToken', N'COLUMN', N'CreateDateTime';
+
 EXECUTE sp_addextendedproperty N'MS_Description', N'音声解説データ	 対象のiBeaconに登録された音声解説のデータ', N'SCHEMA', N'dbo', N'TABLE', N'AudioCommentary', NULL, NULL;
 EXECUTE sp_addextendedproperty N'MS_Description', N'音声解説キー	 音声解説データのキー(GUID)', N'SCHEMA', N'dbo', N'TABLE', N'AudioCommentary', N'COLUMN', N'AudioCommentaryKey';
 EXECUTE sp_addextendedproperty N'MS_Description', N'音声解説タイトル	 音声解説のタイトル', N'SCHEMA', N'dbo', N'TABLE', N'AudioCommentary', N'COLUMN', N'AudioCommentaryTitle';
@@ -74,7 +94,7 @@ EXECUTE sp_addextendedproperty N'MS_Description', N'登録日時	 データの登録日時',
 EXECUTE sp_addextendedproperty N'MS_Description', N'スポットマスター	 スポット(iBeaconの設置場所)を登録するマスタ', N'SCHEMA', N'dbo', N'TABLE', N'SpotMaster', NULL, NULL;
 EXECUTE sp_addextendedproperty N'MS_Description', N'スポットキー	 スポットマスターのキー(GUID)', N'SCHEMA', N'dbo', N'TABLE', N'SpotMaster', N'COLUMN', N'SpotKey';
 EXECUTE sp_addextendedproperty N'MS_Description', N'スポット名	 スポット名', N'SCHEMA', N'dbo', N'TABLE', N'SpotMaster', N'COLUMN', N'SpotName';
-EXECUTE sp_addextendedproperty N'MS_Description', N'スポット説明', N'SCHEMA', N'dbo', N'TABLE', N'SpotMaster', N'COLUMN', N'SpotDescription';
+EXECUTE sp_addextendedproperty N'MS_Description', N'スポット説明	 スポットの説明', N'SCHEMA', N'dbo', N'TABLE', N'SpotMaster', N'COLUMN', N'SpotDescription';
 EXECUTE sp_addextendedproperty N'MS_Description', N'スポット画像URL	 スポット画像のURL', N'SCHEMA', N'dbo', N'TABLE', N'SpotMaster', N'COLUMN', N'SpotImageURL';
 EXECUTE sp_addextendedproperty N'MS_Description', N'メジャーID	 iBeaconのメジャーID', N'SCHEMA', N'dbo', N'TABLE', N'SpotMaster', N'COLUMN', N'MajorID';
 EXECUTE sp_addextendedproperty N'MS_Description', N'マイナーID	 iBeaconのマイナーID', N'SCHEMA', N'dbo', N'TABLE', N'SpotMaster', N'COLUMN', N'MinorID';
@@ -102,4 +122,3 @@ EXECUTE sp_addextendedproperty N'MS_Description', N'トーク名	 会話のタイトル', N
 EXECUTE sp_addextendedproperty N'MS_Description', N'並び順	 並び順', N'SCHEMA', N'dbo', N'TABLE', N'Talk', N'COLUMN', N'SortID';
 EXECUTE sp_addextendedproperty N'MS_Description', N'評価	 会話の総合評価ステータス', N'SCHEMA', N'dbo', N'TABLE', N'Talk', N'COLUMN', N'Evaluation';
 EXECUTE sp_addextendedproperty N'MS_Description', N'評価詳細	 会話の総合評価詳細', N'SCHEMA', N'dbo', N'TABLE', N'Talk', N'COLUMN', N'EvaluationDetail';
-

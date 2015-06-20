@@ -26,6 +26,7 @@ namespace SpajamHonsen.Models
         }
     
         public virtual DbSet<AudioCommentary> AudioCommentary { get; set; }
+        public virtual DbSet<DeviceToken> DeviceToken { get; set; }
         public virtual DbSet<SpotMaster> SpotMaster { get; set; }
         public virtual DbSet<Talk> Talk { get; set; }
         public virtual DbSet<Voice> Voice { get; set; }
