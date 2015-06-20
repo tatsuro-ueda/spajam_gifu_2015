@@ -10,6 +10,7 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
+using System.Xml;
 
 namespace SpajamHonsen.Utilities
 {
@@ -122,7 +123,7 @@ namespace SpajamHonsen.Utilities
         /// </remarks>
         /// <param name="keyword">検索キーワード</param>
         /// <returns>検索結果</returns>
-        public async Task<string> RequestBingSearchAPIAsync(string keyword)
+        public async Task<SpajamHonsen.Models.JsonResponse.BingSearchAPIResponseModel.feed> RequestBingSearchAPIAsync(string keyword)
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["Query"] = "'" + HttpUtility.UrlEncode(keyword) + "'";
@@ -137,7 +138,10 @@ namespace SpajamHonsen.Utilities
 
             var resultStr = await client.GetStringAsync(url);
 
-            return resultStr;
+            System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(SpajamHonsen.Models.JsonResponse.BingSearchAPIResponseModel.feed));
+            XmlTextReader reader = new XmlTextReader(new StringReader(resultStr));
+            var responseModel = (SpajamHonsen.Models.JsonResponse.BingSearchAPIResponseModel.feed)serializer.Deserialize(reader);
+            return responseModel;
         }
 
         /// <summary>
