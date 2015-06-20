@@ -20,6 +20,14 @@
           <Property Name="RegisteredUserID" Type="varchar" MaxLength="36" Nullable="false" />
           <Property Name="RegisteredDateTime" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="DeviceToken">
+          <Key>
+            <PropertyRef Name="DeviceTokenID" />
+          </Key>
+          <Property Name="DeviceTokenID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="DeviceToken" Type="varbinary(max)" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="SpotMaster">
           <Key>
             <PropertyRef Name="SpotKey" />
@@ -65,6 +73,7 @@
         </EntityType>
         <EntityContainer Name="spajamhonsenModelStoreContainer">
           <EntitySet Name="AudioCommentary" EntityType="Self.AudioCommentary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceToken" EntityType="Self.DeviceToken" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpotMaster" EntityType="Self.SpotMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Talk" EntityType="Self.Talk" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Voice" EntityType="Self.Voice" Schema="dbo" store:Type="Tables" />
@@ -88,6 +97,14 @@
           <Property Name="SpeechSynthesisFileID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="RegisteredUserID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RegisteredDateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="DeviceToken">
+          <Key>
+            <PropertyRef Name="DeviceTokenID" />
+          </Key>
+          <Property Name="DeviceTokenID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DeviceToken1" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="SpotMaster">
           <Key>
@@ -134,6 +151,7 @@
         </EntityType>
         <EntityContainer Name="spajamhonsenEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AudioCommentary" EntityType="Self.AudioCommentary" />
+          <EntitySet Name="DeviceToken" EntityType="Self.DeviceToken" />
           <EntitySet Name="SpotMaster" EntityType="Self.SpotMaster" />
           <EntitySet Name="Talk" EntityType="Self.Talk" />
           <EntitySet Name="Voice" EntityType="Self.Voice" />
@@ -157,6 +175,15 @@
                 <ScalarProperty Name="SpeechSynthesisFileID" ColumnName="SpeechSynthesisFileID" />
                 <ScalarProperty Name="RegisteredUserID" ColumnName="RegisteredUserID" />
                 <ScalarProperty Name="RegisteredDateTime" ColumnName="RegisteredDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceToken">
+            <EntityTypeMapping TypeName="spajamhonsenModel.DeviceToken">
+              <MappingFragment StoreEntitySet="DeviceToken">
+                <ScalarProperty Name="DeviceTokenID" ColumnName="DeviceTokenID" />
+                <ScalarProperty Name="DeviceToken1" ColumnName="DeviceToken" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

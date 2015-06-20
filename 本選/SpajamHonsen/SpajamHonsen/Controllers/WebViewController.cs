@@ -14,8 +14,14 @@ namespace SpajamHonsen.Controllers
             return View();
         }
 
-        // GET: WebView
+        // GET: WebView/WebView1
         public ActionResult WebView1()
+        {
+            return View();
+        }
+
+        // GET: WebView/PushTestView
+        public ActionResult PushTestView()
         {
             return View();
         }   

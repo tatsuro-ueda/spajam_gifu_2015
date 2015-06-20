@@ -37,6 +37,23 @@ SqlSeparator=0
 ShowTag=1
 ShowCommonAttributes=0
 
+[Entity]
+PName=DeviceToken
+LName=デバイストークンテーブル
+Comment=Push通知対象端末のデバイストークン情報を保存する
+TableOption=
+Page=Main
+Left=950
+Top=100
+Field="デバイストークンID","DeviceTokenID","@VARCHAR(36)","NOT NULL",0,"","デバイストークンを一意に識別するキー(GUID)",$FFFFFFFF,""
+Field="デバイストークン","DeviceToken","VARBINARY(max)","NOT NULL",,"","デバイストークン",$FFFFFFFF,""
+Field="作成日時","CreateDateTime","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20150620103107
+Position="Main",950,100
+
 [Relation]
 Entity1=SpotMaster
 Entity2=AudioCommentary
@@ -62,7 +79,7 @@ PName=AudioCommentary
 LName=音声解説データ
 Comment=対象のiBeaconに登録された音声解説のデータ
 TableOption=
-Page=Main
+Page=MAIN
 Left=500
 Top=400
 Field="音声解説キー","AudioCommentaryKey","@VARCHAR(36)","NOT NULL",0,"","音声解説データのキー(GUID)",$FFFFFFFF,""
@@ -79,14 +96,14 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20150523162939
-Position="Main",500,400,391,273
+Position="MAIN",500,400,391,273
 
 [Entity]
 PName=SpotMaster
 LName=スポットマスター
 Comment=スポット(iBeaconの設置場所)を登録するマスタ
 TableOption=
-Page=Main
+Page=MAIN
 Left=100
 Top=400
 Field="スポットキー","SpotKey","@VARCHAR(36)","NOT NULL",0,"","スポットマスターのキー(GUID)",$FFFFFFFF,""
@@ -105,7 +122,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20150523172634
-Position="Main",100,400,268,361
+Position="MAIN",100,400,268,361
 
 [Relation]
 Entity1=Talk
@@ -147,7 +164,7 @@ Field="作成日時","CreateDateTime","@DATETIME","NOT NULL",,"","作成日時",
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20150517130911
+ModifiedDateTime=20150620101839
 Position="MAIN",400,100
 
 [Entity]

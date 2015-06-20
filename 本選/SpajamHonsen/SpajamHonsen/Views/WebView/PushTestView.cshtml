@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<header>
+    <div class="content-wrapper">
+        <div class="float-left">
+            <p class="site-title">
+                PushTest
+            </p>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <section class="featured">
+        <input type="text" value="Hello iPhone!" id="messageTextBox" />
+        <input type="button" value="通知する！" id="pushButton" />
+    </section>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+		$("#pushButton").on('click', function () {
+
+			$.ajax({
+				url : '/api/push/notify',
+				type : "POST",
+				data : { '' : $('#messageTextBox').val() }
+			});
+		});
+
+    </script>
+}
