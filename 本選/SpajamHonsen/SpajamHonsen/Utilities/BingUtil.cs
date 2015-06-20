@@ -150,24 +150,26 @@ namespace SpajamHonsen.Utilities
         /// <remarks>
         /// BingSynonymAPIにリクエスト送信して類義語を取得する
         /// </remarks>
-        /// <param name="synonym">類義語取得対象文字列</param>
+        /// <param name="keyword">類義語取得キーワード</param>
         /// <returns>類義語のリスト</returns>
-        public static async Task<string> RequestBingSynonymAPIAsync(string synonym)
+        public async Task<SpajamHonsen.Models.JsonResponse.BingSynonymAPIResponseModel.feed> RequestBingSynonymAPIAsync(string keyword)
         {
-            string url = "https://api.datamarket.azure.com/Bing/Synonyms/v1/GetSynonyms?Query=%27" + synonym + "%27";
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            queryString["Query"] = "'" + HttpUtility.UrlEncode(keyword) + "'";
 
-            HttpClient client = new HttpClient(new AccessTokenMessageHandler(new HttpClientHandler()));
+            string url = "https://api.datamarket.azure.com/Bing/Synonyms/v1/GetSynonyms?" + queryString;
 
-            var result = await client.GetAsync(url);
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.Credentials = new NetworkCredential(accountKey, accountKey);
 
-            string synonyms;
-            using (Stream stream = await result.Content.ReadAsStreamAsync())
-            {
-                System.Runtime.Serialization.DataContractSerializer dcs = new System.Runtime.Serialization.DataContractSerializer(Type.GetType("System.String"));
-                synonyms = (string)dcs.ReadObject(stream);
-            }
+            HttpClient client = new HttpClient(handler);
 
-            return synonyms;
+            var resultStr = await client.GetStringAsync(url);
+
+            System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(SpajamHonsen.Models.JsonResponse.BingSynonymAPIResponseModel.feed));
+            XmlTextReader reader = new XmlTextReader(new StringReader(resultStr));
+            var responseModel = (SpajamHonsen.Models.JsonResponse.BingSynonymAPIResponseModel.feed)serializer.Deserialize(reader);
+            return responseModel;
         }
 
         #endregion Methods
