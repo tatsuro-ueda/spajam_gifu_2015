@@ -42,12 +42,15 @@ namespace SpajamHonsen.Utilities
             }
         }
         #endregion Consraters
-
+        
+        #region Enums
         public enum OxfordAPIType
         {
             Vision = 1,
             Faces = 2,
         }
+        #endregion Enums
+
         #region VisionAPI
         /// <summary>
         /// VisionAPIによる画像解析を行う

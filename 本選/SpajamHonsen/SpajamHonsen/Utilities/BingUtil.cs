@@ -34,6 +34,18 @@ namespace SpajamHonsen.Utilities
         }
         #endregion Consraters
 
+        #region Enums
+        public enum BingSearchSources
+        {
+            web = 1,
+            image = 2,
+            video = 3,
+            news = 4,
+            spell = 5,
+        }
+        // web+image+video+news+spell
+        #endregion Enums
+
         #region Methods
         /// <summary>
         /// MicrosoftBingVoiceRecognitionAPIにリクエスト送信
@@ -122,12 +134,34 @@ namespace SpajamHonsen.Utilities
         /// BingSearchAPIにリクエスト送信して検索結果を取得する
         /// </remarks>
         /// <param name="keyword">検索キーワード</param>
+        /// <param name="source">検索タイプ</param>
         /// <returns>検索結果</returns>
-        public async Task<SpajamHonsen.Models.JsonResponse.BingSearchAPIResponseModel.feed> RequestBingSearchAPIAsync(string keyword)
+        public async Task<SpajamHonsen.Models.JsonResponse.BingSearchAPIResponseModel.feed> RequestBingSearchAPIAsync(string keyword, BingSearchSources source)
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             queryString["Query"] = "'" + HttpUtility.UrlEncode(keyword) + "'";
-            queryString["Sources"] = "'web+image+video+news+spell'";
+
+            string sourceString = string.Empty;
+            switch (source)
+            {
+                case BingSearchSources.web:
+                    sourceString = "web";
+                    break;
+                case BingSearchSources.image:
+                    sourceString = "image";
+                    break;
+                case BingSearchSources.video:
+                    sourceString = "video";
+                    break;
+                case BingSearchSources.news:
+                    sourceString = "news";
+                    break;
+                case BingSearchSources.spell:
+                    sourceString = "spell";
+                    break;
+            }
+
+            queryString["Sources"] = "'" + sourceString + "'";
 
             HttpClientHandler handler = new HttpClientHandler();
             handler.Credentials = new NetworkCredential(accountKey, accountKey);
