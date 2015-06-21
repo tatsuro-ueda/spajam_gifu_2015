@@ -32,16 +32,30 @@ namespace SpajamHonsen.Controllers
         }
         */
 
-        // 未完了　BingSynonimsAPI(類義語)
+        /* 完了　BingSynonimsAPI(類義語)
         /// <summary>
         /// BingSynonimsAPIでリクエストテキストの類義語を返す
         /// </summary>
-        /// <param name="synonim">類義語取得対象キーワード</param>
+        /// <param name="keyword">類義語取得対象キーワード</param>
         /// <returns>翻訳結果</returns>
         public async Task<string> GetBingSynonimsAPIAsync(string keyword)
         {
             var bingUtil = new BingUtil();
             var result = await bingUtil.RequestBingSynonymAPIAsync(keyword);
+            return result.ToString();
+        }
+        */
+
+        // 未完了　BingVoiceOutputAPI(類義語)
+        /// <summary>
+        /// BingSynonimsAPIでリクエストテキストの類義語を返す
+        /// </summary>
+        /// <param name="keyword">音声合成文字列</param>
+        /// <returns>音声合成結果</returns>
+        public async Task<string> GetBingVoiceOutputAPIAsync(string keyword)
+        {
+            var bingUtil = new BingUtil();
+            var result = await bingUtil.RequestBingVoiceOutputAsync(keyword);
             return result.ToString();
         }
 

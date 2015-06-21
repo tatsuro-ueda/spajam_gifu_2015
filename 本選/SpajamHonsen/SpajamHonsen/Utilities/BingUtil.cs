@@ -172,6 +172,40 @@ namespace SpajamHonsen.Utilities
             return responseModel;
         }
 
+        /// <summary>
+        /// BingVoiceOutputAPIにリクエスト送信
+        /// </summary>
+        /// <remarks>
+        /// BingVoiceOutputAPIにリクエスト送信して音声を取得する
+        /// </remarks>
+        /// <param name="text">音声合成対象文字列</param>
+        /// <returns>音声合成結果</returns>
+        public async Task<string> RequestBingVoiceOutputAsync(string text)
+        {
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            queryString["locale"] = "'en-US'";
+            queryString["text"] = "'" + HttpUtility.UrlEncode(text) + "'";
+
+            var param = new FormUrlEncodedContent(new Dictionary<string, string>
+            {
+                { "locale", "'" + HttpUtility.UrlEncode("en-US") + "'"},
+                { "text", "'" + HttpUtility.UrlEncode(text) + "'" },
+            });
+
+            string url = "https://api.datamarket.azure.com/data.ashx/Bing/speechoutput/v2/BingSpeechToText?" + queryString; ;
+
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.Credentials = new NetworkCredential(accountKey, accountKey);
+
+            HttpClient client = new HttpClient(handler);
+
+            var result = await client.PostAsync(url, null);
+
+            var resultStr = await result.Content.ReadAsStringAsync();
+
+            return resultStr;
+        }
+
         #endregion Methods
     }
 }
