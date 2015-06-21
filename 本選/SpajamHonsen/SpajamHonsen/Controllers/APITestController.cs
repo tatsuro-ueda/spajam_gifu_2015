@@ -32,7 +32,7 @@ namespace SpajamHonsen.Controllers
         }
         */
 
-        // 完了　BingSynonimsAPI(類義語)
+        /* 完了　BingSynonimsAPI(類義語)
         /// <summary>
         /// BingSynonimsAPIでリクエストテキストの類義語を返す
         /// </summary>
@@ -44,8 +44,9 @@ namespace SpajamHonsen.Controllers
             var result = await bingUtil.RequestBingSynonymAPIAsync(keyword);
             return result.ToString();
         }
+        */
 
-        /* 未完了　BingVoiceOutputAPI(類義語)
+        /* 未完了　BingVoiceOutputAPI(音声合成)
         /// <summary>
         /// BingSynonimsAPIでリクエストテキストの類義語を返す
         /// </summary>
@@ -146,7 +147,7 @@ namespace SpajamHonsen.Controllers
         }
         */
 
-        /* 完了　BingSearchAPI(Bing検索API)
+        // 完了　BingSearchAPI(Bing検索API)
         /// <summary>
         /// BingSearchAPIでBingの検索結果を返す
         /// </summary>
@@ -158,7 +159,6 @@ namespace SpajamHonsen.Controllers
             var result = await bingUtil.RequestBingSearchAPIAsync(keyword);
             return result.ToString();
         }
-        */
         
         #endregion GET: api/APITest
 
