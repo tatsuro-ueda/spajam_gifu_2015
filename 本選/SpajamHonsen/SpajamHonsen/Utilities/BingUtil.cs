@@ -169,6 +169,7 @@ namespace SpajamHonsen.Utilities
             System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(SpajamHonsen.Models.JsonResponse.BingSynonymAPIResponseModel.feed));
             XmlTextReader reader = new XmlTextReader(new StringReader(resultStr));
             var responseModel = (SpajamHonsen.Models.JsonResponse.BingSynonymAPIResponseModel.feed)serializer.Deserialize(reader);
+            var synonyms = responseModel.entry.Select(entry => entry.content.properties.Synonym.Value);
             return responseModel;
         }
 

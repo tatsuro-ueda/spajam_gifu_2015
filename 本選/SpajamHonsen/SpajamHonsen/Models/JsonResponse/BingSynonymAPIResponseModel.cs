@@ -10,7 +10,6 @@ namespace SpajamHonsen.Models.JsonResponse
     /// </summary>
     public class BingSynonymAPIResponseModel
     {
-
         /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.w3.org/2005/Atom")]
         [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.w3.org/2005/Atom", IsNullable = false)]
@@ -29,7 +28,7 @@ namespace SpajamHonsen.Models.JsonResponse
 
             private feedLink linkField;
 
-            private feedEntry entryField;
+            private feedEntry[] entryField;
 
             /// <remarks/>
             public feedTitle title
@@ -110,7 +109,8 @@ namespace SpajamHonsen.Models.JsonResponse
             }
 
             /// <remarks/>
-            public feedEntry entry
+            [System.Xml.Serialization.XmlElementAttribute("entry")]
+            public feedEntry[] entry
             {
                 get
                 {
@@ -469,6 +469,8 @@ namespace SpajamHonsen.Models.JsonResponse
 
             private string typeField;
 
+            private string valueField;
+
             /// <remarks/>
             [System.Xml.Serialization.XmlAttributeAttribute(Form = System.Xml.Schema.XmlSchemaForm.Qualified, Namespace = "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata")]
             public string type
@@ -482,8 +484,20 @@ namespace SpajamHonsen.Models.JsonResponse
                     this.typeField = value;
                 }
             }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlTextAttribute()]
+            public string Value
+            {
+                get
+                {
+                    return this.valueField;
+                }
+                set
+                {
+                    this.valueField = value;
+                }
+            }
         }
-
-
     }
 }
