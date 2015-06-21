@@ -133,7 +133,7 @@ namespace SpajamHonsen.Controllers
          }
          */
 
-        /* 完了　YahooQuestionSearchAPI(Yahoo知恵袋　質問検索API)
+        // 完了　YahooQuestionSearchAPI(Yahoo知恵袋　質問検索API)
         /// <summary>
         /// YahooQuestionSearchAPIでYahoo知恵袋の検索結果を返す
         /// </summary>
@@ -145,9 +145,8 @@ namespace SpajamHonsen.Controllers
             var result = await yahooUtil.RequestYahooQuestionSearchAPIAsync(keyword);
             return result.ToString();
         }
-        */
 
-        // 完了　BingSearchAPI(Bing検索API)
+        /* 完了　BingSearchAPI(Bing検索API)
         /// <summary>
         /// BingSearchAPIでBingの検索結果を返す
         /// </summary>
@@ -159,6 +158,7 @@ namespace SpajamHonsen.Controllers
             var result = await bingUtil.RequestBingSearchAPIAsync(keyword);
             return result.ToString();
         }
+        */
         
         #endregion GET: api/APITest
 

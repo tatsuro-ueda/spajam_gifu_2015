@@ -54,6 +54,7 @@ namespace SpajamHonsen.Utilities
             System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(SpajamHonsen.Models.JsonResponse.YahooQuestionSearchAPIResponseModel.ResultSet));
             XmlTextReader reader = new XmlTextReader(new StringReader(responseString));
             var responseModel = (SpajamHonsen.Models.JsonResponse.YahooQuestionSearchAPIResponseModel.ResultSet)serializer.Deserialize(reader);
+            var results = responseModel.Result.Select(model => model).Where(model => model.BestAnswer.Any());
             return responseModel;
         }
 
