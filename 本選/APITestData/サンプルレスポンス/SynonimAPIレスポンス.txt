@@ -1,0 +1,30 @@
+<feed xmlns:base="https://api.datamarket.azure.com/Data.ashx/Bing/Synonyms/v1/GetSynonyms" 
+xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" 
+xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+ xmlns="http://www.w3.org/2005/Atom">
+ <title type="text" /><subtitle type="text">Bing GetSynonymsEntitySet</subtitle>
+ <id>https://api.datamarket.azure.com/Data.ashx/Bing/Synonyms/v1/GetSynonyms?Query='vaio'</id>
+ <rights type="text" /><updated>2015-06-20T06:30:14Z</updated>
+ <link rel="self" href="https://api.datamarket.azure.com/Data.ashx/Bing/Synonyms/v1/GetSynonyms?Query='vaio'" />
+ <entry>
+ <id>https://api.datamarket.azure.com/Data.ashx/Bing/Synonyms/v1/GetSynonyms?Query='vaio'&amp;$skip=0&amp;$top=1</id>
+ <title type="text">GetSynonymsEntitySet</title><updated>2015-06-20T06:30:14Z</updated>
+ <link rel="self" href="https://api.datamarket.azure.com/Data.ashx/Bing/Synonyms/v1/GetSynonyms?Query='vaio'&amp;$skip=0&amp;$top=1" />
+ <content type="application/xml">
+ <m:properties>
+ 	<d:Synonym m:type="Edm.String">sony vaio</d:Synonym>
+ </m:properties>
+ </content>
+ </entry>
+ <entry>	
+ <id>https://api.datamarket.azure.com/Data.ashx/Bing/Synonyms/v1/GetSynonyms?Query='vaio'&amp;$skip=1&amp;$top=1</id>
+ <title type="text">GetSynonymsEntitySet</title>
+ <updated>2015-06-20T06:30:14Z</updated>
+	 <link rel="self" href="https://api.datamarket.azure.com/Data.ashx/Bing/Synonyms/v1/GetSynonyms?Query='vaio'&amp;$skip=1&amp;$top=1" />
+		 <content type="application/xml">
+		<m:properties>
+			<d:Synonym m:type="Edm.String">sony vaio laptops</d:Synonym>
+		</m:properties>
+		</content>
+	</entry>
+</feed>

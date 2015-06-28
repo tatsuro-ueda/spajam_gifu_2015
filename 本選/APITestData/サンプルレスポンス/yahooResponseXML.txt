@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ResultSet xmlns="urn:yahoo:jp:chiebukuro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:yahoo:jp:chiebukuro:questionsearch http://chiebukuro.yahooapis.jp/Chiebukuro/V1/questionSearchResponse.xsd" totalResultsReturned="10" totalResultsAvailable="999" firstResultPosition="1">
+    <Status>
+                        <StatusCode>0</StatusCode> 
+        <Error></Error>
+            </Status>
+    <Result>
+                <Question>
+            <Id>13146949058</Id>
+            <Content><![CDATA[米国通の皆さんこれ＞日本車の品質評価・・・韓国車に抜かれる＝中国メディア  ほんと？  そんなに韓国車ってすぐれてるんですかぁ？？？ 参考：http://www.msn.com/ja-jp/news/money/%E6%97%A5%E6%9C%AC%E8%BB%8A%E3%81%AE%E5%93%81%E8%B3%AA%E8%A9%95%E4%BE%A1%E3%83%BB%E3%83%BB%E3%83%BB%E9%9F%93%E5%9B%BD%E8%BB%8A%E3%81%AB%E6%8A%9C%E3%81%8B%E3%82%8C%E3%82%8B%EF%BC%9D%E4%B8%AD%E5%9B%BD%E3%83%A1%E3%83%87%E3%82%A3%E3%82%A2/ar-AAbRtRZ  ちょっと？信じがたいんですが・・・]]></Content>
+            <BestAnswer><![CDATA[]]></BestAnswer>
+            <Url>http://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13146949058</Url>
+            <Condition>open</Condition>
+            <CategoryPath>スポーツ、アウトドア、車|自動車</CategoryPath>
+            <CategoryIdPath>2078297753|2078297760</CategoryIdPath>
+            <AnsCount>3</AnsCount>
+            <PostedDate>2015-06-21T00:53:01+09:00</PostedDate>
+            <SolvedDate></SolvedDate>
+            <PostedDevice>pc</PostedDevice>
+        </Question>
+                <Question>
+            <Id>10146933540</Id>
+            <Content><![CDATA[グラフ理論におけるラムゼー数の問題です。  ラムゼー数R(4,3)=9の証明の仕方を教えて頂きたいです。
+             【ラムゼー数とは】 ラムゼー数R(k,l)とはK_nを2つの集合G1、G2に分割した際に、G1がK_kまたはG2がK_lを含む最小の頂点数のことです。
+             ここで、K_nとは頂点数nの完全グラフのことです。  ラムゼー数R(3,3)=6の証明は有名なようで、
+             wikipedia(https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%A0%E3%82%BC%E3%83%BC%E3%81%AE%E5%AE%9A%E7%90%86)や数学オリンピック
+             (http://mathtrain.jp/ramsey)で証明方法が解説されています。 ここは納得しました。 
+              問題はラムゼー数R(4,3)=9の証明です。  【自分で考えたこと】 R(3,3)=6と同様の証明を考えました。
+               図のn=9の完全グラフから頂点cを選んだ場合、頂点cからでる辺の数は8本です。 辺を赤色か青色で塗り分け場合、頂点cから出る辺の内、少なくとも4本が赤色(または青色)で塗られます。
+                図では、頂点(b,e,g,i)を選び、(cb)、(ce)、(cg)、(ci)を辺で結びました。ここで&quot;(ab)&quot;は辺abという意味です。 
+                (eg)と(gi)、(eg)と(gb)、(gi)と(gb)を結ぶことでK_4ができます。ここまではR(3,3)=6の証明と同じです。 さらに図のように、(eg)、(gi)と(ib)が青色で結んだ場合、
+                (be)、(ei)と(bg)を青色で結べばK_4ができます。 しかし、(be)、(ei)と(bg)のどれか一つが赤色であれば、K_4はできません。  
+                私の結論ではラムゼー数R(3,3)=6の方法を単純にR(4,3)=9の証明に適応できないようです。 そこで、ラムゼー数R(4,3)=9の証明を教えて頂きたいです。 よろしくお願い致します。]]>
+            </Content>
+            <BestAnswer><![CDATA[]]></BestAnswer>
+            <Url>http://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q10146933540</Url>
+            <Condition>open</Condition>
+            <CategoryPath>教養と学問、サイエンス|数学、サイエンス|数学</CategoryPath>
+            <CategoryIdPath>2078297812|2078297831|2078297847</CategoryIdPath>
+            <AnsCount>1</AnsCount>
+            <PostedDate>2015-06-20T18:27:37+09:00</PostedDate>
+            <SolvedDate></SolvedDate>
+            <PostedDevice>pc</PostedDevice>
+        </Question>
+                <Question>
+            <Id>11146857461</Id>
+            <Content><![CDATA[Amazonで取り扱っている俺ガイル続についてです//www.amazon.co.jp/dp/B00VPHB060/ref=wl_it_dp_o_pC_nS_img?_encoding=UTF8&amp;co lid=3LUJ5F3NB0UML&amp;coliid=I3JKCBNIE316AO  と  //www.amazon.co.jp/%E3%80%90Amazon-co-jp%E9%99%90%E5%AE%9A%E3%80%91%E3%82%84%E3%81%AF%E3%82%8A%E4%BF%BA%E3%81%AE%E9%9D%92%E6%98%A5%E3%83%A9%E3%83%96%E3%82%B3%E3%83%A1%E3%81%AF%E3%81%BE%E3%81%A1%E3%81%8C%E3%81%A3%E3%81%A6%E3%81%84%E3%82%8B%E3%80%82%E7%B6%9A-%E7%AC%AC%EF%BC%91%E5%B7%BB-%E5%88%9D%E5%9B%9E%E9%99%90%E5%AE%9A%E7%89%88%EF%BC%9A%E6%B8%A1-%E8%88%AA%E6%9B%B8%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97%E6%96%87%E5%BA%AB%E5%B0%8F%E8%AA%AC%E3%83%BB%E3%82%B5%E3%83%B3%E3%83%88%E3%83%A9CD%E5%90%8C%E6%A2%B1-%E6%97%A9%E6%9C%9F%E8%B3%BC%E5%85%A5%E7%89%B9%E5%85%B8-%E3%80%8C%E5%85%A8%E5%B7%BB%E5%8F%8E%E7%B4%8DBOX%E3%80%8D%E5%BC%95%E6%8F%9B%E3%82%B7%E3%83%AA%E3%82%A2%E3%83%AB%E3%82%B3%E3%83%BC%E3%83%89%E4%BB%98/dp/B00VPREIBY/ref=pd_cp_74_1?ie=UTF8&amp;refRID=1ZKZTBB7DXC2YD72GH17  ってどうちがうんですか？]]></Content>
+            <BestAnswer><![CDATA[]]></BestAnswer>
+            <Url>http://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q11146857461</Url>
+            <Condition>open</Condition>
+            <CategoryPath>エンターテインメントと趣味|アニメ、コミック|アニメ</CategoryPath>
+            <CategoryIdPath>2078297513|2079048392|2078297528</CategoryIdPath>
+            <AnsCount>0</AnsCount>
+            <PostedDate>2015-06-18T17:05:49+09:00</PostedDate>
+            <SolvedDate></SolvedDate>
+            <PostedDevice>pc</PostedDevice>
+        </Question>
+                <Question>
+            <Id>14146736814</Id>
+            <Content><![CDATA[シーシェパードの人間を入国拒否しないの http://www.dailymotion.com/video/x2tx5xh_%E6%BF%80%E8%AB%96-%E3%82%B3%E3%83%AD%E3%82%B7%E3%82%A2%E3%83%A0-6%E6%9C%8813%E6%97%A5-%E3%82%A4%E3%83%AB%E3%82%AB%E6%BC%81-%E3%81%AA%E3%81%9C%E6%97%A5%E6%9C%AC%E3%81%AF%E8%BF%BD%E3%81%84%E8%BE%BC%E3%81%BE%E3%82%8C%E3%81%9F%E3%81%AE%E3%81%8B_news]]></Content>
+            <BestAnswer><![CDATA[]]></BestAnswer>
+            <Url>http://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14146736814</Url>
+            <Condition>open</Condition>
+            <CategoryPath>ニュース、政治、国際情勢|政治、社会問題</CategoryPath>
+            <CategoryIdPath>2078297784|2078297787</CategoryIdPath>
+            <AnsCount>0</AnsCount>
+            <PostedDate>2015-06-15T09:37:24+09:00</PostedDate>
+            <SolvedDate></SolvedDate>
+            <PostedDevice>pc</PostedDevice>
+        </Question>
+                <Question>
+            <Id>13146704303</Id>
+            <Content><![CDATA[▽生涯読書量等に関してです。渡部昇一先生は、蔵書数１５万冊、 故・谷沢永一先生は、蔵書数２０万冊と言います。 私は、２０代前半の頃、例えば、渡部昇一先生のような知的な人間になる事を目指そう、その為に生涯、毎日アマゾンで面白い本を探し続け、 図書館も利用しつつ、読み続けようと思ったものです。ところで、 皆様は、今までに何冊ぐらい本（出来れば漫画本は除く）をお読みに なりましたか？また皆様の望む寿命は何歳で、その生涯で何冊の本を お読みになる事を目標とされていますか？また皆様が今までに 読んできた本の中で最高に面白く勉強になり役に立ったりした本は 何ですか？私の１番は、日下公人氏の下の本です。ついでに２番、 ３番も紹介しておきます。複数でも構いません。老若男女問わず、 どしどしご回答下さい。宜しくお願い致します。  ①Amazon.co.jp： 新しい「幸福」への12章―経済と人生哲学の接点から 日下 公人 本 http://www.amazon.co.jp/%E6%96%B0%E3%81%97%E3%81%84%E3%80%8C%E5%B9%B8%E7%A6%8F%E3%80%8D%E3%81%B8%E3%81%AE12%E7%AB%A0%E2%80%95%E7%B5%8C%E6%B8%88%E3%81%A8%E4%BA%BA%E7%94%9F%E5%93%B2%E5%AD%A6%E3%81%AE%E6%8E%A5%E7%82%B9%E3%81%8B%E3%82%89-%E6%97%A5%E4%B8%8B-%E5%85%AC%E4%BA%BA/dp/4907440111/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1434259955&amp;sr=1-1&amp;keywords=%E6%97%A5%E4%B8%8B%E5%85%AC%E4%BA%BA%E3%80%80%E6%96%B0%E3%81%97%E3%81%84%E5%B9%B8%E7%A6%8F%E3%81%B8%E3%81%AE%EF%BC%91%EF%BC%92%E7%AB%A0  ②Amazon.co.jp： 「国の借金」アッと驚く新常識 ~年金絶望世代も元気が出る 廣宮 孝信 本 http://www.amazon.co.jp/%E3%80%8C%E5%9B%BD%E3%81%AE%E5%80%9F%E9%87%91%E3%80%8D%E3%82%A2%E3%83%83%E3%81%A8%E9%A9%9A%E3%81%8F%E6%96%B0%E5%B8%B8%E8%AD%98-%E5%B9%B4%E9%87%91%E7%B5%B6%E6%9C%9B%E4%B8%96%E4%BB%A3-%E3%82%82%E5%85%83%E6%B0%97%E3%81%8C%E5%87%BA%E3%82%8B-%E5%BB%A3%E5%AE%AE-%E5%AD%9D%E4%BF%A1/dp/4774151491/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1434260111&amp;sr=1-1&amp;keywords=%E5%9B%BD%E3%81%AE%E5%80%9F%E9%87%91%E6%96%B0%E5%B8%B8%E8%AD%98  ③Amazon.co.jp： 空き家問題 (祥伝社新書) 牧野知弘 本 http://www.amazon.co.jp/%E7%A9%BA%E3%81%8D%E5%AE%B6%E5%95%8F%E9%A1%8C-%E7%A5%A5%E4%BC%9D%E7%A4%BE%E6%96%B0%E6%9B%B8-%E7%89%A7%E9%87%8E%E7%9F%A5%E5%BC%98/dp/4396113714/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1434260210&amp;sr=1-1&amp;keywords=%E7%A9%BA%E5%AE%B6%E5%95%8F%E9%A1%8C]]></Content>
+            <BestAnswer><![CDATA[]]></BestAnswer>
+            <Url>http://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13146704303</Url>
+            <Condition>open</Condition>
+            <CategoryPath>エンターテインメントと趣味|本、雑誌|読書</CategoryPath>
+            <CategoryIdPath>2078297513|2078297562|2078297584</CategoryIdPath>
+            <AnsCount>1</AnsCount>
+            <PostedDate>2015-06-14T14:40:05+09:00</PostedDate>
+            <SolvedDate></SolvedDate>
+            <PostedDevice>pc</PostedDevice>
+        </Question>
+                <Question>
+            <Id>13146697248</Id>
+            <Content><![CDATA[みんな～  とうとうオタクの時代が来たぞ～ http://www.msn.com/ja-jp/news/opinion/%e3%82%aa%e3%82%bf%e3%82%af%e8%b6%a3%e5%91%b3%e9%99%90%e5%ae%9a%e5%90%88%e3%82%b3%e3%83%b3%e3%80%8c%e3%82%aa%e3%82%bf%e3%82%b3%e3%83%b3%e3%80%8d%e3%81%ab%e7%be%8e%e5%a5%b3%e3%81%8c%e9%9b%86%e3%81%be%e3%82%8b%e7%90%86%e7%94%b1/ar-BBl4XSQ#page=2]]></Content>
+            <BestAnswer><![CDATA[きっとリア充の方々に荒らされてしまうでしょう・・]]></BestAnswer>
+            <Url>http://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13146697248</Url>
+            <Condition>solved</Condition>
+            <CategoryPath>エンターテインメントと趣味|アニメ、コミック|アニメ</CategoryPath>
+            <CategoryIdPath>2078297513|2079048392|2078297528</CategoryIdPath>
+            <AnsCount>1</AnsCount>
+            <PostedDate>2015-06-14T11:03:37+09:00</PostedDate>
+            <SolvedDate>2015-06-20T20:53:12+09:00</SolvedDate>
+            <PostedDevice>pc</PostedDevice>
+        </Question>
+                <Question>
+            <Id>12146691662</Id>
+            <Content><![CDATA[この外付けHDDは自分のノートPCでバックアップ用として使えるのか教えてください。  PCはvaioのvgnfz31bを使っています。 http://www.amazon.co.jp/%E6%9D%B1%E8%8A%9DREGZA%E9%8C%B2%E7%94%BB%E5%AF%BE%E5%BF%9C-%E3%80%90%E6%A5%B5%E8%96%84%E3%82%A2%E3%83%AB%E3%83%9F%E3%83%9C%E3%83%87%E3%82%A3%E3%80%91-%E5%A4%96%E4%BB%98%E3%81%91%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%96%E3%83%ABHDD%EF%BC%882-5%E3%82%A4%E3%83%B3%E3%83%81%E5%A4%96%E4%BB%98%E3%81%91%E3%83%8F%E3%83%BC%E3%83%89%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AF%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96-MARSHAL-WEB%E9%99%90%E5%AE%9A%E3%83%A2%E3%83%87%E3%83%AB/dp/B00MF1C8P2/ref=sr_1_7?ie=UTF8&amp;qid=1434231993&amp;sr=8-7&amp;keywords=%E5%A4%96%E4%BB%98%E3%81%91hdd#customerReviews]]></Content>
+            <BestAnswer><![CDATA[USBのジャックがついており、SATAのな対応しているのであれば接続可能でしょう]]></BestAnswer>
+            <Url>http://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q12146691662</Url>
+            <Condition>solved</Condition>
+            <CategoryPath>インターネット、PCと家電|パソコン|周辺機器</CategoryPath>
+            <CategoryIdPath>2078297382|2078297424|2080071883</CategoryIdPath>
+            <AnsCount>1</AnsCount>
+            <PostedDate>2015-06-14T06:56:54+09:00</PostedDate>
+            <SolvedDate>2015-06-14T10:55:39+09:00</SolvedDate>
+            <PostedDevice>pc</PostedDevice>
+        </Question>
+                <Question>
+            <Id>14146620699</Id>
+            <Content><![CDATA[目立たない隠れた名作を発掘して紹介する賞やサイトってないですか？ 本屋大賞って、本の専門家の書店員さんたちが、普段は目にしないけどぜひとも読んでおきたい一冊を選んで欲しかったけど、本屋も商売ですから、売りやすい本、多量に売れそうな本という基準で選ばれて居るんでしょうか。 では、本当に隠れた名作を掘り起こして紹介する賞やサイトってどこかにないんですか？    ちなみに私が隠れた名作を一冊紹介するとしたら 「Ｄｒ．ヘリオットのおかしな体験」 http://www.amazon.co.jp/Dr-%E3%83%98%E3%83%AA%E3%82%AA%E3%83%83%E3%83%88%E3%81%AE%E3%81%8A%E3%81%8B%E3%81%97%E3%81%AA%E4%BD%93%E9%A8%93-%E9%9B%86%E8%8B%B1%E7%A4%BE%E6%96%87%E5%BA%AB-%E3%82%B8%E3%82%A7%E3%82%A4%E3%83%A0%E3%82%BA%E3%83%BB%E3%83%98%E3%83%AA%E3%82%AA%E3%83%83%E3%83%88/dp/4087600696 ベストセラーランクとは縁遠いようですが、心が温まる良い本ですよ。]]></Content>
+            <BestAnswer><![CDATA[]]></BestAnswer>
+            <Url>http://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14146620699</Url>
+            <Condition>vote</Condition>
+            <CategoryPath>エンターテインメントと趣味|本、雑誌|読書</CategoryPath>
+            <CategoryIdPath>2078297513|2078297562|2078297584</CategoryIdPath>
+            <AnsCount>5</AnsCount>
+            <PostedDate>2015-06-12T10:30:48+09:00</PostedDate>
+            <SolvedDate></SolvedDate>
+            <PostedDevice>pc</PostedDevice>
+        </Question>
+                <Question>
+            <Id>14146528954</Id>
+            <Content><![CDATA[NHK放送センター（渋谷）の建て替え計画が公表されましたがどう思いますか？ 関連事項 http://chiebukuro.search.yahoo.co.jp/search?sort=6&amp;p=%EF%BC%AE%EF%BC%A8%EF%BC%AB+%E6%B8%8B%E8%B0%B7++%E6%94%BE%E9%80%81%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%80%80%E5%BB%BA%E3%81%A6%E6%9B%BF%E3%81%88&amp;class=1&amp;ei=UTF-8]]></Content>
+            <BestAnswer><![CDATA[]]></BestAnswer>
+            <Url>http://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14146528954</Url>
+            <Condition>vote</Condition>
+            <CategoryPath>ニュース、政治、国際情勢|ニュース、事件</CategoryPath>
+            <CategoryIdPath>2078297784|2078297785</CategoryIdPath>
+            <AnsCount>1</AnsCount>
+            <PostedDate>2015-06-09T20:20:57+09:00</PostedDate>
+            <SolvedDate></SolvedDate>
+            <PostedDevice>pc</PostedDevice>
+        </Question>
+                <Question>
+            <Id>14146490659</Id>
+            <Content><![CDATA[リクエスト回答です。 再回答欄では字数がオーバーになり回答できませんので、リクエストで回答します。  下記一般的なルートです。 高速料金：2620円 https://www.google.co.jp/maps/dir/%E5%80%89%E6%95%B7%E9%A7%85%EF%BC%88%E5%B2%A1%E5%B1%B1%EF%BC%89/35.5433509,134.2370997/%E7%99%BD%E5%85%8E%E7%A5%9E%E7%A4%BE,+%E3%80%92689-0206+%E9%B3%A5%E5%8F%96%E7%9C%8C%E9%B3%A5%E5%8F%96%E5%B8%82%E7%99%BD%E5%85%8E%EF%BC%95%EF%BC%99%EF%BC%92/%E3%81%AF%E3%82%8F%E3%81%84%E6%B8%A9%E6%B3%89%E3%83%BB%E6%9D%B1%E9%83%B7%E6%B8%A9%E6%B3%89%E6%97%85%E9%A4%A8%E7%B5%84%E5%90%88,+%E3%80%92682-0715+%E9%B3%A5%E5%8F%96%E7%9C%8C%E6%9D%B1%E4%BC%AF%E9%83%A1+%E6%B9%AF%E6%A2%A8%E6%B5%9C%E7%94%BA%E3%81%AF%E3%82%8F%E3%81%84%E6%B8%A9%E6%B3%89%EF%BC%95%E2%88%92%EF%BC%92%EF%BC%92/%E4%B8%89%E6%9C%9D%E6%B8%A9%E6%B3%89%EF%BC%88%E3%83%90%E3%82%B9%EF%BC%89/@35.0723953,133.3559145,9z/data=!3m1!4b1!4m27!4m26!1m5!1m1!1s0x3551564392b91caf:0x3089a8c02f2a3465!2m2!1d133.765676!2d34.602065!1m0!1m5!1m1!1s0x35559297d81c2891:0x873dc10e7c2abcd3!2m2!1d134.115096!2d35.524203!1m5!1m1!1s0x3555ddc0f212bf39:0x5c9c11fd1466c4d9!2m2!1d133.883726!2d35.478273!1m5!1m1!1s0x3555db908dbf7f8f:0x5a4881854aa06893!2m2!1d133.895!2d35.41082!3e0  駐車場はらくだやか砂丘会館に止められたらよいです。ここは無料らしいです。 私は知らなかったので、いつも有料に止めていました。 砂の美術館の駐車場は狭いので空いていないことが多いです。 先に駐車場が空いているか確認なさってください。 空いていない場合は歩いて行くとよいです。  白兎神社に行かれるのなら、道の駅と白兎海岸にも立ち寄られたらと思います。 羽合温泉に行く時間がなければ翌日行かれると良いでしょう。 三朝温泉から20分くらいです。  翌日の観光予定は？ 下記、私のお勧めルートです。高速料金：2860円 スイートランドTAKARA、道の駅犬挟、蒜山風の家に寄り道しながら帰られたらどうでしょう？ 蒜山には蒜山ジャージランドもあります。ここのソフトクリームが美味しいです。  https://www.google.co.jp/maps/dir/%E4%B8%89%E6%9C%9D%E6%B8%A9%E6%B3%89,+%E3%80%92682-0123+%E9%B3%A5%E5%8F%96%E7%9C%8C%E6%9D%B1%E4%BC%AF%E9%83%A1%E4%B8%89%E6%9C%9D%E7%94%BA%E4%B8%89%E6%9C%9D/%E3%82%B9%E3%82%A6%E3%82%A3%E3%83%BC%E3%83%88%E3%83%A9%E3%83%B3%E3%83%89%EF%BC%B4%EF%BC%A1%EF%BC%AB%EF%BC%A1%EF%BC%B2%EF%BC%A1,+%E3%80%92682-0411+%E9%B3%A5%E5%8F%96%E7%9C%8C%E5%80%89%E5%90%89%E5%B8%82%E9%96%A2%E9%87%91%E7%94%BA%E9%96%A2%E9%87%91%E5%AE%BF%EF%BC%92%EF%BC%99%EF%BC%91%EF%BC%93/%E9%81%93%E3%81%AE%E9%A7%85%E7%8A%AC%E6%8C%9F,+%E3%80%92682-0412+%E9%B3%A5%E5%8F%96%E7%9C%8C%E5%80%89%E5%90%89%E5%B8%82Sekiganecho+Yamaguchi,+%EF%BC%92%EF%BC%90%EF%BC%93%EF%BC%90%E2%88%92%EF%BC%94%EF%BC%96/%E5%B2%A1%E5%B1%B1%E7%9C%8C%E7%9C%9F%E5%BA%AD%E5%B8%82%E8%92%9C%E5%B1%B1%E4%B8%8A%E5%BE%B3%E5%B1%B1%EF%BC%91%EF%BC%93%EF%BC%98%EF%BC%90%E2%88%92%EF%BC%96+%E9%A2%A8%E3%81%AE%E5%AE%B6/%E5%80%89%E6%95%B7%E9%A7%85%EF%BC%88%E5%B2%A1%E5%B1%B1%EF%BC%89/@35.0163634,133.1648205,9z/data=!3m1!4b1!4m32!4m31!1m5!1m1!1s0x3555db90f32d2de5:0x39d75500365e9729!2m2!1d133.89382!2d35.410324!1m5!1m1!1s0x355678e0160d065f:0xe7a771fbbf725936!2m2!1d133.75343!2d35.363129!1m5!1m1!1s0x35567f2136355889:0x4b14c574bc84840!2m2!1d133.756106!2d35.329308!1m5!1m1!1s0x355688bde9eb5a8d:0xd64c39addb2f7fb4!2m2!1d133.623973!2d35.276791!1m5!1m1!1s0x3551564392b91caf:0x3089a8c02f2a3465!2m2!1d133.765676!2d34.602065!3e0  もしくは温泉がお好きなら湯原温泉に寄られてもよいかも。高速料金：2390円 https://www.google.co.jp/maps/dir/%E4%B8%89%E6%9C%9D%E6%B8%A9%E6%B3%89,+%E3%80%92682-0123+%E9%B3%A5%E5%8F%96%E7%9C%8C%E6%9D%B1%E4%BC%AF%E9%83%A1%E4%B8%89%E6%9C%9D%E7%94%BA%E4%B8%89%E6%9C%9D/%E3%80%92717-0402+%E5%B2%A1%E5%B1%B1%E7%9C%8C%E7%9C%9F%E5%BA%AD%E5%B8%82%E6%B9%AF%E5%8E%9F%E6%B8%A9%E6%B3%89/%E5%80%89%E6%95%B7%E9%A7%85%EF%BC%88%E5%B2%A1%E5%B1%B1%EF%BC%89/@35.0071154,133.1852218,9z/data=!3m1!4b1!4m20!4m19!1m5!1m1!1s0x3555db90f32d2de5:0x39d75500365e9729!2m2!1d133.89382!2d35.410324!1m5!1m1!1s0x355683dc76bd02ab:0xe138a43d8a620f4a!2m2!1d133.7318478!2d35.2010805!1m5!1m1!1s0x3551564392b91caf:0x3089a8c02f2a3465!2m2!1d133.765676!2d34.602065!3e0  グーグルマップを利用すると便利ですよ。時間もほぼ合っています。]]></Content>
+            <BestAnswer><![CDATA[natumikan160さん、リクエスト回答ありがとうございます。 再回答欄で字数オーバーになるなど、お手数おかけしました。すみません(^-^;  グーグルマップのルート案内はとてもわかりやすいですね！ 鳥取砂丘の駐車場は無料のところにとめます。 行き帰りのルートも、参考にさせていただきます♪次の日の予定も特になかったので、蒜山方面に寄り道して帰ろうと思います。]]></BestAnswer>
+            <Url>http://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q14146490659</Url>
+            <Condition>solved</Condition>
+            <CategoryPath>地域、旅行、お出かけ|国内|観光地、行楽地</CategoryPath>
+            <CategoryIdPath>2078297918|2078297926|2078297935</CategoryIdPath>
+            <AnsCount>1</AnsCount>
+            <PostedDate>2015-06-08T19:33:19+09:00</PostedDate>
+            <SolvedDate>2015-06-10T05:12:40+09:00</SolvedDate>
+            <PostedDevice>pc</PostedDevice>
+        </Question>
+            </Result>
+</ResultSet>

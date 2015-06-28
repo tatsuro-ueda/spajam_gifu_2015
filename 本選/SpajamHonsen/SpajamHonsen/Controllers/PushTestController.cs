@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Web;
 using System.Web.Http;
 
 namespace SpajamHonsen.Controllers
@@ -50,7 +51,8 @@ namespace SpajamHonsen.Controllers
                 string deviceToken = utf8Enc.GetString(token);
 
                 // TODO 証明書周り
-                var appleCert = File.ReadAllBytes(@"C:\Users\miso_soup3\Desktop\push\my_apns_dev_cert.p12");
+                var filePath = HttpContext.Current.Server.MapPath("~/App_Data/push_development.p12");
+                var appleCert = File.ReadAllBytes(filePath);
                 push.RegisterAppleService(new PushSharp.Apple.ApplePushChannelSettings(appleCert, "ここには証明書のpasswordを"));
                 push.QueueNotification(new AppleNotification()
                     .ForDeviceToken(deviceToken)
