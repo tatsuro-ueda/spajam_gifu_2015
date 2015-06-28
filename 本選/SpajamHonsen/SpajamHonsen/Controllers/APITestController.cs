@@ -276,6 +276,7 @@ namespace SpajamHonsen.Controllers
         }
         */
 
+        /*
         //　OxfordVisoinAPI(画像解析、文字認識、サムネイル作成)
         /// <summary>
         /// OxfordVisoinAPIのテスト
@@ -299,6 +300,19 @@ namespace SpajamHonsen.Controllers
             
             return result;
         }
+        */
+
+        /// <summary>
+        /// Base64形式で音声ファイル(content-type:x-flac rete:16000)をPOSTしてGoogleSpeechAPIで音声を解析して返す
+        /// </summary>
+        /// <param name="request">テスト用リクエストモデル</param>
+        /// <returns>音声解析結果テキスト(1番目)</returns>
+        public async Task<string> PostBaiduSpeechAPIAsync(TestRequestModel request)
+        {
+            byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
+            return await BaiduUtil.RequestBaiduSpeechAPIAsync(byteArray);
+        }
+
         #endregion POST: api/APITest
     }
 }

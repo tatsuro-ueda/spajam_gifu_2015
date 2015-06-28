@@ -13,6 +13,37 @@ namespace SpajamHonsen.Utilities
 {
     public class BaiduUtil
     {
+
+        public static async Task<string> RequestBaiduSpeechAPIAsync(byte[] byteArray)
+        {
+            var httpClient = new HttpClient();
+            var mediaType = new MediaTypeWithQualityHeaderValue("audio/x-flac");
+            var parameter = new NameValueHeaderValue("rate", "16000");
+            mediaType.Parameters.Add(parameter);
+
+            var url = "http://vop.baidu.com/server_api?lan=zh";
+            url += "&cuid=u7CHooimP8rCsOlzNzW50C66";
+            url += "&token=24.d7ca91217c8dcd828bd374b03d40b799.2592000.1438064825.282335-6310719";
+            url += "&format=wav";
+            // url += "&rate=8000";
+            url += "&channel=1";
+            var uri = new Uri(url);
+
+            using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
+            {
+                var param = new StreamContent(ms);
+                param.Headers.ContentType = mediaType;
+
+                var result = await httpClient.PostAsync(uri, param);
+
+                var responseFromServer = await result.Content.ReadAsStringAsync();
+                var responceArray = responseFromServer.Split('\n');
+                var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<SpajamHonsen.Models.GoogleSpeechAPIResponseModel.Resuls>(responceArray[1]));
+
+                return responseJson.result[0].alternative[0].transcript;
+            }
+        }
+
         public static async Task<string> RequestBaiduTranslateAPIAsync(string text)
         {
             var httpClient = new HttpClient();
