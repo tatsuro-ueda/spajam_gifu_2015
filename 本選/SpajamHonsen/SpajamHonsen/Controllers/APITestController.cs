@@ -1,5 +1,6 @@
 ﻿using SpajamHonsen.Models;
 using SpajamHonsen.Models.JsonRequest;
+using SpajamHonsen.Models.JsonResponse;
 using SpajamHonsen.Utilities;
 using System;
 using System.Collections.Generic;
@@ -64,7 +65,7 @@ namespace SpajamHonsen.Controllers
         /// <summary>
         /// OxfordVisoinAPIのテスト
         /// </summary>
-        /// <returns>翻訳結果</returns>
+        /// <returns>画像解析結果</returns>
         public async Task<string> GetOxfordVisoinAPIAsync()
         {
             string analyzeImageUrl = @"{'Url':'https://spajamhonsenstorage.blob.core.windows.net/visions/visionsample.jpg'}";
@@ -274,6 +275,30 @@ namespace SpajamHonsen.Controllers
             return await BingUtil.RequestMicrosoftBingVoiceRecognitionAPIAsync(byteArray);
         }
         */
+
+        //　OxfordVisoinAPI(画像解析、文字認識、サムネイル作成)
+        /// <summary>
+        /// OxfordVisoinAPIのテスト
+        /// </summary>
+        /// <returns>画像解析結果</returns>
+        public async Task<VisionAPIAnalyzeanImageResponseModel> PostOxfordVisoinAPIAsync(TestRequestModel request)
+        {
+            // 画像ファイルのアップロード
+            byte[] byteArray = System.Convert.FromBase64String(request.Base64String);
+            var azureStorageUtil = new AzureStorageUtil();
+            var fileName = Guid.NewGuid().ToString();
+            await azureStorageUtil.UploadBlobStrage(byteArray, fileName, "visions");
+
+            // 画像のURLを取得
+            var imageUrl = azureStorageUtil.GetBlobStrageUrl(fileName, "visions");
+
+            string analyzeImageUrl = @"{'Url':'" + imageUrl + "'}";
+
+            var oxfordUtil = new OxfordUtil(SpajamHonsen.Utilities.OxfordUtil.OxfordAPIType.Vision);
+            var result = await oxfordUtil.AnalyzeAnImageAsync(analyzeImageUrl);
+            
+            return result;
+        }
         #endregion POST: api/APITest
     }
 }
