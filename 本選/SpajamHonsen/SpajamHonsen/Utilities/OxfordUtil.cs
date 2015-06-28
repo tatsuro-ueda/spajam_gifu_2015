@@ -315,5 +315,69 @@ namespace SpajamHonsen.Utilities
             return responseJson;
         }
         #endregion FaceAPI
+
+        private void CustomImage() 
+        {
+            /*
+            int i = 0;
+            float sum = 0;
+            float[] angle = new float[5];
+
+            // 550×500ピクセルのキャンバスを生成したうえで、
+            // 背景色を白でクリア
+            Bitmap bImage =
+              new Bitmap(550, 500, PixelFormat.Format64bppPArgb);
+            Graphics graph = Graphics.FromImage(bImage);
+            graph.Clear(Color.White);
+
+            // 画像生成に使用するブラシ（SolidBrushコントロール）を定義
+            SolidBrush[] brush = new SolidBrush[5];
+            brush[0] = new SolidBrush(Color.Lime);
+            brush[1] = new SolidBrush(Color.Blue);
+            brush[2] = new SolidBrush(Color.DarkGreen);
+            brush[3] = new SolidBrush(Color.Red);
+            brush[4] = new SolidBrush(Color.Silver);
+
+            // リクエストURLからベース名のみを取得し、
+            // 「<ベース名>.dat」をデータ・ファイルとして読み込む
+            String basePath =
+              Path.GetFileNameWithoutExtension(context.Request.FilePath);
+            StreamReader sReader = new StreamReader(
+              context.Server.MapPath(basePath + ".dat"),
+              Encoding.GetEncoding("Shift_JIS"));
+
+            // 読み込んだデータから数値合計（sum）と
+            //個々の値（angle）をセット
+            // また、「■ <項目名>」の形式で凡例を出力
+            while (sReader.Peek() > -1)
+            {
+                String[] line = sReader.ReadLine().Split('\t');
+                sum += Single.Parse(line[1]);
+                angle[i] = Single.Parse(line[1]);
+                graph.DrawString("■ " + line[0],
+                  new Font("HG丸ｺﾞｼｯｸM-PRO", 16),
+                  brush[i], new PointF(380, 20 + i * 25));
+                i++;
+            }
+            sReader.Close();
+
+            // 個々の値（angle）と合計値（sum）から円グラフの角度を計算
+            for (i = 0; i < angle.Length; i++)
+            {
+                angle[i] = (int)(angle[i] * 360 / sum);
+            }
+            float start = -90;
+            // FillPieメソッドで個々のデータに基づき、円弧を描画
+            for (i = 0; i < angle.Length; i++)
+            {
+                graph.FillPie(brush[i], 10, 10, 400, 400, start, angle[i]);
+                start += angle[i];
+            }
+            // コンテンツ・タイプを設定したうえで生成された画像を出力
+            context.Response.ContentType = "image/jpg";
+            bImage.Save(context.Response.OutputStream, ImageFormat.Jpeg);
+        
+           */
+        }
     }
 }
