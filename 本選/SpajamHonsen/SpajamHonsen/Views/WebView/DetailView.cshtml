@@ -10,25 +10,40 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript">
+        var exp1 = 0;
+        var exp2 = 0;
+        var exp3 = 0;
+        var exp4 = 0;
+        var exp5 = 0;
         $(window).load(function () {
+            alert(get_url_vars("lan"));
             $.ajax({
-                url: "http://spajamapi.azurewebsites.net/api/SpotMasters",
+                url: "http://spajamhonsen.azurewebsites.net/Api/TweetDetail/1?lan=" + get_url_vars("lan"),
                 cache: false,
                 async: false,
                 success: function (xml) {
                     var show = "";
-                    var data = new Array();
 
                     xml.forEach(function (value) {
-                        show += "<img src='/Scripts/icon_ume.png'><B>" + value.SpotName + "</B><br/>"
-                                 + "<div style='width: 600px' >" + value.SpotDescription + "</div><br/>";
-                        data.push({ position: new google.maps.LatLng(value.Latitude, value.Longitude), content: value.SpotName });
+                        show += "<img src='/Scripts/icon_ume.png'><br/>"
+                            + "<div style='width: 600px' >" + value.TweetText + "</div><br/>";
                     });
 
                     $("#content").html(show);
                 }
             });
-
+            $.ajax({
+                url: "http://spajamhonsen.azurewebsites.net/Api/TweetSummy/1",
+                cache: false,
+                async: false,
+                success: function (xml) {
+                    exp1 = xml.Express1;
+                    exp2 = xml.Express2;
+                    exp3 = xml.Express3;
+                    exp4 = xml.Express4;
+                    exp5 = xml.Express5;
+                }
+            });
         });
 
         google.load("visualization", "1", {packages:["corechart"]});
@@ -37,11 +52,11 @@
 
             var data = google.visualization.arrayToDataTable([
                 ['Task', 'Hours per Day'],
-                ['無表情',     11],
-                ['喜ぶ',      2],
-                ['驚き',  2],
-                ['怒り', 2],
-                ['悲しみ',    7]
+                ['無表情', exp1],
+                ['喜ぶ',   exp2],
+                ['驚き',   exp3],
+                ['怒り',   exp4],
+                ['悲しみ', exp5]
             ]);
 
             var options = {
@@ -51,6 +66,22 @@
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
             chart.draw(data, options);
+        }
+
+        function get_url_vars(res) {
+            var vars = new Object, params;
+            var temp_params = window.location.search.substring(1).split('&');
+            for (var i = 0; i < temp_params.length; i++) {
+                params = temp_params[i].split('=');
+                if (params[0] == res) {
+                    return params[1];
+                }
+            }
+            if (res == "lan") {
+                return "ja";
+            } else {
+                return "1";
+            }
         }
     </script>
     <title></title>

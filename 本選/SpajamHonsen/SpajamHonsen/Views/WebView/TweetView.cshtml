@@ -12,17 +12,14 @@
     <script type="text/javascript">
         $(window).load(function () {
             $.ajax({
-                url: "http://spajamapi.azurewebsites.net/api/SpotMasters",
+                url: "http://spajamhonsen.azurewebsites.net/Api/TweetList/1?lan=" + get_url_vars("lan"),
                 cache: false,
                 async: false,
                 success: function (xml) {
                     var show = "";
-                    var data = new Array();
-
                     xml.forEach(function (value) {
-                        show += "<img src='/Scripts/icon_ume.png'><B>" + value.SpotName + "</B><br/>"
-                                 + "<div style='width: 600px' >" + value.SpotDescription + "</div><br/>";
-                        data.push({ position: new google.maps.LatLng(value.Latitude, value.Longitude), content: value.SpotName });
+                        show += "<img src='/Scripts/icon_ume.png'>"
+                                 + "<div style='width: 600px' >" + value.TweetText + "</div><br/>";
                     });
 
                     $("#content").html(show);
@@ -30,6 +27,22 @@
             });
 
         });
+
+        function get_url_vars(res) {
+            var vars = new Object, params;
+            var temp_params = window.location.search.substring(1).split('&');
+            for (var i = 0; i < temp_params.length; i++) {
+                params = temp_params[i].split('=');
+                if (params[0] == res) {
+                    return params[1];
+                }
+            }
+            if (res == "lan") {
+                return "ja";
+            } else {
+                return "1";
+            }
+        }
     </script>
     <title></title>
 </head>
