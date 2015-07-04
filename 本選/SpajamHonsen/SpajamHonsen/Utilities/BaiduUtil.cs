@@ -65,8 +65,8 @@ namespace SpajamHonsen.Utilities
                                 () =>
                                     JsonConvert
                                         .DeserializeObject<BaiduSpeechAPIResponseModel>(responseFromServer));
-
-                    return responseJson.result[0].Replace(",", "");
+                    var res = responseJson.result[0];
+                    return res.Substring(0, res.Length - 1);
                 }
             }
         }
