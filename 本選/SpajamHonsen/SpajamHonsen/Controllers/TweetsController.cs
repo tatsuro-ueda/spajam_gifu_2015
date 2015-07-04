@@ -163,7 +163,8 @@ namespace SpajamHonsen.Controllers
                 }
                 else if (language == "cn")
                 {
-                    //TODO 音声合成中国語
+                    // 音声合成中国語
+                    voiceTextFileName = await BaiduUtil.RequestVoiceTextAPI(speechText);
                 }
 
                 var azureStorageUtil = new AzureStorageUtil();

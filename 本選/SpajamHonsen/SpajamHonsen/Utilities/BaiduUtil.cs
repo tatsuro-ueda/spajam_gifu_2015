@@ -87,7 +87,7 @@ namespace SpajamHonsen.Utilities
         }
 
 
-        public async Task<string> RequestVoiceTextAPI(string voiceText)
+        public static async Task<string> RequestVoiceTextAPI(string voiceText)
         {
 
             var url = "http://tsn.baidu.com/text2audio";
