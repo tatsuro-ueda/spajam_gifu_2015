@@ -73,6 +73,11 @@ namespace SpajamHonsen.Controllers
         }
 
         // POST: api/HVCLogs
+        /// <summary>
+        /// HVCのログを登録する
+        /// </summary>
+        /// <param name="hVCLogPostRequest"></param>
+        /// <returns></returns>
         [ResponseType(typeof(HVCLog))]
         public async Task<IHttpActionResult> PostHVCLog(HVCLogPostRequest hVCLogPostRequest)
         {
@@ -91,8 +96,6 @@ namespace SpajamHonsen.Controllers
                 Sex = hVCLogPostRequest.Sex,
                 CreateDateTime = DateTime.Now,
             };
-
-
 
             db.HVCLog.Add(hVCLog);
 

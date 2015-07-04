@@ -5,6 +5,9 @@ using System.Web;
 
 namespace SpajamHonsen.Models.JsonRequest
 {
+    /// <summary>
+    /// HVCログを登録する際のRequestモデル
+    /// </summary>
     public class HVCLogPostRequest
     {
             public string SpotID { get; set; }
