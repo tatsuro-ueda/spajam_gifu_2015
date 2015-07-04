@@ -66,14 +66,14 @@ Fields1=SpotID
 Fields2=SpotID
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,671,9329,1113,R,R
+Position="MAIN",0,671,9329,1192,R,R
 Dependence=0
 Caption=
 PName=
 LineMode=0
 Bar1=67
 Bar2=933
-Bar3=111
+Bar3=119
 TermPos1=R
 TermPos2=R
 
@@ -106,15 +106,16 @@ Left=400
 Top=50
 Field="ログID","LogID","@VARCHAR(36)","NOT NULL",0,"","HVCのログを一意に識別するID(UUID)",$FFFFFFFF,""
 Field="スポットID","SpotID","@VARCHAR(36)","NOT NULL",,"","スポット(iBeacon)を一意に識別するID(UUID)",$FFFFFFFF,""
+Field="ツイートID","TweetID","@VARCHAR(36)",,,"","Tweet吹き込み時にログを結びつける",$FFFFFFFF,""
 Field="言語","Language","@VARCHAR(2)","NOT NULL",,"","jp:日本語 en:英語 cn:中国語",$FFFFFFFF,""
-Field="表情","Expression","@INT","NOT NULL",,"","0:無表情 1:喜び 2:驚き 3:怒り 4:悲しみ",$FFFFFFFF,""
+Field="表情","Expression","@INT","NOT NULL",,"","0:無表情 1:喜び 2:驚き 3:怒り 4:哀しみ",$FFFFFFFF,""
 Field="年齢","Age","@INT","NOT NULL",,"","年齢0-75",$FFFFFFFF,""
 Field="性別","Sex","@VARCHAR(1)","NOT NULL",,"","m:男性 f:女性",$FFFFFFFF,""
 Field="作成日時","CreateDateTime","@DATETIME","NOT NULL",,"","HVCログの作成日時",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20150704202507
+ModifiedDateTime=20150704212841
 Position="Main",400,50
 
 [Entity]

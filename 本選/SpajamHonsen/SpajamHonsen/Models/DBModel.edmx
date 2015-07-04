@@ -11,6 +11,7 @@
           </Key>
           <Property Name="LogID" Type="varchar" MaxLength="36" Nullable="false" />
           <Property Name="SpotID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="TweetID" Type="varchar" MaxLength="36" />
           <Property Name="Language" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="Expression" Type="int" Nullable="false" />
           <Property Name="Age" Type="int" Nullable="false" />
@@ -61,6 +62,7 @@
           </Key>
           <Property Name="LogID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SpotID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TweetID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
           <Property Name="Language" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Expression" Type="Int32" Nullable="false" />
           <Property Name="Age" Type="Int32" Nullable="false" />
@@ -111,6 +113,7 @@
               <MappingFragment StoreEntitySet="HVCLog">
                 <ScalarProperty Name="LogID" ColumnName="LogID" />
                 <ScalarProperty Name="SpotID" ColumnName="SpotID" />
+                <ScalarProperty Name="TweetID" ColumnName="TweetID" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="Expression" ColumnName="Expression" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
