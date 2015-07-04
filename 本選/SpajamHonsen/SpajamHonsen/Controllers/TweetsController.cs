@@ -110,6 +110,31 @@ namespace SpajamHonsen.Controllers
             var language = tweetPostRequest.hVCLogPostRequest.Language;
             var sex = tweetPostRequest.hVCLogPostRequest.Sex;
 
+            #region 音声ファイルのbase64文字列ログ出力
+            // TODO 完成後コメントアウトする
+            var audioLogFilePath = HttpContext.Current.Server.MapPath("~/Temp/Logs/" + Guid.NewGuid().ToString() + ".log");
+            
+            // ファイルを作成する
+            using (System.IO.FileStream hStream = System.IO.File.Create(audioLogFilePath))
+            {
+                // 作成時に返される FileStream を利用して閉じる
+                if (hStream != null)
+                {
+                    hStream.Close();
+                }
+            }
+
+            var base64String = System.Convert.ToBase64String(byteArray, 0, byteArray.Length);
+            System.IO.StreamWriter sw = new System.IO.StreamWriter(
+                    audioLogFilePath,
+                    true,
+                    System.Text.Encoding.GetEncoding("utf-8"));
+            sw.Write(base64String);
+            sw.Close();
+            var azureStorageUtil = new AzureStorageUtil();
+            azureStorageUtil.UploadBlobStrage(audioLogFilePath, Guid.NewGuid().ToString() + ".log", "logs");
+            #endregion 音声ファイルのbase64文字列ログ出力
+
             string convertFilePath = string.Empty;
             // 音声ファイルのレートを変換
             if (language == "en" || language == "jp")
@@ -133,9 +158,14 @@ namespace SpajamHonsen.Controllers
 
                 // 音声解説ファイルの解析
                 string speechText = string.Empty;
-                if (language == "en" || language == "jp")
+                if (language == "jp")
                 {
                     speechText = await GoogleUtil.RequestGoogleSpeechAPIAsync(audioByteArray);
+                }
+                else if (language == "en")
+                {
+                    speechText = await BaiduUtil.RequestBaiduSpeechAPIAsync(audioByteArray);
+                    speechText = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechText, "en", "ja");
                 }
                 else if (language == "cn")
                 {

@@ -62,6 +62,26 @@ namespace SpajamHonsen.Utilities
         /// <summary>
         /// AzureBlobStrageにファイルをアップロードする
         /// </summary>
+        /// <param name="filePath">ファイルパス</param>
+        /// <param name="fileName">ファイル名</param>
+        /// <param name="containerName">コンテナ名</param>
+        /// <returns>Taskクラス</returns>
+        public void UploadBlobStrage(string filePath, string fileName, string containerName)
+        {
+            // コンテナを作成
+            CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+
+            container.CreateIfNotExists();
+
+            // Blobを作成
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
+
+            blockBlob.UploadFromFile(filePath, FileMode.Open);
+        }
+
+        /// <summary>
+        /// AzureBlobStrageにファイルをアップロードする
+        /// </summary>
         /// <param name="byteArray">バイナリデータのbyte配列</param>
         /// <param name="fileName">ファイル名</param>
         /// <param name="containerName">コンテナ名</param>
