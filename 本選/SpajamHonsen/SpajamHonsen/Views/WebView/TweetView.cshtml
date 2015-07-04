@@ -6,12 +6,36 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $.ajax({
+                url: "http://spajamapi.azurewebsites.net/api/SpotMasters",
+                cache: false,
+                async: false,
+                success: function (xml) {
+                    var show = "";
+                    var data = new Array();
+
+                    xml.forEach(function (value) {
+                        show += "<img src='/Scripts/icon_ume.png'><B>" + value.SpotName + "</B><br/>"
+                                 + "<div style='width: 600px' >" + value.SpotDescription + "</div><br/>";
+                        data.push({ position: new google.maps.LatLng(value.Latitude, value.Longitude), content: value.SpotName });
+                    });
+
+                    $("#content").html(show);
+                }
+            });
+
+        });
+    </script>
     <title></title>
 </head>
 <body>
     <div>
-        TweetView
+        <div id="content"></div>
     </div>
 </body>
 </html>

@@ -306,6 +306,7 @@
     <Compile Include="Models\JsonResponse\BaiduSpeechAPIResponseModel.cs" />
     <Compile Include="Models\JsonResponse\BingSearchAPIResponseModel.cs" />
     <Compile Include="Models\JsonResponse\BingSynonymAPIResponseModel.cs" />
+    <Compile Include="Models\JsonResponse\ExpressInformation.cs" />
     <Compile Include="Models\JsonResponse\FaceAPIDetectionResponseModel.cs" />
     <Compile Include="Models\JsonResponse\FaceAPIFindSimilarFacesResponseModel.cs" />
     <Compile Include="Models\JsonResponse\FaceAPIGroupingResponseModel.cs" />
@@ -313,6 +314,7 @@
     <Compile Include="Models\JsonResponse\FaceAPIVerificationResponseModel.cs" />
     <Compile Include="Models\JsonResponse\GoogleSpeechAPIResponseModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\JsonResponse\HcvInformation.cs" />
     <Compile Include="Models\JsonResponse\VisionAPIAnalyzeanImageResponseModel.cs" />
     <Compile Include="Models\JsonResponse\VisionAPIOCRResponseModel.cs" />
     <Compile Include="Models\JsonResponse\YahooQuestionSearchAPIResponseModel.cs" />
