@@ -107,7 +107,10 @@ namespace SpajamHonsen.Controllers
                 inputFileStream.Write(byteArray, 0, byteArray.Length);
             }
 
-            // 音声ファイルのレートを16000に変換
+            var language = tweetPostRequest.hVCLogPostRequest.Language;
+            var sex = tweetPostRequest.hVCLogPostRequest.Sex;
+
+            // 音声ファイルのレートを変換
             var convertFilePath = FFmpegUtil.ConvertAudioRate(inputFilePath, "16000");
 
             var tweet = new Tweet();
@@ -120,23 +123,56 @@ namespace SpajamHonsen.Controllers
                 byte[] audioByteArray = new byte[outputFileStream.Length];
                 outputFileStream.Read(audioByteArray, 0, audioByteArray.Length);
 
-                // TODO 多言語対応
                 // 音声解説ファイルの解析
-                var speechText = await GoogleUtil.RequestGoogleSpeechAPIAsync(audioByteArray);
+                string speechText = string.Empty;
+                if (language == "en" || language == "jp")
+                {
+                    speechText = await GoogleUtil.RequestGoogleSpeechAPIAsync(audioByteArray);
+                }
+                else if (language == "cn")
+                {
+                    speechText = await BaiduUtil.RequestBaiduSpeechAPIAsync(audioByteArray);
+                }
 
                 // 音声解説ファイルの解析結果の漢字変換
-                var kanjiText = await GoogleUtil.RequestGoogleJapaneseAPI(speechText);
+                if (language == "jp") 
+                { 
+                    speechText = await GoogleUtil.RequestGoogleJapaneseAPI(speechText);
+                }
 
                 // 音声解析結果の音声合成
                 var othersUtil = new OthersUtil();
-                var voiceTextFileName = await othersUtil.RequestVoiceTextAPI(speechText, "hikari");
+
+                string tweetURL = string.Empty;
+                string voiceTextFileName = string.Empty;
+
+                if (language == "jp")
+                {
+                    if(sex == "m")
+                    {
+                        voiceTextFileName = await othersUtil.RequestVoiceTextAPI(speechText, "show");
+                    }
+                    else if (sex == "m")
+                    {
+                        voiceTextFileName = await othersUtil.RequestVoiceTextAPI(speechText, "haruka");
+                    }
+                }
+                else if (language == "en")
+                {
+                    //TODO 音声合成英語
+                }
+                else if (language == "cn")
+                {
+                    //TODO 音声合成中国語
+                }
+
                 var azureStorageUtil = new AzureStorageUtil();
-                var tweetURL = azureStorageUtil.GetBlobStrageUrl(voiceTextFileName, "voices");
+                tweetURL = azureStorageUtil.GetBlobStrageUrl(voiceTextFileName, "voices");
 
                 // 登録情報の設定
                 tweet.TweetID = Guid.NewGuid().ToString();
                 tweet.SpotID = tweetPostRequest.hVCLogPostRequest.SpotID;
-                tweet.TweetText = kanjiText;
+                tweet.TweetText = speechText;
                 tweet.TweetURL = tweetURL;
                 tweet.CreateDateTime = DateTime.Now;
 
@@ -146,6 +182,7 @@ namespace SpajamHonsen.Controllers
                 {
                     LogID = Guid.NewGuid().ToString(),
                     SpotID = tweetPostRequest.hVCLogPostRequest.SpotID,
+                    TweetID = tweet.TweetID,
                     Language = tweetPostRequest.hVCLogPostRequest.Language,
                     Expression = tweetPostRequest.hVCLogPostRequest.Expression,
                     Age = tweetPostRequest.hVCLogPostRequest.Age,
