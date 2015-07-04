@@ -422,6 +422,8 @@
     <Content Include="Views\WebView\Index.cshtml" />
     <Content Include="Views\WebView\WebView1.cshtml" />
     <Content Include="Views\WebView\PushTestView.cshtml" />
+    <Content Include="Views\WebView\TweetView.cshtml" />
+    <Content Include="Views\WebView\DetailView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -24,6 +24,18 @@ namespace SpajamHonsen.Controllers
         public ActionResult PushTestView()
         {
             return View();
+        }
+
+        // GET: WebView/TweetView
+        public ActionResult TweetView()
+        {
+            return View();
+        }
+
+        // GET: WebView/DetailView
+        public ActionResult DetailView()
+        {
+            return View();
         }   
     }
 }
