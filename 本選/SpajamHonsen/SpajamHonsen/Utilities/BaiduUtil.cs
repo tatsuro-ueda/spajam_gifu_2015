@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
 using SpajamHonsen.Models;
+using SpajamHonsen.Models.JsonResponse;
 
 namespace SpajamHonsen.Utilities
 {
@@ -16,31 +18,56 @@ namespace SpajamHonsen.Utilities
 
         public static async Task<string> RequestBaiduSpeechAPIAsync(byte[] byteArray)
         {
-            var httpClient = new HttpClient();
-            var mediaType = new MediaTypeWithQualityHeaderValue("audio/x-flac");
-            var parameter = new NameValueHeaderValue("rate", "16000");
-            mediaType.Parameters.Add(parameter);
+            // 音声解説ファイルのレート変換
+            var inputFilePath = HttpContext.Current.Server.MapPath("~/ffmpeg/" + Guid.NewGuid().ToString() + ".wav");
 
-            var url = "http://vop.baidu.com/server_api?lan=zh";
-            url += "&cuid=u7CHooimP8rCsOlzNzW50C66";
-            url += "&token=24.d7ca91217c8dcd828bd374b03d40b799.2592000.1438064825.282335-6310719";
-            url += "&format=wav";
-            // url += "&rate=8000";
-            url += "&channel=1";
-            var uri = new Uri(url);
-
-            using (MemoryStream ms = new MemoryStream(byteArray, 0, byteArray.Length))
+            // 一時的に音声ファイルを作成
+            using (System.IO.FileStream inputFileStream =
+                new System.IO.FileStream(
+                    inputFilePath,
+                    System.IO.FileMode.Create,
+                    System.IO.FileAccess.Write))
             {
-                var param = new StreamContent(ms);
-                param.Headers.ContentType = mediaType;
+                // バイト型配列の内容をすべて書き込む
+                inputFileStream.Write(byteArray, 0, byteArray.Length);
+            }
 
-                var result = await httpClient.PostAsync(uri, param);
+            // 音声ファイルのレートを16000に変換
+            var convertFilePath = FFmpegUtil.ConvertAudioRate2(inputFilePath, "8000");
 
-                var responseFromServer = await result.Content.ReadAsStringAsync();
-                var responceArray = responseFromServer.Split('\n');
-                var responseJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<SpajamHonsen.Models.GoogleSpeechAPIResponseModel.Resuls>(responceArray[1]));
+            using (System.IO.FileStream outputFileStream =
+                new System.IO.FileStream(
+                    convertFilePath, FileMode.Open))
+            {
+                byte[] audioByteArray = new byte[outputFileStream.Length];
+                var httpClient = new HttpClient();
+                var mediaType = new MediaTypeWithQualityHeaderValue("audio/wav");
+                var parameter = new NameValueHeaderValue("rate", "8000");
+                mediaType.Parameters.Add(parameter);
 
-                return responseJson.result[0].alternative[0].transcript;
+                var url = "http://vop.baidu.com/server_api?lan=zh";
+                url += "&cuid=u7CHooimP8rCsOlzNzW50C66";
+                url += "&token=24.d7ca91217c8dcd828bd374b03d40b799.2592000.1438064825.282335-6310719";
+                url += "&format=wav";
+                url += "&channel=1";
+                var uri = new Uri(url);
+
+                using (MemoryStream ms = new MemoryStream(audioByteArray, 0, audioByteArray.Length))
+                {
+                    var param = new StreamContent(outputFileStream);
+                    param.Headers.ContentType = mediaType;
+
+                    var result = await httpClient.PostAsync(uri, param);
+
+                    var responseFromServer = await result.Content.ReadAsStringAsync();
+                    var responseJson =
+                        await Task.Factory.StartNew(
+                                () =>
+                                    JsonConvert
+                                        .DeserializeObject<BaiduSpeechAPIResponseModel>(responseFromServer));
+
+                    return responseJson.result[0].Replace(",", "");
+                }
             }
         }
 

@@ -56,6 +56,43 @@ namespace SpajamHonsen.Utilities
             return outputFilePath;
         }
 
+        public static string ConvertAudioRate2(string inputFilePath, string rate)
+        {
+            string result = string.Empty;
+            string outputFilePath = string.Empty;
+            try
+            {
+                string ffmpegFilePath = HttpContext.Current.Server.MapPath("~/ffmpeg/ffmpeg.exe");
+                outputFilePath = HttpContext.Current.Server.MapPath("~/ffmpeg/" + Guid.NewGuid().ToString() + ".wav");
+
+                var processInfo = new ProcessStartInfo(ffmpegFilePath, " -i " + inputFilePath + " -ar " + rate + " " + outputFilePath)
+                {
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                };
+
+                try
+                {
+                    Process process = System.Diagnostics.Process.Start(processInfo);
+                    result = process.StandardError.ReadToEnd();
+                    process.WaitForExit();
+                    process.Close();
+                    result = outputFilePath;
+                }
+                catch (Exception)
+                {
+                    result = string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+            }
+
+            return outputFilePath;
+        }
         /// <summary>
         /// 音声ファイルの形式を変換する
         /// </summary>
