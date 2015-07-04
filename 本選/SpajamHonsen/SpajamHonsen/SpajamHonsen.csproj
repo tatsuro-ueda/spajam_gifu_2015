@@ -303,6 +303,7 @@
     <Compile Include="Models\JsonRequest\FaceAPIFindSimilarFacesRequestModel.cs" />
     <Compile Include="Models\JsonRequest\FaceAPIGroupingRequestModel.cs" />
     <Compile Include="Models\JsonRequest\FaceAPIIdentificationRequestModel.cs" />
+    <Compile Include="Models\JsonRequest\HVCLogPostRequest.cs" />
     <Compile Include="Models\JsonResponse\BaiduSpeechAPIResponseModel.cs" />
     <Compile Include="Models\JsonResponse\BingSearchAPIResponseModel.cs" />
     <Compile Include="Models\JsonResponse\BingSynonymAPIResponseModel.cs" />

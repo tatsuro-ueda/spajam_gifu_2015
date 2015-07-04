@@ -22,6 +22,7 @@ create table Tweet (
 create table HVCLog (
   LogID VARCHAR(36) not null
   , SpotID VARCHAR(36) not null
+  , TweetID VARCHAR(36)
   , Language VARCHAR(2) not null
   , Expression INTEGER not null
   , Age INTEGER not null
@@ -58,8 +59,9 @@ EXECUTE sp_addextendedproperty N'MS_Description', N'作成日時	 Tweetの作成日時', 
 EXECUTE sp_addextendedproperty N'MS_Description', N'HVCログデータ	 ヒューマンビジョンコンボのログを登録する', N'SCHEMA', N'dbo', N'TABLE', N'HVCLog', NULL, NULL;
 EXECUTE sp_addextendedproperty N'MS_Description', N'ログID	 HVCのログを一意に識別するID(UUID)', N'SCHEMA', N'dbo', N'TABLE', N'HVCLog', N'COLUMN', N'LogID';
 EXECUTE sp_addextendedproperty N'MS_Description', N'スポットID	 スポット(iBeacon)を一意に識別するID(UUID)', N'SCHEMA', N'dbo', N'TABLE', N'HVCLog', N'COLUMN', N'SpotID';
+EXECUTE sp_addextendedproperty N'MS_Description', N'ツイートID	 Tweet吹き込み時にログを結びつける', N'SCHEMA', N'dbo', N'TABLE', N'HVCLog', N'COLUMN', N'TweetID';
 EXECUTE sp_addextendedproperty N'MS_Description', N'言語	 jp:日本語 en:英語 cn:中国語', N'SCHEMA', N'dbo', N'TABLE', N'HVCLog', N'COLUMN', N'Language';
-EXECUTE sp_addextendedproperty N'MS_Description', N'表情	 0:無表情 1:喜び 2:驚き 3:怒り 4:悲しみ', N'SCHEMA', N'dbo', N'TABLE', N'HVCLog', N'COLUMN', N'Expression';
+EXECUTE sp_addextendedproperty N'MS_Description', N'表情	 0:無表情 1:喜び 2:驚き 3:怒り 4:哀しみ', N'SCHEMA', N'dbo', N'TABLE', N'HVCLog', N'COLUMN', N'Expression';
 EXECUTE sp_addextendedproperty N'MS_Description', N'年齢	 年齢0-75', N'SCHEMA', N'dbo', N'TABLE', N'HVCLog', N'COLUMN', N'Age';
 EXECUTE sp_addextendedproperty N'MS_Description', N'性別	 m:男性 f:女性', N'SCHEMA', N'dbo', N'TABLE', N'HVCLog', N'COLUMN', N'Sex';
 EXECUTE sp_addextendedproperty N'MS_Description', N'作成日時	 HVCログの作成日時', N'SCHEMA', N'dbo', N'TABLE', N'HVCLog', N'COLUMN', N'CreateDateTime';

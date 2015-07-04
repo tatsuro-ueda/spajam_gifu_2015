@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using SpajamHonsen.Models;
+using SpajamHonsen.Models.JsonRequest;
 
 namespace SpajamHonsen.Controllers
 {
@@ -73,12 +74,25 @@ namespace SpajamHonsen.Controllers
 
         // POST: api/HVCLogs
         [ResponseType(typeof(HVCLog))]
-        public async Task<IHttpActionResult> PostHVCLog(HVCLog hVCLog)
+        public async Task<IHttpActionResult> PostHVCLog(HVCLogPostRequest hVCLogPostRequest)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            var hVCLog = new HVCLog()
+            {
+                LogID = Guid.NewGuid().ToString(),
+                SpotID = hVCLogPostRequest.SpotID,
+                Language = hVCLogPostRequest.Language,
+                Expression = hVCLogPostRequest.Expression,
+                Age = hVCLogPostRequest.Age,
+                Sex = hVCLogPostRequest.Sex,
+                CreateDateTime = DateTime.Now,
+            };
+
+
 
             db.HVCLog.Add(hVCLog);
 

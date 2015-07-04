@@ -16,6 +16,7 @@ namespace SpajamHonsen.Models
     {
         public string LogID { get; set; }
         public string SpotID { get; set; }
+        public string TweetID { get; set; }
         public string Language { get; set; }
         public int Expression { get; set; }
         public int Age { get; set; }
