@@ -267,14 +267,12 @@
     <Compile Include="AzureMarketplace\AdmAccessToken.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\APITestController.cs" />
-    <Compile Include="Controllers\AudioCommentariesController.cs" />
     <Compile Include="Controllers\BaiduTranslateController.cs" />
     <Compile Include="Controllers\BaiduVoiceController.cs" />
-    <Compile Include="Controllers\DeviceTokensController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PushTestController.cs" />
+    <Compile Include="Controllers\HVCLogsController.cs" />
     <Compile Include="Controllers\SpotMastersController.cs" />
-    <Compile Include="Controllers\TalksController.cs" />
+    <Compile Include="Controllers\TweetsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WebViewController.cs" />
     <Compile Include="Global.asax.cs">
@@ -283,9 +281,6 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AudioCommentariesRequestModel.cs" />
-    <Compile Include="Models\AudioCommentary.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -301,7 +296,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DeviceToken.cs">
+    <Compile Include="Models\HVCLog.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\JsonRequest\DeviceTokenRegistRequestModel.cs" />
@@ -324,11 +319,8 @@
     <Compile Include="Models\SpotMaster.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Talk.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TestRequestModel.cs" />
-    <Compile Include="Models\Voice.cs">
+    <Compile Include="Models\Tweet.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

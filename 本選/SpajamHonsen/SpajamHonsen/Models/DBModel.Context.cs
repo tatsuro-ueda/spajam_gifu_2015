@@ -25,10 +25,8 @@ namespace SpajamHonsen.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AudioCommentary> AudioCommentary { get; set; }
-        public virtual DbSet<DeviceToken> DeviceToken { get; set; }
+        public virtual DbSet<HVCLog> HVCLog { get; set; }
         public virtual DbSet<SpotMaster> SpotMaster { get; set; }
-        public virtual DbSet<Talk> Talk { get; set; }
-        public virtual DbSet<Voice> Voice { get; set; }
+        public virtual DbSet<Tweet> Tweet { get; set; }
     }
 }

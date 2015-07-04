@@ -12,17 +12,14 @@ namespace SpajamHonsen.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AudioCommentary
+    public partial class HVCLog
     {
-        public string AudioCommentaryKey { get; set; }
-        public string AudioCommentaryTitle { get; set; }
-        public string SpotKey { get; set; }
-        public Nullable<long> SortID { get; set; }
-        public string FileID { get; set; }
-        public string AudioCommentaryResultOriginal { get; set; }
-        public string AudioCommentaryResultConversion { get; set; }
-        public string SpeechSynthesisFileID { get; set; }
-        public string RegisteredUserID { get; set; }
-        public System.DateTime RegisteredDateTime { get; set; }
+        public string LogID { get; set; }
+        public string SpotID { get; set; }
+        public string Language { get; set; }
+        public int Expression { get; set; }
+        public int Age { get; set; }
+        public string Sex { get; set; }
+        public System.DateTime CreateDateTime { get; set; }
     }
 }

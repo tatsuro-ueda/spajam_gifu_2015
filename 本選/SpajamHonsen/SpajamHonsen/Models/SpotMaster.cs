@@ -14,9 +14,10 @@ namespace SpajamHonsen.Models
     
     public partial class SpotMaster
     {
-        public string SpotKey { get; set; }
+        public string SpotID { get; set; }
         public string SpotName { get; set; }
         public string SpotDescription { get; set; }
+        public string SpotDescriptionAudio { get; set; }
         public string SpotImageURL { get; set; }
         public int MajorID { get; set; }
         public int MinorID { get; set; }
@@ -25,6 +26,6 @@ namespace SpajamHonsen.Models
         public Nullable<int> StateCityLineID { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
-        public System.DateTime RegisteredDateTime { get; set; }
+        public System.DateTime CreateDateTime { get; set; }
     }
 }

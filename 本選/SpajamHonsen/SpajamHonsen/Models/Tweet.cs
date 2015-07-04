@@ -12,13 +12,12 @@ namespace SpajamHonsen.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Talk
+    public partial class Tweet
     {
-        public string UserID { get; set; }
-        public string TalkID { get; set; }
-        public string TalkTitle { get; set; }
-        public long SortID { get; set; }
-        public string Evaluation { get; set; }
-        public Nullable<long> EvaluationDetail { get; set; }
+        public string TweetID { get; set; }
+        public string SpotID { get; set; }
+        public string TweetText { get; set; }
+        public string TweetURL { get; set; }
+        public System.DateTime CreateDateTime { get; set; }
     }
 }
