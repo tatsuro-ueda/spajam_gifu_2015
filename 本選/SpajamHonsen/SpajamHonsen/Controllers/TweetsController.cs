@@ -110,8 +110,16 @@ namespace SpajamHonsen.Controllers
             var language = tweetPostRequest.hVCLogPostRequest.Language;
             var sex = tweetPostRequest.hVCLogPostRequest.Sex;
 
+            string convertFilePath = string.Empty;
             // 音声ファイルのレートを変換
-            var convertFilePath = FFmpegUtil.ConvertAudioRate(inputFilePath, "16000");
+            if (language == "en" || language == "jp")
+            {
+                convertFilePath = FFmpegUtil.ConvertAudioRate(inputFilePath, "16000");
+            }
+            else if (language == "cn")
+            {
+                convertFilePath = FFmpegUtil.ConvertAudioRate2(inputFilePath, "8000");
+            }
 
             var tweet = new Tweet();
 
@@ -132,18 +140,20 @@ namespace SpajamHonsen.Controllers
                 else if (language == "cn")
                 {
                     speechText = await BaiduUtil.RequestBaiduSpeechAPIAsync(audioByteArray);
+                    speechText = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechText, "zh-cn", "ja");
                 }
 
                 // 音声解説ファイルの解析結果の漢字変換
                 if (language == "jp") 
-                { 
-                    speechText = await GoogleUtil.RequestGoogleJapaneseAPI(speechText);
+                {
+                    speechText = await GoogleUtil.RequestGoogleJapaneseAPI(speechText); 
+          
                 }
 
                 // 音声解析結果の音声合成
                 var othersUtil = new OthersUtil();
 
-                string tweetURL = string.Empty;
+                string tweetURL = "default";
                 string voiceTextFileName = string.Empty;
 
                 if (language == "jp")
@@ -164,11 +174,11 @@ namespace SpajamHonsen.Controllers
                 else if (language == "cn")
                 {
                     // 音声合成中国語
-                    voiceTextFileName = await BaiduUtil.RequestVoiceTextAPI(speechText);
+                    // voiceTextFileName = await BaiduUtil.RequestVoiceTextAPI(speechText);
                 }
 
-                var azureStorageUtil = new AzureStorageUtil();
-                tweetURL = azureStorageUtil.GetBlobStrageUrl(voiceTextFileName, "voices");
+                // var azureStorageUtil = new AzureStorageUtil();
+                // tweetURL = azureStorageUtil.GetBlobStrageUrl(voiceTextFileName, "voices");
 
                 // 登録情報の設定
                 tweet.TweetID = Guid.NewGuid().ToString();

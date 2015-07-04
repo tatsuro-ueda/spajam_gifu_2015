@@ -19,8 +19,7 @@ namespace SpajamHonsen.Controllers
         /// <returns></returns>
         public async Task<string> PostVoiceTextAPIAsync(TestRequestModel request)
         {
-            var baidu = new BaiduUtil();
-            var fileID = await baidu.RequestVoiceTextAPI(request.Base64String);
+            var fileID = await BaiduUtil.RequestVoiceTextAPI(request.Base64String);
             var azureStorageUtil = new AzureStorageUtil();
             return azureStorageUtil.GetBlobStrageUrl(fileID, "voicetext");
         }
