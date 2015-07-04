@@ -45,7 +45,7 @@ namespace SpajamHonsen.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != spotMaster.SpotKey)
+            if (id != spotMaster.SpotID)
             {
                 return BadRequest();
             }
@@ -88,7 +88,7 @@ namespace SpajamHonsen.Controllers
             }
             catch (DbUpdateException)
             {
-                if (SpotMasterExists(spotMaster.SpotKey))
+                if (SpotMasterExists(spotMaster.SpotID))
                 {
                     return Conflict();
                 }
@@ -98,7 +98,7 @@ namespace SpajamHonsen.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = spotMaster.SpotKey }, spotMaster);
+            return CreatedAtRoute("DefaultApi", new { id = spotMaster.SpotID }, spotMaster);
         }
 
         // DELETE: api/SpotMasters/5
@@ -128,7 +128,7 @@ namespace SpajamHonsen.Controllers
 
         private bool SpotMasterExists(string id)
         {
-            return db.SpotMaster.Count(e => e.SpotKey == id) > 0;
+            return db.SpotMaster.Count(e => e.SpotID == id) > 0;
         }
     }
 }

@@ -13,44 +13,44 @@ using SpajamHonsen.Models;
 
 namespace SpajamHonsen.Controllers
 {
-    public class DeviceTokensController : ApiController
+    public class TweetsController : ApiController
     {
         private spajamhonsenEntities db = new spajamhonsenEntities();
 
-        // GET: api/DeviceTokens
-        public IQueryable<DeviceToken> GetDeviceToken()
+        // GET: api/Tweets
+        public IQueryable<Tweet> GetTweet()
         {
-            return db.DeviceToken;
+            return db.Tweet;
         }
 
-        // GET: api/DeviceTokens/5
-        [ResponseType(typeof(DeviceToken))]
-        public async Task<IHttpActionResult> GetDeviceToken(string id)
+        // GET: api/Tweets/5
+        [ResponseType(typeof(Tweet))]
+        public async Task<IHttpActionResult> GetTweet(string id)
         {
-            DeviceToken deviceToken = await db.DeviceToken.FindAsync(id);
-            if (deviceToken == null)
+            Tweet tweet = await db.Tweet.FindAsync(id);
+            if (tweet == null)
             {
                 return NotFound();
             }
 
-            return Ok(deviceToken);
+            return Ok(tweet);
         }
 
-        // PUT: api/DeviceTokens/5
+        // PUT: api/Tweets/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutDeviceToken(string id, DeviceToken deviceToken)
+        public async Task<IHttpActionResult> PutTweet(string id, Tweet tweet)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != deviceToken.DeviceTokenID)
+            if (id != tweet.TweetID)
             {
                 return BadRequest();
             }
 
-            db.Entry(deviceToken).State = EntityState.Modified;
+            db.Entry(tweet).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace SpajamHonsen.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DeviceTokenExists(id))
+                if (!TweetExists(id))
                 {
                     return NotFound();
                 }
@@ -71,16 +71,16 @@ namespace SpajamHonsen.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/DeviceTokens
-        [ResponseType(typeof(DeviceToken))]
-        public async Task<IHttpActionResult> PostDeviceToken(DeviceToken deviceToken)
+        // POST: api/Tweets
+        [ResponseType(typeof(Tweet))]
+        public async Task<IHttpActionResult> PostTweet(Tweet tweet)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.DeviceToken.Add(deviceToken);
+            db.Tweet.Add(tweet);
 
             try
             {
@@ -88,7 +88,7 @@ namespace SpajamHonsen.Controllers
             }
             catch (DbUpdateException)
             {
-                if (DeviceTokenExists(deviceToken.DeviceTokenID))
+                if (TweetExists(tweet.TweetID))
                 {
                     return Conflict();
                 }
@@ -98,23 +98,23 @@ namespace SpajamHonsen.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = deviceToken.DeviceTokenID }, deviceToken);
+            return CreatedAtRoute("DefaultApi", new { id = tweet.TweetID }, tweet);
         }
 
-        // DELETE: api/DeviceTokens/5
-        [ResponseType(typeof(DeviceToken))]
-        public async Task<IHttpActionResult> DeleteDeviceToken(string id)
+        // DELETE: api/Tweets/5
+        [ResponseType(typeof(Tweet))]
+        public async Task<IHttpActionResult> DeleteTweet(string id)
         {
-            DeviceToken deviceToken = await db.DeviceToken.FindAsync(id);
-            if (deviceToken == null)
+            Tweet tweet = await db.Tweet.FindAsync(id);
+            if (tweet == null)
             {
                 return NotFound();
             }
 
-            db.DeviceToken.Remove(deviceToken);
+            db.Tweet.Remove(tweet);
             await db.SaveChangesAsync();
 
-            return Ok(deviceToken);
+            return Ok(tweet);
         }
 
         protected override void Dispose(bool disposing)
@@ -126,9 +126,9 @@ namespace SpajamHonsen.Controllers
             base.Dispose(disposing);
         }
 
-        private bool DeviceTokenExists(string id)
+        private bool TweetExists(string id)
         {
-            return db.DeviceToken.Count(e => e.DeviceTokenID == id) > 0;
+            return db.Tweet.Count(e => e.TweetID == id) > 0;
         }
     }
 }

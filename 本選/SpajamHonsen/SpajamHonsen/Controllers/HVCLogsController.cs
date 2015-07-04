@@ -13,44 +13,44 @@ using SpajamHonsen.Models;
 
 namespace SpajamHonsen.Controllers
 {
-    public class TalksController : ApiController
+    public class HVCLogsController : ApiController
     {
         private spajamhonsenEntities db = new spajamhonsenEntities();
 
-        // GET: api/Talks
-        public IQueryable<Talk> GetTalk()
+        // GET: api/HVCLogs
+        public IQueryable<HVCLog> GetHVCLog()
         {
-            return db.Talk;
+            return db.HVCLog;
         }
 
-        // GET: api/Talks/5
-        [ResponseType(typeof(Talk))]
-        public async Task<IHttpActionResult> GetTalk(string id)
+        // GET: api/HVCLogs/5
+        [ResponseType(typeof(HVCLog))]
+        public async Task<IHttpActionResult> GetHVCLog(string id)
         {
-            Talk talk = await db.Talk.FindAsync(id);
-            if (talk == null)
+            HVCLog hVCLog = await db.HVCLog.FindAsync(id);
+            if (hVCLog == null)
             {
                 return NotFound();
             }
 
-            return Ok(talk);
+            return Ok(hVCLog);
         }
 
-        // PUT: api/Talks/5
+        // PUT: api/HVCLogs/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutTalk(string id, Talk talk)
+        public async Task<IHttpActionResult> PutHVCLog(string id, HVCLog hVCLog)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != talk.UserID)
+            if (id != hVCLog.LogID)
             {
                 return BadRequest();
             }
 
-            db.Entry(talk).State = EntityState.Modified;
+            db.Entry(hVCLog).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace SpajamHonsen.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TalkExists(id))
+                if (!HVCLogExists(id))
                 {
                     return NotFound();
                 }
@@ -71,16 +71,16 @@ namespace SpajamHonsen.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Talks
-        [ResponseType(typeof(Talk))]
-        public async Task<IHttpActionResult> PostTalk(Talk talk)
+        // POST: api/HVCLogs
+        [ResponseType(typeof(HVCLog))]
+        public async Task<IHttpActionResult> PostHVCLog(HVCLog hVCLog)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Talk.Add(talk);
+            db.HVCLog.Add(hVCLog);
 
             try
             {
@@ -88,7 +88,7 @@ namespace SpajamHonsen.Controllers
             }
             catch (DbUpdateException)
             {
-                if (TalkExists(talk.UserID))
+                if (HVCLogExists(hVCLog.LogID))
                 {
                     return Conflict();
                 }
@@ -98,23 +98,23 @@ namespace SpajamHonsen.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = talk.UserID }, talk);
+            return CreatedAtRoute("DefaultApi", new { id = hVCLog.LogID }, hVCLog);
         }
 
-        // DELETE: api/Talks/5
-        [ResponseType(typeof(Talk))]
-        public async Task<IHttpActionResult> DeleteTalk(string id)
+        // DELETE: api/HVCLogs/5
+        [ResponseType(typeof(HVCLog))]
+        public async Task<IHttpActionResult> DeleteHVCLog(string id)
         {
-            Talk talk = await db.Talk.FindAsync(id);
-            if (talk == null)
+            HVCLog hVCLog = await db.HVCLog.FindAsync(id);
+            if (hVCLog == null)
             {
                 return NotFound();
             }
 
-            db.Talk.Remove(talk);
+            db.HVCLog.Remove(hVCLog);
             await db.SaveChangesAsync();
 
-            return Ok(talk);
+            return Ok(hVCLog);
         }
 
         protected override void Dispose(bool disposing)
@@ -126,9 +126,9 @@ namespace SpajamHonsen.Controllers
             base.Dispose(disposing);
         }
 
-        private bool TalkExists(string id)
+        private bool HVCLogExists(string id)
         {
-            return db.Talk.Count(e => e.UserID == id) > 0;
+            return db.HVCLog.Count(e => e.LogID == id) > 0;
         }
     }
 }

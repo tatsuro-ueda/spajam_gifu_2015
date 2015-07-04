@@ -5,36 +5,26 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="spajamhonsenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="AudioCommentary">
+        <EntityType Name="HVCLog">
           <Key>
-            <PropertyRef Name="AudioCommentaryKey" />
+            <PropertyRef Name="LogID" />
           </Key>
-          <Property Name="AudioCommentaryKey" Type="varchar" MaxLength="36" Nullable="false" />
-          <Property Name="AudioCommentaryTitle" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="SpotKey" Type="varchar" MaxLength="36" Nullable="false" />
-          <Property Name="SortID" Type="bigint" />
-          <Property Name="FileID" Type="varchar" MaxLength="36" />
-          <Property Name="AudioCommentaryResultOriginal" Type="varchar(max)" />
-          <Property Name="AudioCommentaryResultConversion" Type="varchar(max)" />
-          <Property Name="SpeechSynthesisFileID" Type="varchar" MaxLength="36" />
-          <Property Name="RegisteredUserID" Type="varchar" MaxLength="36" Nullable="false" />
-          <Property Name="RegisteredDateTime" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DeviceToken">
-          <Key>
-            <PropertyRef Name="DeviceTokenID" />
-          </Key>
-          <Property Name="DeviceTokenID" Type="varchar" MaxLength="36" Nullable="false" />
-          <Property Name="DeviceToken" Type="varbinary(max)" Nullable="false" />
+          <Property Name="LogID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="SpotID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="Language" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Expression" Type="int" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Sex" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="SpotMaster">
           <Key>
-            <PropertyRef Name="SpotKey" />
+            <PropertyRef Name="SpotID" />
           </Key>
-          <Property Name="SpotKey" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="SpotID" Type="varchar" MaxLength="36" Nullable="false" />
           <Property Name="SpotName" Type="varchar(max)" Nullable="false" />
           <Property Name="SpotDescription" Type="varchar(max)" />
+          <Property Name="SpotDescriptionAudio" Type="varchar(max)" />
           <Property Name="SpotImageURL" Type="varchar(max)" />
           <Property Name="MajorID" Type="int" Nullable="false" />
           <Property Name="MinorID" Type="int" Nullable="false" />
@@ -43,76 +33,48 @@
           <Property Name="StateCityLineID" Type="int" />
           <Property Name="Latitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
           <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
-          <Property Name="RegisteredDateTime" Type="datetime" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="Talk">
+        <EntityType Name="Tweet">
           <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="TalkID" />
+            <PropertyRef Name="TweetID" />
           </Key>
-          <Property Name="UserID" Type="varchar" MaxLength="36" Nullable="false" />
-          <Property Name="TalkID" Type="varchar" MaxLength="36" Nullable="false" />
-          <Property Name="TalkTitle" Type="varchar" MaxLength="256" Nullable="false" />
-          <Property Name="SortID" Type="bigint" Nullable="false" />
-          <Property Name="Evaluation" Type="varchar(max)" />
-          <Property Name="EvaluationDetail" Type="bigint" />
-        </EntityType>
-        <EntityType Name="Voice">
-          <Key>
-            <PropertyRef Name="TalkID" />
-            <PropertyRef Name="IndexID" />
-          </Key>
-          <Property Name="TalkID" Type="varchar" MaxLength="36" Nullable="false" />
-          <Property Name="IndexID" Type="bigint" Nullable="false" />
-          <Property Name="VoiceID" Type="varchar" MaxLength="36" />
-          <Property Name="FileID" Type="varchar" MaxLength="36" />
-          <Property Name="VoiceAnalysisResult" Type="varchar(max)" />
-          <Property Name="TextMiningResult" Type="bigint" />
-          <Property Name="TextMiningResultDetail" Type="varchar(max)" />
+          <Property Name="TweetID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="SpotID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="TweetText" Type="varchar(max)" Nullable="false" />
+          <Property Name="TweetURL" Type="varchar(max)" Nullable="false" />
           <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityContainer Name="spajamhonsenModelStoreContainer">
-          <EntitySet Name="AudioCommentary" EntityType="Self.AudioCommentary" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DeviceToken" EntityType="Self.DeviceToken" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HVCLog" EntityType="Self.HVCLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpotMaster" EntityType="Self.SpotMaster" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Talk" EntityType="Self.Talk" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Voice" EntityType="Self.Voice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tweet" EntityType="Self.Tweet" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="spajamhonsenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AudioCommentary">
+        <EntityType Name="HVCLog">
           <Key>
-            <PropertyRef Name="AudioCommentaryKey" />
+            <PropertyRef Name="LogID" />
           </Key>
-          <Property Name="AudioCommentaryKey" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="AudioCommentaryTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SpotKey" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SortID" Type="Int64" />
-          <Property Name="FileID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="AudioCommentaryResultOriginal" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="AudioCommentaryResultConversion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="SpeechSynthesisFileID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="RegisteredUserID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="RegisteredDateTime" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="DeviceToken">
-          <Key>
-            <PropertyRef Name="DeviceTokenID" />
-          </Key>
-          <Property Name="DeviceTokenID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DeviceToken1" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="LogID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SpotID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Language" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Expression" Type="Int32" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="SpotMaster">
           <Key>
-            <PropertyRef Name="SpotKey" />
+            <PropertyRef Name="SpotID" />
           </Key>
-          <Property Name="SpotKey" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SpotID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SpotName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SpotDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SpotDescriptionAudio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="SpotImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MajorID" Type="Int32" Nullable="false" />
           <Property Name="MinorID" Type="Int32" Nullable="false" />
@@ -121,40 +83,22 @@
           <Property Name="StateCityLineID" Type="Int32" />
           <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
           <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
-          <Property Name="RegisteredDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="Talk">
+        <EntityType Name="Tweet">
           <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="TalkID" />
+            <PropertyRef Name="TweetID" />
           </Key>
-          <Property Name="UserID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TalkID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TalkTitle" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SortID" Type="Int64" Nullable="false" />
-          <Property Name="Evaluation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="EvaluationDetail" Type="Int64" />
-        </EntityType>
-        <EntityType Name="Voice">
-          <Key>
-            <PropertyRef Name="TalkID" />
-            <PropertyRef Name="IndexID" />
-          </Key>
-          <Property Name="TalkID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IndexID" Type="Int64" Nullable="false" />
-          <Property Name="VoiceID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="FileID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
-          <Property Name="VoiceAnalysisResult" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TextMiningResult" Type="Int64" />
-          <Property Name="TextMiningResultDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TweetID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SpotID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TweetText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TweetURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityContainer Name="spajamhonsenEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AudioCommentary" EntityType="Self.AudioCommentary" />
-          <EntitySet Name="DeviceToken" EntityType="Self.DeviceToken" />
+          <EntitySet Name="HVCLog" EntityType="Self.HVCLog" />
           <EntitySet Name="SpotMaster" EntityType="Self.SpotMaster" />
-          <EntitySet Name="Talk" EntityType="Self.Talk" />
-          <EntitySet Name="Voice" EntityType="Self.Voice" />
+          <EntitySet Name="Tweet" EntityType="Self.Tweet" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -162,27 +106,15 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="spajamhonsenModelStoreContainer" CdmEntityContainer="spajamhonsenEntities">
-          <EntitySetMapping Name="AudioCommentary">
-            <EntityTypeMapping TypeName="spajamhonsenModel.AudioCommentary">
-              <MappingFragment StoreEntitySet="AudioCommentary">
-                <ScalarProperty Name="AudioCommentaryKey" ColumnName="AudioCommentaryKey" />
-                <ScalarProperty Name="AudioCommentaryTitle" ColumnName="AudioCommentaryTitle" />
-                <ScalarProperty Name="SpotKey" ColumnName="SpotKey" />
-                <ScalarProperty Name="SortID" ColumnName="SortID" />
-                <ScalarProperty Name="FileID" ColumnName="FileID" />
-                <ScalarProperty Name="AudioCommentaryResultOriginal" ColumnName="AudioCommentaryResultOriginal" />
-                <ScalarProperty Name="AudioCommentaryResultConversion" ColumnName="AudioCommentaryResultConversion" />
-                <ScalarProperty Name="SpeechSynthesisFileID" ColumnName="SpeechSynthesisFileID" />
-                <ScalarProperty Name="RegisteredUserID" ColumnName="RegisteredUserID" />
-                <ScalarProperty Name="RegisteredDateTime" ColumnName="RegisteredDateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DeviceToken">
-            <EntityTypeMapping TypeName="spajamhonsenModel.DeviceToken">
-              <MappingFragment StoreEntitySet="DeviceToken">
-                <ScalarProperty Name="DeviceTokenID" ColumnName="DeviceTokenID" />
-                <ScalarProperty Name="DeviceToken1" ColumnName="DeviceToken" />
+          <EntitySetMapping Name="HVCLog">
+            <EntityTypeMapping TypeName="spajamhonsenModel.HVCLog">
+              <MappingFragment StoreEntitySet="HVCLog">
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="SpotID" ColumnName="SpotID" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Expression" ColumnName="Expression" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -190,9 +122,10 @@
           <EntitySetMapping Name="SpotMaster">
             <EntityTypeMapping TypeName="spajamhonsenModel.SpotMaster">
               <MappingFragment StoreEntitySet="SpotMaster">
-                <ScalarProperty Name="SpotKey" ColumnName="SpotKey" />
+                <ScalarProperty Name="SpotID" ColumnName="SpotID" />
                 <ScalarProperty Name="SpotName" ColumnName="SpotName" />
                 <ScalarProperty Name="SpotDescription" ColumnName="SpotDescription" />
+                <ScalarProperty Name="SpotDescriptionAudio" ColumnName="SpotDescriptionAudio" />
                 <ScalarProperty Name="SpotImageURL" ColumnName="SpotImageURL" />
                 <ScalarProperty Name="MajorID" ColumnName="MajorID" />
                 <ScalarProperty Name="MinorID" ColumnName="MinorID" />
@@ -201,32 +134,17 @@
                 <ScalarProperty Name="StateCityLineID" ColumnName="StateCityLineID" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="RegisteredDateTime" ColumnName="RegisteredDateTime" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Talk">
-            <EntityTypeMapping TypeName="spajamhonsenModel.Talk">
-              <MappingFragment StoreEntitySet="Talk">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="TalkID" ColumnName="TalkID" />
-                <ScalarProperty Name="TalkTitle" ColumnName="TalkTitle" />
-                <ScalarProperty Name="SortID" ColumnName="SortID" />
-                <ScalarProperty Name="Evaluation" ColumnName="Evaluation" />
-                <ScalarProperty Name="EvaluationDetail" ColumnName="EvaluationDetail" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Voice">
-            <EntityTypeMapping TypeName="spajamhonsenModel.Voice">
-              <MappingFragment StoreEntitySet="Voice">
-                <ScalarProperty Name="TalkID" ColumnName="TalkID" />
-                <ScalarProperty Name="IndexID" ColumnName="IndexID" />
-                <ScalarProperty Name="VoiceID" ColumnName="VoiceID" />
-                <ScalarProperty Name="FileID" ColumnName="FileID" />
-                <ScalarProperty Name="VoiceAnalysisResult" ColumnName="VoiceAnalysisResult" />
-                <ScalarProperty Name="TextMiningResult" ColumnName="TextMiningResult" />
-                <ScalarProperty Name="TextMiningResultDetail" ColumnName="TextMiningResultDetail" />
+          <EntitySetMapping Name="Tweet">
+            <EntityTypeMapping TypeName="spajamhonsenModel.Tweet">
+              <MappingFragment StoreEntitySet="Tweet">
+                <ScalarProperty Name="TweetID" ColumnName="TweetID" />
+                <ScalarProperty Name="SpotID" ColumnName="SpotID" />
+                <ScalarProperty Name="TweetText" ColumnName="TweetText" />
+                <ScalarProperty Name="TweetURL" ColumnName="TweetURL" />
                 <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
               </MappingFragment>
             </EntityTypeMapping>
