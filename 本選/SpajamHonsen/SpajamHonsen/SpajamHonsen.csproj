@@ -272,7 +272,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HVCLogsController.cs" />
     <Compile Include="Controllers\SpotMastersController.cs" />
+    <Compile Include="Controllers\TweetDetailController.cs" />
+    <Compile Include="Controllers\TweetListController.cs" />
     <Compile Include="Controllers\TweetsController.cs" />
+    <Compile Include="Controllers\TweetSummyController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WebViewController.cs" />
     <Compile Include="Global.asax.cs">
@@ -427,6 +430,9 @@
     <Folder Include="Enums\" />
     <Folder Include="Temp\Audios\" />
     <Folder Include="Views\APITest\" />
+    <Folder Include="Views\TweetDetail\" />
+    <Folder Include="Views\TweetList\" />
+    <Folder Include="Views\TweetSummy\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
