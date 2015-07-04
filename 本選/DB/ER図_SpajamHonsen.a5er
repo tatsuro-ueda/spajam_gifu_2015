@@ -1,0 +1,103 @@
+﻿# A5:ER FORMAT:10
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright (C)2007 m.matsubara
+# A5:SQL Mk-2 Copyright (C)1997 m.matsubara
+#  http://www.wind.sannet.ne.jp/m_matsu/developer/a5m2/
+
+[Manager]
+ProjectName=SpajamMadoben
+Author=平内　孝尚
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=Main
+PageInfo="Main",2,"A3Landscape",$FFFFFF
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=2
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Tahoma
+FontSize=6
+PaperSize=A4Landscape
+HeaderLeft=
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSType=4
+RDBMSTypeName=Microsoft SQL Server 2008
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+ShowTag=1
+ShowCommonAttributes=0
+
+[Entity]
+PName=Tweet
+LName=ツイートデータ
+Comment=スポットに吹き込んだつぶやきのデータ
+TableOption=
+Page=Main
+Left=400
+Top=100
+Field="ツイートID","TweetID","@VARCHAR(36)","NOT NULL",0,"","Tweetを一意に識別するID(UUID)",$FFFFFFFF,""
+Field="ツイートファイルURL","TweetURL","@VARCHAR(max)","NOT NULL",,"","Tweetの生音声ファイルURL",$FFFFFFFF,""
+Field="作成日時","CreateDateTime","@DATETIME","NOT NULL",,"","Tweetの作成日時",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20150704200300
+Position="Main",400,100
+
+[Entity]
+PName=HVCLog
+LName=HVCログデータ
+Comment=ヒューマンビジョンコンボのログを登録する
+TableOption=
+Page=Main
+Left=100
+Top=100
+Field="ログID","LogID","@VARCHAR(36)","NOT NULL",0,"","HVCのログを一意に識別するID(UUID)",$FFFFFFFF,""
+Field="スポットID","SpotID","@VARCHAR(36)","NOT NULL",,"","スポット(iBeacon)を一意に識別するID(UUID)",$FFFFFFFF,""
+Field="言語","Language","@VARCHAR(2)","NOT NULL",,"","jp:日本語 en:英語 cn:中国語",$FFFFFFFF,""
+Field="表情","Expression","@INT","NOT NULL",,"","0:無表情 1:喜び 2:驚き 3:怒り 4:悲しみ",$FFFFFFFF,""
+Field="年齢","Age","@INT","NOT NULL",,"","年齢0-75",$FFFFFFFF,""
+Field="性別","Sex","@VARCHAR(1)","NOT NULL",,"","m:男性 f:女性",$FFFFFFFF,""
+Field="作成日時","CreateDateTime","@DATETIME","NOT NULL",,"","HVCログの作成日時",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20150704200317
+Position="Main",100,100
+
+[Entity]
+PName=SpotMaster
+LName=スポットマスター
+Comment=スポット(iBeaconの設置場所)を登録するマスタ
+TableOption=
+Page=MAIN
+Left=100
+Top=400
+Field="スポットキー","SpotID","@VARCHAR(36)","NOT NULL",0,"","スポット(iBeacon)を一意に識別するID(UUID)",$FFFFFFFF,""
+Field="スポット名","SpotName","@VARCHAR(max)","NOT NULL",,"","スポット名",$FFFFFFFF,""
+Field="スポット説明","SpotDescription","@VARCHAR(max)",,,"","スポットの説明",$FFFFFFFF,""
+Field="スポット説明音声URL","SpotDescriptionAudio","@VARCHAR(max)",,,"","スポットの説明音声のURL",$FFFFFFFF,""
+Field="スポット画像URL","SpotImageURL","@VARCHAR(max)",,,"","スポット画像のURL",$FFFFFFFF,""
+Field="メジャーID","MajorID","@INT","NOT NULL",,"","iBeaconのメジャーID",$FFFFFFFF,""
+Field="マイナーID","MinorID","@INT","NOT NULL",,"","iBeaconのマイナーID",$FFFFFFFF,""
+Field="並び順","SortID","BIGINT",,,"","並び順",$FFFFFFFF,""
+Field="都道府県ID","PrefectureID","@INT",,,"","都道府県を一意に識別するID",$FFFFFFFF,""
+Field="市区町村ID","StateCityLineID","@INT",,,"","市区町村を一意に識別するID",$FFFFFFFF,""
+Field="緯度","Latitude","@DECIMAL(9,6)","NOT NULL",,"","iBeacon設置場所の緯度",$FFFFFFFF,""
+Field="経度","Longitude","@DECIMAL(9,6)","NOT NULL",,"","iBeaconの設置場所の経度",$FFFFFFFF,""
+Field="登録日時","CreateDateTime","@DATETIME","NOT NULL",,"","スポットを登録した日時",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20150704200328
+Position="MAIN",100,400,268,361
