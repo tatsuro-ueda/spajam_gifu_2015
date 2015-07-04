@@ -23,11 +23,31 @@ namespace SpajamHonsen.Controllers
             return db.SpotMaster;
         }
 
+        /*
         // GET: api/SpotMasters/5
         [ResponseType(typeof(SpotMaster))]
         public async Task<IHttpActionResult> GetSpotMaster(string id)
         {
             SpotMaster spotMaster = await db.SpotMaster.FindAsync(id);
+            if (spotMaster == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(spotMaster);
+        }
+        */
+
+        // GET: api/SpotMasters?spotid={spotid}
+        /// <summary>
+        /// スポット情報の取得
+        /// </summary>
+        /// <param name="spotid"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(SpotMaster))]
+        public IHttpActionResult GetSpotMaster(string spotid)
+        {
+            SpotMaster spotMaster = db.SpotMaster.Where(master => master.SpotID == spotid).FirstOrDefault();
             if (spotMaster == null)
             {
                 return NotFound();
