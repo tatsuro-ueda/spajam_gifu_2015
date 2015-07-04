@@ -15,18 +15,46 @@
         var exp3 = 0;
         var exp4 = 0;
         var exp5 = 0;
+        var exp1s = "";
+        var exp2s = "";
+        var exp3s = "";
+        var exp4s = "";
+        var exp5s = "";
+        var title = "";
         $(window).load(function () {
-            alert(get_url_vars("lan"));
+            var lan = get_url_vars("lan");
+            alert(lan);
+            if (lan == "ja") {
+                exp1s = "無表情";
+                exp2s = "喜ぶ";
+                exp3s = "驚き";
+                exp4s = "怒り";
+                exp5s = "悲しみ";
+                title = "表情情報一覧";
+            } else if (lan == "cn") {
+                exp1s = "普通";
+                exp2s = "高兴";
+                exp3s = "惊讶";
+                exp4s = "愤怒";
+                exp5s = "悲伤";
+                title = "表情情报一览表";
+            } else if (lan == "en") {
+                exp1s = "Normal";
+                exp2s = "Happy";
+                exp3s = "Suprise";
+                exp4s = "Angry";
+                exp5s = "Sad";
+                title = "View of faces";
+            }
             $.ajax({
-                url: "http://spajamhonsen.azurewebsites.net/Api/TweetDetail/1?lan=" + get_url_vars("lan"),
+                url: "http://spajamhonsen.azurewebsites.net/Api/TweetDetail/1?lan=" + lan,
                 cache: false,
                 async: false,
                 success: function (xml) {
                     var show = "";
 
                     xml.forEach(function (value) {
-                        show += "<img src='/Scripts/icon_ume.png'><br/>"
-                            + "<div style='width: 600px' >" + value.TweetText + "</div><br/>";
+                        show += "<img src='" + value.IconURL + "'><div style='width: 375px' >" + value.TweetText + "</div><br/>";
                     });
 
                     $("#content").html(show);
@@ -52,15 +80,15 @@
 
             var data = google.visualization.arrayToDataTable([
                 ['Task', 'Hours per Day'],
-                ['無表情', exp1],
-                ['喜ぶ',   exp2],
-                ['驚き',   exp3],
-                ['怒り',   exp4],
-                ['悲しみ', exp5]
+                [exp1s, exp1],
+                [exp2s, exp2],
+                [exp3s, exp3],
+                [exp4s, exp4],
+                [exp5s, exp5]
             ]);
 
             var options = {
-                title: '表情情報一覧'
+                title: title
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -88,7 +116,7 @@
 </head>
 <body>
     <div>
-        <div id="piechart" style="width: 480px; height: 360px;"></div>
+        <div id="piechart" style="width: 375px; height: 360px;"></div>
         <div id="content"></div>
     </div>
 </body>
