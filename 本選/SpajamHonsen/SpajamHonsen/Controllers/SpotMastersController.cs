@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using SpajamHonsen.Models;
+using SpajamHonsen.Utilities;
 
 namespace SpajamHonsen.Controllers
 {
@@ -43,11 +44,24 @@ namespace SpajamHonsen.Controllers
         /// スポット情報の取得
         /// </summary>
         /// <param name="spotid"></param>
+        /// <param name="lang"></param>
         /// <returns></returns>
         [ResponseType(typeof(SpotMaster))]
-        public IHttpActionResult GetSpotMaster(string spotid)
+        public async Task<IHttpActionResult> GetSpotMaster(string spotid, string lang)
         {
             SpotMaster spotMaster = db.SpotMaster.Where(master => master.SpotID == spotid).FirstOrDefault();
+
+            var spotDescription = spotMaster.SpotDescription;
+
+            if (lang == "en")
+            {
+                spotMaster.SpotDescription = await BingUtil.RequestMicrosoftTranslatorAPIAsync(spotDescription, "ja", "en");
+            }
+            else if (lang == "cn")
+            {
+                spotMaster.SpotDescription = await BingUtil.RequestMicrosoftTranslatorAPIAsync(spotDescription, "ja", "zh-cn");
+            }
+
             if (spotMaster == null)
             {
                 return NotFound();
