@@ -8,11 +8,11 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript">
         $(window).load(function () {
             $.ajax({
-                url: "http://spajamhonsen.azurewebsites.net/Api/TweetList/1?lan=" + get_url_vars("lan"),
+                url: "http://spajamhonsen.azurewebsites.net/Api/TweetList/test?lan=" + get_url_vars("lan"),
                 cache: false,
                 async: false,
                 success: function (xml) {

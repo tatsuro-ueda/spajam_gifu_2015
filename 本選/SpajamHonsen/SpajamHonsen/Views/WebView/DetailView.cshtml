@@ -8,7 +8,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript">
         var exp1 = 0;
         var exp2 = 0;
@@ -53,7 +53,7 @@
                 title = "表情情報一覧";
             }
             $.ajax({
-                url: "http://spajamhonsen.azurewebsites.net/Api/TweetDetail/1?lan=" + lan,
+                url: "http://spajamhonsen.azurewebsites.net/Api/TweetDetail/test?lan=" + lan,
                 cache: false,
                 async: false,
                 success: function (xml) {
@@ -67,7 +67,7 @@
                 }
             });
             $.ajax({
-                url: "http://spajamhonsen.azurewebsites.net/Api/TweetSummy/1",
+                url: "http://spajamhonsen.azurewebsites.net/Api/TweetSummy/test",
                 cache: false,
                 async: false,
                 success: function (xml) {
