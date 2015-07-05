@@ -42,7 +42,7 @@ namespace SpajamHonsen.Controllers
                 {
                     if (lan != "jp")
                     {
-                        result.TweetText = await BingUtil.RequestMicrosoftTranslatorAPIAsync(tweet.TweetText, "jp", lan);
+                        result.TweetText = await BingUtil.RequestMicrosoftTranslatorAPIAsync(tweet.TweetText, "ja", lan);
                         result.TweetURL = tweet.TweetURL;
                     }
                     else
