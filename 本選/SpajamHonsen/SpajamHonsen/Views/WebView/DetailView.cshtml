@@ -60,7 +60,7 @@
                     var show = "";
 
                     xml.forEach(function (value) {
-                        show += "<img src=http://spajamhonsenstorage.blob.core.windows.net/faceicons/" + value.IconURL + " width='16' height='16'>";
+                        show += "<img src=http://spajamhonsenstorage.blob.core.windows.net/faceicons/" + value.IconURL + " width='32' height='32'>" + value.IconDisp;
                         show += "<div style='width: 375px' >" + value.TweetText + "</div><br/>";
                     });
 

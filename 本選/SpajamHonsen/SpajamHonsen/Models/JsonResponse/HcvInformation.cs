@@ -18,5 +18,6 @@ namespace SpajamHonsen.Models.JsonResponse
         public string TweetText { get; set; }
         public string TweetURL { get; set; }
         public string IconURL { get; set; }
+        public string IconDisp { get; set; }
     }
 }
