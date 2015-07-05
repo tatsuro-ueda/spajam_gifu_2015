@@ -13,6 +13,11 @@ namespace SpajamHonsen.Controllers
         //[ResponseType(typeof(void))]
         public ExpressInformation GetTweetSummy(string id)
         {
+            var express0 = 0;
+            if (db.HVCLog.Any(item => item.SpotID == id && item.Expression == 0 && item.TweetID != null))
+            {
+                express0 = db.HVCLog.Count(item => item.SpotID == id && item.Expression == 0 && item.TweetID != null);
+            }
             var express1 = 0;
             if (db.HVCLog.Any(item => item.SpotID == id && item.Expression == 1 && item.TweetID != null))
             {
@@ -33,18 +38,13 @@ namespace SpajamHonsen.Controllers
             {
                 express4 = db.HVCLog.Count(item => item.SpotID == id && item.Expression == 4 && item.TweetID != null);
             }
-            var express5 = 0;
-            if (db.HVCLog.Any(item => item.SpotID == id && item.Expression == 5 && item.TweetID != null))
-            {
-                express5 = db.HVCLog.Count(item => item.SpotID == id && item.Expression == 5 && item.TweetID != null);
-            }
             var expressInfo = new ExpressInformation()
             {
-                Express1 = express1,
-                Express2 = express2,
-                Express3 = express3,
-                Express4 = express4,
-                Express5 = express5
+                Express1 = express0,
+                Express2 = express1,
+                Express3 = express2,
+                Express4 = express3,
+                Express5 = express4
             };
 
             return expressInfo;
