@@ -62,9 +62,9 @@ namespace SpajamHonsen.Utilities
                     var responseFromServer = await result.Content.ReadAsStringAsync();
                     var responseJson =
                         await Task.Factory.StartNew(
-                                () =>
-                                    JsonConvert
-                                        .DeserializeObject<BaiduSpeechAPIResponseModel>(responseFromServer));
+                            () =>
+                                JsonConvert
+                                    .DeserializeObject<BaiduSpeechAPIResponseModel>(responseFromServer));
                     var res = responseJson.result[0];
                     return res.Substring(0, res.Length - 1);
                 }
