@@ -64,11 +64,11 @@ namespace SpajamHonsen.Controllers
             } 
             else if (lan == "en")
             {
-                result = "cn_";
+                result = "en_";
             }
             else
             {
-                result = "ja_";
+                result = "jp_";
             }
 
             if (sex == "f")
