@@ -23,7 +23,6 @@
         var title = "";
         $(window).load(function () {
             var lan = get_url_vars("lan");
-            alert(lan);
             if (lan == "ja") {
                 exp1s = "無表情";
                 exp2s = "喜ぶ";
@@ -45,6 +44,13 @@
                 exp4s = "Angry";
                 exp5s = "Sad";
                 title = "View of faces";
+            } else {
+                exp1s = "無表情";
+                exp2s = "喜ぶ";
+                exp3s = "驚き";
+                exp4s = "怒り";
+                exp5s = "悲しみ";
+                title = "表情情報一覧";
             }
             $.ajax({
                 url: "http://spajamhonsen.azurewebsites.net/Api/TweetDetail/1?lan=" + lan,

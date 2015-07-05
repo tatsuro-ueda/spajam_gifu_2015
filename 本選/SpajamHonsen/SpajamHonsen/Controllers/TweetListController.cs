@@ -32,7 +32,8 @@ namespace SpajamHonsen.Controllers
                     CreateDateTime = model.CreateDateTime,
                     Language = model.Language,
                     LogID = model.LogID,
-                    TweetID = model.TweetID
+                    TweetID = model.TweetID,
+                    IconURL = TweetDetailController.GetAconUrl(lan, model.Sex, model.Age, model.Expression)
                 };
 
                 var tweet = db.Tweet.First(item => item.SpotID == model.SpotID && item.TweetID == model.TweetID);
