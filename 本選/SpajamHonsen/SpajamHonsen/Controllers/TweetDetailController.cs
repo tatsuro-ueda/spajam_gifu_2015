@@ -57,7 +57,8 @@ namespace SpajamHonsen.Controllers
 
         public static string GetAconUrl(string lan, string sex, int age, int expression)
         {
-            var result = "/Scripts/";
+            // var result = "/Scripts/";
+            var result = HttpContext.Current.Server.MapPath("~/Scripts/");
             if (lan == "cn")
             {
                 result = "cn_";
