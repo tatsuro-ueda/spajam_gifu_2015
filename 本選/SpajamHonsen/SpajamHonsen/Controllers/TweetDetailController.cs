@@ -21,7 +21,7 @@ namespace SpajamHonsen.Controllers
         public async Task<List<HcvInformation>> GetTweetDetail(string id, string lan)
         {
             var results = new List<HcvInformation>();
-            foreach (var model in db.HVCLog.Where(item => item.SpotID == id && item.TweetID != null))
+            foreach (var model in db.HVCLog.Where(item => item.SpotID == id && item.TweetID != null).OrderByDescending(item => item.CreateDateTime))
             {
                 var result = new HcvInformation()
                 {
