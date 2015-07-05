@@ -82,26 +82,28 @@ PName=Tweet
 LName=ツイートデータ
 Comment=スポットに吹き込んだつぶやきのデータ
 TableOption=
-Page=Main
+Page=MAIN
 Left=400
 Top=300
 Field="ツイートID","TweetID","@VARCHAR(36)","NOT NULL",0,"","Tweetを一意に識別するID(UUID)",$FFFFFFFF,""
 Field="スポットID","SpotID","@VARCHAR(36)","NOT NULL",,"","どのスポットでTweetされたかを識別するID",$FFFFFFFF,""
-Field="ツイート内容","TweetText","@VARCHAR(max)","NOT NULL",,"","Tweetの音声解析結果",$FFFFFFFF,""
+Field="ツイート内容日本語","TweetTextjp","@VARCHAR(max)","NOT NULL",,"","日本語のツイート内容",$FFFFFFFF,""
+Field="ツイート内容中国語","TweetTextcn","@VARCHAR(max)","NOT NULL",,"","中国語のツイート内容",$FFFFFFFF,""
+Field="ツイート内容英語","TweetTexten","@VARCHAR(max)","NOT NULL",,"","英語のツイート内容",$FFFFFFFF,""
 Field="ツイートファイルURL","TweetURL","@VARCHAR(max)","NOT NULL",,"","Tweetの音声合成ファイルURL",$FFFFFFFF,""
 Field="作成日時","CreateDateTime","@DATETIME","NOT NULL",,"","Tweetの作成日時",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20150704202237
-Position="Main",400,300
+ModifiedDateTime=20150705114620
+Position="MAIN",400,300
 
 [Entity]
 PName=HVCLog
 LName=HVCログデータ
 Comment=ヒューマンビジョンコンボのログを登録する
 TableOption=
-Page=Main
+Page=MAIN
 Left=400
 Top=50
 Field="ログID","LogID","@VARCHAR(36)","NOT NULL",0,"","HVCのログを一意に識別するID(UUID)",$FFFFFFFF,""
@@ -116,7 +118,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20150704212841
-Position="Main",400,50
+Position="MAIN",400,50
 
 [Entity]
 PName=SpotMaster

@@ -42,9 +42,9 @@
           </Key>
           <Property Name="TweetID" Type="varchar" MaxLength="36" Nullable="false" />
           <Property Name="SpotID" Type="varchar" MaxLength="36" Nullable="false" />
-          <Property Name="TweetTextjp" Type="varchar(max)" Nullable="false" />
-          <Property Name="TweetTextcn" Type="varchar(max)" Nullable="false" />
-          <Property Name="TweetTexten" Type="varchar(max)" Nullable="false" />
+          <Property Name="TweetTextjp" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TweetTextcn" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TweetTexten" Type="nvarchar(max)" Nullable="false" />
           <Property Name="TweetURL" Type="varchar(max)" Nullable="false" />
           <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
         </EntityType>
@@ -95,9 +95,9 @@
           </Key>
           <Property Name="TweetID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SpotID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TweetTextjp" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TweetTextcn" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TweetTexten" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TweetTextjp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TweetTextcn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TweetTexten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TweetURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
