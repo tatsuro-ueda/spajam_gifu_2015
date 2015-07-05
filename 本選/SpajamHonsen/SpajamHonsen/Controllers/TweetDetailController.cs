@@ -57,7 +57,7 @@ namespace SpajamHonsen.Controllers
 
         public static string GetAconUrl(string lan, string sex, int age, int expression)
         {
-            var result = "https://spajamhonsenstorage.blob.core.windows.net/faceicons/";
+            var result = "/Scripts/";
             if (lan == "cn")
             {
                 result = "cn_";
