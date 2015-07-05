@@ -110,8 +110,8 @@ namespace SpajamHonsen.Controllers
             var language = tweetPostRequest.hVCLogPostRequest.Language;
             var sex = tweetPostRequest.hVCLogPostRequest.Sex;
 
+            /*
             #region 音声ファイルのbase64文字列ログ出力
-            // TODO 完成後コメントアウトする
             var audioLogFilePath = HttpContext.Current.Server.MapPath("~/Temp/Logs/" + Guid.NewGuid().ToString() + ".log");
             
             // ファイルを作成する
@@ -134,6 +134,7 @@ namespace SpajamHonsen.Controllers
             var azureStorageUtil = new AzureStorageUtil();
             azureStorageUtil.UploadBlobStrage(audioLogFilePath, Guid.NewGuid().ToString() + ".log", "logs");
             #endregion 音声ファイルのbase64文字列ログ出力
+            */
 
             string convertFilePath = string.Empty;
             // 音声ファイルのレートを変換
@@ -170,7 +171,7 @@ namespace SpajamHonsen.Controllers
                 {
                     speechTexten = await GoogleUtil.RequestGoogleSpeechAPIAsync(audioByteArray);
                     speechTextjp = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTexten, "en", "ja");
-                    speechTextcn = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTextjp, "en", "zh-cn");
+                    speechTextcn = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTexten, "en", "zh-cn");
                 }
                 else if (language == "cn")
                 {
