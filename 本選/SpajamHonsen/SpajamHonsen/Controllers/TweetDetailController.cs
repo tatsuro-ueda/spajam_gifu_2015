@@ -104,8 +104,9 @@ namespace SpajamHonsen.Controllers
             {
                 result += "46-60_";
             }
+          
+            result += (expression).ToString() + ".png";
             
-            result += (expression - 1).ToString() + ".png";
             return result;
         }
 
