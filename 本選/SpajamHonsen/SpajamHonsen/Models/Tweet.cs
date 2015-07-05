@@ -16,7 +16,9 @@ namespace SpajamHonsen.Models
     {
         public string TweetID { get; set; }
         public string SpotID { get; set; }
-        public string TweetText { get; set; }
+        public string TweetTextjp { get; set; }
+        public string TweetTextcn { get; set; }
+        public string TweetTexten { get; set; }
         public string TweetURL { get; set; }
         public System.DateTime CreateDateTime { get; set; }
     }

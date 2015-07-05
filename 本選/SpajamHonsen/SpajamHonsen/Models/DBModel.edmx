@@ -42,7 +42,9 @@
           </Key>
           <Property Name="TweetID" Type="varchar" MaxLength="36" Nullable="false" />
           <Property Name="SpotID" Type="varchar" MaxLength="36" Nullable="false" />
-          <Property Name="TweetText" Type="varchar(max)" Nullable="false" />
+          <Property Name="TweetTextjp" Type="varchar(max)" Nullable="false" />
+          <Property Name="TweetTextcn" Type="varchar(max)" Nullable="false" />
+          <Property Name="TweetTexten" Type="varchar(max)" Nullable="false" />
           <Property Name="TweetURL" Type="varchar(max)" Nullable="false" />
           <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
         </EntityType>
@@ -93,7 +95,9 @@
           </Key>
           <Property Name="TweetID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SpotID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TweetText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TweetTextjp" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TweetTextcn" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TweetTexten" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TweetURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
@@ -146,7 +150,9 @@
               <MappingFragment StoreEntitySet="Tweet">
                 <ScalarProperty Name="TweetID" ColumnName="TweetID" />
                 <ScalarProperty Name="SpotID" ColumnName="SpotID" />
-                <ScalarProperty Name="TweetText" ColumnName="TweetText" />
+                <ScalarProperty Name="TweetTextjp" ColumnName="TweetTextjp" />
+                <ScalarProperty Name="TweetTextcn" ColumnName="TweetTextcn" />
+                <ScalarProperty Name="TweetTexten" ColumnName="TweetTexten" />
                 <ScalarProperty Name="TweetURL" ColumnName="TweetURL" />
                 <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
               </MappingFragment>

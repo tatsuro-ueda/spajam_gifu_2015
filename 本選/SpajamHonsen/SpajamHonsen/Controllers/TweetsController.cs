@@ -157,27 +157,32 @@ namespace SpajamHonsen.Controllers
                 outputFileStream.Read(audioByteArray, 0, audioByteArray.Length);
 
                 // 音声解説ファイルの解析
-                string speechText = string.Empty;
+                string speechTextjp = string.Empty;
+                string speechTexten = string.Empty;
+                string speechTextcn = string.Empty;
                 if (language == "jp")
                 {
-                    speechText = await GoogleUtil.RequestGoogleSpeechAPIAsync(audioByteArray);
+                    speechTextjp = await GoogleUtil.RequestGoogleSpeechAPIAsync(audioByteArray);
+                    speechTextcn = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTextjp, "ja", "cn");
+                    speechTexten = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTextjp, "ja", "en");
                 }
                 else if (language == "en")
                 {
-                    speechText = await GoogleUtil.RequestGoogleSpeechAPIAsync(audioByteArray);
-                    speechText = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechText, "en", "ja");
+                    speechTexten = await GoogleUtil.RequestGoogleSpeechAPIAsync(audioByteArray);
+                    speechTextjp = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTexten, "en", "ja");
+                    speechTextcn = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTextjp, "en", "cn");
                 }
                 else if (language == "cn")
                 {
-                    speechText = await BaiduUtil.RequestBaiduSpeechAPIAsync(audioByteArray);
-                    speechText = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechText, "zh-cn", "ja");
+                    speechTextcn = await BaiduUtil.RequestBaiduSpeechAPIAsync(audioByteArray); speechTextjp = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTexten, "en", "ja");
+                    speechTextjp = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTextcn, "zh-cn", "ja");
+                    speechTexten = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTextcn, "zh-cn", "en");
                 }
 
                 // 音声解説ファイルの解析結果の漢字変換
                 if (language == "jp") 
                 {
-                    speechText = await GoogleUtil.RequestGoogleJapaneseAPI(speechText); 
-          
+                    speechTextjp = await GoogleUtil.RequestGoogleJapaneseAPI(speechTextjp); 
                 }
 
                 // 音声解析結果の音声合成
@@ -190,11 +195,11 @@ namespace SpajamHonsen.Controllers
                 {
                     if(sex == "m")
                     {
-                        voiceTextFileName = await othersUtil.RequestVoiceTextAPI(speechText, "show");
+                        voiceTextFileName = await othersUtil.RequestVoiceTextAPI(speechTextjp, "show");
                     }
                     else if (sex == "m")
                     {
-                        voiceTextFileName = await othersUtil.RequestVoiceTextAPI(speechText, "haruka");
+                        voiceTextFileName = await othersUtil.RequestVoiceTextAPI(speechTextjp, "haruka");
                     }
                 }
                 else if (language == "en")
@@ -213,7 +218,9 @@ namespace SpajamHonsen.Controllers
                 // 登録情報の設定
                 tweet.TweetID = Guid.NewGuid().ToString();
                 tweet.SpotID = tweetPostRequest.hVCLogPostRequest.SpotID;
-                tweet.TweetText = speechText;
+                tweet.TweetTextjp = speechTextjp;
+                tweet.TweetTextcn = speechTextcn;
+                tweet.TweetTexten = speechTexten;
                 tweet.TweetURL = tweetURL;
                 tweet.CreateDateTime = DateTime.Now;
 
