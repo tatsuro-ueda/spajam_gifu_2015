@@ -174,7 +174,7 @@ namespace SpajamHonsen.Controllers
                 }
                 else if (language == "cn")
                 {
-                    speechTextcn = await BaiduUtil.RequestBaiduSpeechAPIAsync(audioByteArray); speechTextjp = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTexten, "en", "ja");
+                    speechTextcn = await BaiduUtil.RequestBaiduSpeechAPIAsync(audioByteArray); 
                     speechTextjp = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTextcn, "zh-cn", "ja");
                     speechTexten = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTextcn, "zh-cn", "en");
                 }
