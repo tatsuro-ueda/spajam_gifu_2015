@@ -110,6 +110,10 @@ namespace SpajamHonsen.Utilities
         /// <returns>翻訳結果</returns>
         public static async Task<string> RequestMicrosoftTranslatorAPIAsync(string text, string from, string to)
         {
+            if (to == "cn")
+            {
+                to = "zh-cn";
+            }
             string url = "http://api.microsofttranslator.com/v2/Http.svc/Translate?&text=" +
                 System.Web.HttpUtility.UrlEncode(text) + "&from=" + from + "&to=" + to + "&contentType=text%2fplain";
 

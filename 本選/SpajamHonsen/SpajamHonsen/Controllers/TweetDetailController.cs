@@ -112,7 +112,7 @@ namespace SpajamHonsen.Controllers
             var result = "[";
             if (lan == "cn")
             {
-                result = "中国　";
+                result += "中国　";
 
                 if (sex == "f")
                 {
@@ -125,7 +125,7 @@ namespace SpajamHonsen.Controllers
             }
             else if (lan == "en")
             {
-                result = "English　";
+                result += "English　";
 
                 if (sex == "f")
                 {
@@ -138,7 +138,7 @@ namespace SpajamHonsen.Controllers
             }
             else
             {
-                result = "日本　";
+                result += "日本　";
 
                 if (sex == "f")
                 {
@@ -154,23 +154,23 @@ namespace SpajamHonsen.Controllers
 
             if (age > 0 && age <= 15)
             {
-                result += "00-15　";
+                result += "00-15";
             }
             else if (age > 16 && age <= 19)
             {
-                result += "16-19　";
+                result += "16-19";
             }
             else if (age > 20 && age <= 29)
             {
-                result += "20-29　";
+                result += "20-29";
             }
             else if (age > 30 && age <= 45)
             {
-                result += "30-45　";
+                result += "30-45";
             }
             else
             {
-                result += "46-60_";
+                result += "46-60";
             }
 
             result += "]";

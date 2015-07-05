@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
     <script type="text/javascript">
         $(window).load(function () {
             $.ajax({
@@ -19,7 +20,7 @@
                     var show = "";
                     xml.forEach(function (value) {
                         xml.forEach(function (value) {
-                            show += "<img src=http://spajamhonsenstorage.blob.core.windows.net/faceicons/" + value.IconURL + " width='32' height='32'>" + value.IconDisp;
+                            show += "<img src=http://spajamhonsenstorage.blob.core.windows.net/faceicons/" + value.IconURL + " width='48' height='48'>" + value.IconDisp;
                             show += "<div style='width: 375px' >" + value.TweetText + "</div><br/>";
                         });
                     });

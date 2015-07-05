@@ -60,8 +60,8 @@
                     var show = "";
 
                     xml.forEach(function (value) {
-                        show += "<img src=http://spajamhonsenstorage.blob.core.windows.net/faceicons/" + value.IconURL + " width='32' height='32'>" + value.IconDisp;
-                        show += "<div style='width: 375px' >" + value.TweetText + "</div><br/>";
+                        show += "<img src=http://spajamhonsenstorage.blob.core.windows.net/faceicons/" + value.IconURL + " width='48' height='48'>" + value.IconDisp;
+                        show += "<div style='width: 300px' >" + value.TweetText + "</div><br/>";
                     });
 
                     $("#content").html(show);
@@ -123,7 +123,7 @@
 </head>
 <body>
     <div>
-        <div id="piechart" style="width: 375px; height: 360px;"></div>
+        <div id="piechart" style="width: 365px; height: 360px;"></div>
         <div id="content"></div>
     </div>
 </body>
