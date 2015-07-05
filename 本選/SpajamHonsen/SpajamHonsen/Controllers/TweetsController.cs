@@ -163,14 +163,14 @@ namespace SpajamHonsen.Controllers
                 if (language == "jp")
                 {
                     speechTextjp = await GoogleUtil.RequestGoogleSpeechAPIAsync(audioByteArray);
-                    speechTextcn = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTextjp, "ja", "cn");
+                    speechTextcn = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTextjp, "ja", "zh-cn");
                     speechTexten = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTextjp, "ja", "en");
                 }
                 else if (language == "en")
                 {
                     speechTexten = await GoogleUtil.RequestGoogleSpeechAPIAsync(audioByteArray);
                     speechTextjp = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTexten, "en", "ja");
-                    speechTextcn = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTextjp, "en", "cn");
+                    speechTextcn = await BingUtil.RequestMicrosoftTranslatorAPIAsync(speechTextjp, "en", "zh-cn");
                 }
                 else if (language == "cn")
                 {
