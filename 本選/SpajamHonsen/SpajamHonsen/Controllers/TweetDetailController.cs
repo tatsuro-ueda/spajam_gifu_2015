@@ -39,9 +39,9 @@ namespace SpajamHonsen.Controllers
                 var tweet = db.Tweet.First(item => item.SpotID == model.SpotID && item.TweetID == model.TweetID);
                 if (tweet != null)
                 {
-                    if (lan != "ja")
+                    if (lan != "jp")
                     {
-                        result.TweetText = await BingUtil.RequestMicrosoftTranslatorAPIAsync(tweet.TweetText, "ja", lan);
+                        result.TweetText = await BingUtil.RequestMicrosoftTranslatorAPIAsync(tweet.TweetText, "jp", lan);
                         result.TweetURL = tweet.TweetURL;
                     }
                     else
@@ -100,8 +100,8 @@ namespace SpajamHonsen.Controllers
             {
                 result += "46-60_";
             }
-
-            result += expression + "_.png";
+            
+            result += expression + ".png";
             return result;
         }
     }
