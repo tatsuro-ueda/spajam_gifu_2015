@@ -40,16 +40,19 @@ namespace SpajamHonsen.Controllers
                 var tweet = db.Tweet.First(item => item.SpotID == model.SpotID && item.TweetID == model.TweetID);
                 if (tweet != null)
                 {
-                    if (lan != "ja")
+                    if (lan == "ja")
                     {
-                        result.TweetText = await BingUtil.RequestMicrosoftTranslatorAPIAsync(tweet.TweetText, "jp", lan);
-                        result.TweetURL = tweet.TweetURL;
+                        result.TweetText = tweet.TweetTextjp;
                     }
-                    else
+                    else if (lan == "cn")
                     {
-                        result.TweetText = tweet.TweetText;
-                        result.TweetURL = tweet.TweetURL;
+                        result.TweetText = tweet.TweetTextcn;
                     }
+                    else if (lan == "en")
+                    {
+                        result.TweetText = tweet.TweetTexten;
+                    }
+                    result.TweetURL = tweet.TweetURL;
                 }
                 results.Add(result);
             }
