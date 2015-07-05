@@ -26,6 +26,9 @@
                 $("#age").html("Age：");
                 $("#sex").html("Sex：");
                 $("#lan").html("Language：");
+                $("#btn").attr("value", "Search");
+                $("#sexdetail").html("<option>Male</option><option>Female</option>");
+                $("#landetail").html("<option>Japanese</option><option>Chinese</option><option>English</option>");
             } else {
                 $("#age").html("年齢：");
                 $("#sex").html("性別：");
@@ -64,15 +67,15 @@
         <option>46-60</option>
     </select><br><br>
     <span id="sex"></span>
-    <select name="example" style="width: 120px;">
+    <select id="sexdetail" style="width: 120px;">
         <option>男</option>
         <option>女</option>
     </select><br><br>
     <span id="lan"></span>
-    <select name="example" style="width: 120px;">
-        <option value="日本語">日本語</option>
-        <option value="中国語">中国語</option>
-        <option value="英語">英語</option>
+    <select id="landetail" style="width: 120px;">
+        <option>日本語</option>
+        <option>中国語</option>
+        <option>英語</option>
     </select>
 </div>
 <br/>
