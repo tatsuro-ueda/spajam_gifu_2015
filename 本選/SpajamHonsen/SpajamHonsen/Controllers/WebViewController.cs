@@ -36,6 +36,12 @@ namespace SpajamHonsen.Controllers
         public ActionResult DetailView()
         {
             return View();
+        }
+
+        // GET: WebView/DetailView
+        public ActionResult SearchView()
+        {
+            return View();
         }   
     }
 }
